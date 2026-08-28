@@ -7,9 +7,12 @@ import { Button } from '@/components/ui/button'
 export default async function DashboardPage() {
   const user = await requireAuth()
 
+  const isAdmin = user.role === 'SUPER_ADMIN'
+
   const invitations = await prisma.invitation.findMany({
-    where: { userId: user.id },
+    where: isAdmin ? {} : { userId: user.id },
     include: {
+      user: isAdmin ? { select: { name: true, email: true } } : false,
       guests: true,
       guestMessages: true,
       theme: true,
@@ -97,45 +100,60 @@ export default async function DashboardPage() {
 
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Undangan Anda</h2>
+          <h2 className="text-xl font-semibold">
+            {isAdmin ? `Semua Undangan Platform (${invitations.length})` : 'Undangan Anda'}
+          </h2>
           <Link href="/invitations" className="text-sm text-blue-600 hover:underline">
             Lihat Semua →
           </Link>
         </div>
 
+        {isAdmin && (
+          <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
+            <span className="font-semibold">👑 Mode Super Admin:</span>
+            Anda melihat semua undangan dari seluruh agen & customer. Klik Edit untuk langsung mengelola data undangan manapun.
+          </div>
+        )}
+
         {invitations.length === 0 ? (
           <Card className="p-8 text-center">
-            <p className="text-muted-foreground">Anda belum memiliki undangan.</p>
+            <p className="text-muted-foreground">Belum ada undangan.</p>
             <Link href="/invitations/new" className="mt-4 inline-block">
               <Button>Buat Undangan Pertama</Button>
             </Link>
           </Card>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {invitations.map((inv) => (
-              <Card key={inv.id} className="p-5 flex flex-col justify-between hover:shadow-md transition">
-                <div>
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-semibold px-2 py-1 bg-gray-100 rounded text-gray-700 uppercase">
-                      {inv.theme?.name || 'Theme'}
-                    </span>
-                    <span className={`text-xs px-2 py-1 rounded font-medium ${inv.isPublished ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}`}>
-                      {inv.isPublished ? 'Live / Published' : 'Draft'}
-                    </span>
+            {invitations.map((inv) => {
+              const owner = isAdmin && 'user' in inv && inv.user ? inv.user as { name: string; email: string } : null
+              return (
+                <Card key={inv.id} className="p-5 flex flex-col justify-between hover:shadow-md transition">
+                  <div>
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="text-xs font-semibold px-2 py-1 bg-gray-100 rounded text-gray-700 uppercase">
+                        {inv.theme?.name || 'Theme'}
+                      </span>
+                      <span className={`text-xs px-2 py-1 rounded font-medium ${inv.isPublished ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}`}>
+                        {inv.isPublished ? 'Live / Published' : 'Draft'}
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-lg">{inv.groomName} & {inv.brideName}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">/i/{inv.slug}</p>
+                    {owner && (
+                      <p className="text-xs text-amber-700 mt-1 font-medium">👤 {owner.name}</p>
+                    )}
                   </div>
-                  <h3 className="font-bold text-lg">{inv.groomName} & {inv.brideName}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">/i/{inv.slug}</p>
-                </div>
-                <div className="mt-6 pt-4 border-t flex gap-2">
-                  <Link href={`/invitations/${inv.id}/couple`} className="flex-1">
-                    <Button variant="outline" size="sm" className="w-full">Edit</Button>
-                  </Link>
-                  <Link href={`/i/${inv.slug}`} target="_blank" className="flex-1">
-                    <Button variant="default" size="sm" className="w-full">Preview</Button>
-                  </Link>
-                </div>
-              </Card>
-            ))}
+                  <div className="mt-6 pt-4 border-t flex gap-2">
+                    <Link href={`/invitations/${inv.id}/couple`} className="flex-1">
+                      <Button variant="outline" size="sm" className="w-full">Edit</Button>
+                    </Link>
+                    <Link href={`/i/${inv.slug}`} target="_blank" className="flex-1">
+                      <Button variant="default" size="sm" className="w-full">Preview</Button>
+                    </Link>
+                  </div>
+                </Card>
+              )
+            })}
           </div>
         )}
       </div>

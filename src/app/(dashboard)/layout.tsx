@@ -8,7 +8,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="min-h-screen flex">
-      <DashboardNav user={session.user} />
+      <DashboardNav user={session.user as { name?: string | null; email?: string | null; role?: string | null }} />
       <main className="flex-1 p-6 bg-gray-50">
         {children}
       </main>
