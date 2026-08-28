@@ -42,7 +42,7 @@ export default function SidebarNav({
     { name: 'Hadiah & Rekening', href: `/invitations/${invitationId}/gifts`, iconKey: 'gifts' },
     { name: 'Tema & Tampilan', href: `/invitations/${invitationId}/theme`, iconKey: 'theme' },
     { name: 'RSVP & Tamu', href: `/invitations/${invitationId}/rsvp`, iconKey: 'rsvp' },
-    { name: 'Buku Tamu', href: `/invitations/${invitationId}/guestbook`, iconKey: 'guestbook' },
+    { name: 'Ucapan & Doa', href: `/invitations/${invitationId}/guestbook`, iconKey: 'guestbook' },
     { name: 'Pengaturan', href: `/invitations/${invitationId}/settings`, iconKey: 'settings' },
   ]
 

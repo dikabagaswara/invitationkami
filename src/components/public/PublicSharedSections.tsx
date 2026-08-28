@@ -20,10 +20,10 @@ export function PublicSharedSections({ data }: { data: ThemeData }) {
         </section>
       )}
 
-      {/* Guestbook Section */}
+      {/* Guest Messages Section */}
       {sectionConfig.guestbook && (
         <section className="py-16 px-4 max-w-2xl mx-auto">
-          <h2 className="text-3xl text-center mb-8 font-light">Buku Tamu</h2>
+          <h2 className="text-3xl text-center mb-8 font-light">Ucapan & Doa</h2>
           <GuestbookSection slug={invitation.slug} initialMessages={guestMessages} />
         </section>
       )}

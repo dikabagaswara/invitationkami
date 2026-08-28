@@ -43,6 +43,7 @@ export async function submitRsvpAction(input: { slug: string; name: string; phon
         invitationId: invitation.id,
         name,
         message,
+        status: 'APPROVED',
       }
     })
   }
@@ -64,6 +65,7 @@ export async function submitGuestMessageAction(slug: string, name: string, messa
       invitationId: invitation.id,
       name: validated.data.name,
       message: validated.data.message,
+      status: 'APPROVED',
     }
   })
 

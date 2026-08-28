@@ -40,7 +40,7 @@ export default async function GuestbookPage({ params }: { params: Promise<{ id: 
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight capitalize">Guestbook Moderation</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Moderasi Ucapan & Doa</h1>
       <div className="space-y-4">
         {messages.length === 0 ? (
           <p>No messages yet.</p>
