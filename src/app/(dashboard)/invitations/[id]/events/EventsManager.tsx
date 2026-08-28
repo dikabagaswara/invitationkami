@@ -90,9 +90,7 @@ export default function EventsManager({
     <div className="space-y-4">
       <div className="flex justify-end">
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger>
-            <Button onClick={openNewDialog}><Plus className="mr-2 h-4 w-4" /> Tambah Acara</Button>
-          </DialogTrigger>
+          <DialogTrigger render={<Button onClick={openNewDialog}><Plus className="mr-2 h-4 w-4" /> Tambah Acara</Button>} />
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>{editingEvent ? 'Edit Acara' : 'Tambah Acara'}</DialogTitle>

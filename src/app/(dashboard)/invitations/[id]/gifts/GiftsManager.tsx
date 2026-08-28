@@ -79,9 +79,7 @@ export default function GiftsManager({
     <div className="space-y-4">
       <div className="flex justify-end">
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger>
-            <Button><Plus className="mr-2 h-4 w-4" /> Tambah Rekening/Alamat</Button>
-          </DialogTrigger>
+          <DialogTrigger render={<Button><Plus className="mr-2 h-4 w-4" /> Tambah Rekening/Alamat</Button>} />
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Tambah Data Hadiah</DialogTitle>
