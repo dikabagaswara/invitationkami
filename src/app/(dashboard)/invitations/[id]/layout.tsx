@@ -1,11 +1,11 @@
- 
 import Link from 'next/link'
 import { requireAuth } from '@/lib/authorization'
 import { getInvitationById } from '@/modules/invitation/services/invitation.service'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft, ExternalLink, Settings, Users, Image as ImageIcon, Calendar, Heart, Gift, Palette, MessageSquare } from 'lucide-react'
-import SidebarNav from './SidebarNav' // We'll create this client component
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { ArrowLeft, ExternalLink } from 'lucide-react'
+import SidebarNav from './SidebarNav'
 
 export default async function InvitationEditorLayout({
   children,
@@ -18,29 +18,18 @@ export default async function InvitationEditorLayout({
   const resolvedParams = await params
   const invitation = await getInvitationById(resolvedParams.id, user.id)
 
-  const navItems = [
-    { name: 'Mempelai', href: `/invitations/${resolvedParams.id}/couple`, icon: Users },
-    { name: 'Acara & Lokasi', href: `/invitations/${resolvedParams.id}/events`, icon: Calendar },
-    { name: 'Cerita Cinta', href: `/invitations/${resolvedParams.id}/story`, icon: Heart },
-    { name: 'Galeri Foto', href: `/invitations/${resolvedParams.id}/gallery`, icon: ImageIcon },
-    { name: 'Hadiah & Rekening', href: `/invitations/${resolvedParams.id}/gifts`, icon: Gift },
-    { name: 'Tema & Tampilan', href: `/invitations/${resolvedParams.id}/theme`, icon: Palette },
-    { name: 'RSVP & Tamu', href: `/invitations/${resolvedParams.id}/rsvp`, icon: Users },
-    { name: 'Buku Tamu', href: `/invitations/${resolvedParams.id}/guestbook`, icon: MessageSquare },
-    { name: 'Pengaturan', href: `/invitations/${resolvedParams.id}/settings`, icon: Settings },
-  ]
-
   return (
     <div className="flex h-screen overflow-hidden flex-col bg-gray-50/50">
       {/* Top Navigation Bar */}
       <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white px-6">
         <div className="flex flex-1 items-center gap-4">
-          <Button variant="ghost" size="icon">
-            <Link href="/dashboard">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Kembali</span>
-            </Link>
-          </Button>
+          <Link
+            href="/dashboard"
+            className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span className="sr-only">Kembali</span>
+          </Link>
           <div className="flex flex-col">
             <h1 className="text-lg font-semibold leading-none tracking-tight">
               {invitation.groomName && invitation.brideName ? `${invitation.groomName} & ${invitation.brideName}` : 'Editor Undangan'}
@@ -54,12 +43,14 @@ export default async function InvitationEditorLayout({
           )}
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="outline">
-            <Link href={`/i/${invitation.slug}`} target="_blank">
-              <ExternalLink className="mr-2 h-4 w-4" />
-              Preview Live
-            </Link>
-          </Button>
+          <Link
+            href={`/i/${invitation.slug}`}
+            target="_blank"
+            className={cn(buttonVariants({ variant: 'outline' }))}
+          >
+            <ExternalLink className="mr-2 h-4 w-4" />
+            Preview Live
+          </Link>
         </div>
       </header>
 
