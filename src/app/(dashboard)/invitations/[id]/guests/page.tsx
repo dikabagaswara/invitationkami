@@ -1,14 +1,6 @@
-import { requireInvitationOwnership, requireAuth } from '@/lib/authorization'
+import { redirect } from 'next/navigation'
 
 export default async function GuestsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const user = await requireAuth();
-  if (!user.id) throw new Error("No user");
-  await requireInvitationOwnership(id, user.id);
-  return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight capitalize">guests</h1>
-      <p>Manager for guests goes here.</p>
-    </div>
-  )
+  redirect(`/invitations/${id}/rsvp`)
 }
