@@ -69,12 +69,12 @@ export function PublicSharedSections({ data, isDark = false }: { data: ThemeData
             rel="noopener noreferrer"
             className={`flex items-center gap-2 px-3 py-1 rounded-full backdrop-blur-sm border shadow-xs transition ${
               isDark 
-                ? 'bg-[#141414] border-[#d4af37]/30 text-stone-200 hover:bg-[#1f1f1f]' 
+                ? 'bg-[#141414] border-[#c5a880]/30 text-stone-200 hover:bg-[#1f1f1f]' 
                 : 'bg-white/80 border-gray-200/70 hover:bg-white text-gray-800'
             }`}
           >
             <img src="/images/logo.png" alt="InvitationKami" className="h-6 w-auto object-contain" />
-            <span className={`text-xs font-serif font-semibold tracking-wider ${isDark ? 'text-[#d4af37]' : 'text-gray-800'}`}>
+            <span className={`text-xs font-serif font-semibold tracking-wider ${isDark ? 'text-[#c5a880]' : 'text-gray-800'}`}>
               INVITATIONKAMI
             </span>
           </a>

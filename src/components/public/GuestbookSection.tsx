@@ -53,17 +53,17 @@ export function GuestbookSection({ slug, initialMessages, className = '', isDark
   }
 
   const inputClasses = isDark
-    ? "w-full px-4 py-2.5 bg-[#1f1f1f] border border-[#d4af37]/40 rounded-lg text-stone-100 placeholder:text-stone-500 focus:ring-2 focus:ring-[#d4af37] focus:border-[#d4af37] text-sm"
+    ? "w-full px-4 py-2.5 bg-[#171719] border border-[#c5a880]/30 rounded-lg text-stone-100 placeholder:text-stone-500 focus:ring-1 focus:ring-[#c5a880] focus:border-[#c5a880] text-sm"
     : "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 text-sm"
 
   return (
     <div className={className}>
       <div className={
         isDark
-          ? "bg-[#141414] rounded-2xl p-6 md:p-8 shadow-xl mb-8 border border-[#d4af37]/30 text-stone-200"
+          ? "bg-[#141414] rounded-2xl p-6 md:p-8 shadow-xl mb-8 border border-[#c5a880]/20 text-stone-200"
           : "bg-white/80 backdrop-blur rounded-xl p-6 shadow-sm mb-8 border border-gray-100"
       }>
-        <h3 className={`text-base font-medium mb-4 ${isDark ? 'text-[#d4af37] tracking-wider uppercase text-xs font-semibold' : 'text-gray-900'}`}>
+        <h3 className={`text-base font-medium mb-4 ${isDark ? 'text-[#c5a880] tracking-wider text-xs font-semibold' : 'text-gray-900'}`}>
           Kirim Ucapan & Doa
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -91,7 +91,7 @@ export function GuestbookSection({ slug, initialMessages, className = '', isDark
             disabled={isSubmitting}
             className={
               isDark
-                ? "px-6 py-2.5 bg-[#d4af37] text-black font-semibold tracking-wider uppercase text-xs rounded-lg hover:bg-[#e6c453] transition-colors disabled:opacity-50 shadow-md cursor-pointer"
+                ? "px-6 py-2.5 bg-[#c5a880] text-black font-medium tracking-wider text-xs rounded-lg hover:bg-[#d6ba94] transition-colors disabled:opacity-50 shadow-sm cursor-pointer"
                 : "px-6 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 disabled:opacity-50 text-sm cursor-pointer"
             }
           >

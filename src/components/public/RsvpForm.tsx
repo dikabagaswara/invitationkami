@@ -43,18 +43,18 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
   }
 
   const inputClasses = isDark
-    ? "w-full px-4 py-2.5 bg-[#1f1f1f] border border-[#d4af37]/40 rounded-lg text-stone-100 placeholder:text-stone-500 focus:ring-2 focus:ring-[#d4af37] focus:border-[#d4af37] text-sm"
+    ? "w-full px-4 py-2.5 bg-[#171719] border border-[#c5a880]/30 rounded-lg text-stone-100 placeholder:text-stone-500 focus:ring-1 focus:ring-[#c5a880] focus:border-[#c5a880] text-sm"
     : "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
 
   const labelClasses = isDark
-    ? "block text-xs uppercase tracking-wider font-medium text-[#d4af37] mb-1.5"
+    ? "block text-xs tracking-wider font-medium text-[#c5a880] mb-1.5"
     : "block text-sm font-medium text-gray-700 mb-1"
 
   if (success) {
     return (
-      <div className={`p-6 text-center rounded-lg ${isDark ? 'bg-[#18281a] border border-emerald-500/40 text-emerald-300' : 'bg-green-50 text-green-800'} ${className}`}>
-        <h3 className="text-xl font-medium mb-2">Terima Kasih!</h3>
-        <p className="text-sm opacity-90">Konfirmasi kehadiran Anda telah berhasil dikirim.</p>
+      <div className={`p-6 text-center rounded-lg ${isDark ? 'bg-[#142316] border border-emerald-500/30 text-emerald-300' : 'bg-green-50 text-green-800'} ${className}`}>
+        <h3 className="text-lg font-medium mb-1">Terima Kasih!</h3>
+        <p className="text-xs opacity-90">Konfirmasi kehadiran Anda telah berhasil dikirim.</p>
       </div>
     )
   }
@@ -73,24 +73,19 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
       </div>
 
       <div>
-        <label htmlFor="phone" className={labelClasses}>No. WhatsApp (Opsional)</label>
-        <input type="tel" id="phone" name="phone" className={inputClasses} placeholder="08xxxxxxxxxx" />
-      </div>
-
-      <div>
         <label htmlFor="attendance" className={labelClasses}>Jumlah Kehadiran</label>
         <select id="attendance" name="attendance" className={inputClasses}>
-          <option value="1" className={isDark ? "bg-[#1f1f1f] text-white" : ""}>1 Orang</option>
-          <option value="2" className={isDark ? "bg-[#1f1f1f] text-white" : ""}>2 Orang</option>
+          <option value="1" className={isDark ? "bg-[#171719] text-white" : ""}>1 Orang</option>
+          <option value="2" className={isDark ? "bg-[#171719] text-white" : ""}>2 Orang</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="rsvpStatus" className={labelClasses}>Konfirmasi Kehadiran</label>
         <select id="rsvpStatus" name="rsvpStatus" required className={inputClasses}>
-          <option value="ATTENDING" className={isDark ? "bg-[#1f1f1f] text-white" : ""}>Hadir</option>
-          <option value="NOT_ATTENDING" className={isDark ? "bg-[#1f1f1f] text-white" : ""}>Tidak Hadir</option>
-          <option value="PENDING" className={isDark ? "bg-[#1f1f1f] text-white" : ""}>Masih Ragu</option>
+          <option value="ATTENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Hadir</option>
+          <option value="NOT_ATTENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Tidak Hadir</option>
+          <option value="PENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Masih Ragu</option>
         </select>
       </div>
 
@@ -104,7 +99,7 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
         disabled={isSubmitting}
         className={
           isDark
-            ? "w-full py-3 bg-[#d4af37] text-black font-semibold tracking-wider uppercase text-xs rounded-lg hover:bg-[#e6c453] transition-colors disabled:opacity-50 shadow-md cursor-pointer"
+            ? "w-full py-3 bg-[#c5a880] text-black font-medium tracking-wider text-xs rounded-lg hover:bg-[#d6ba94] transition-colors disabled:opacity-50 shadow-sm cursor-pointer"
             : "w-full py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors disabled:opacity-50 text-sm cursor-pointer"
         }
       >
