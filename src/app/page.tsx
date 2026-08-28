@@ -11,7 +11,7 @@ export default function HomePage() {
         </div>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-2">{appConfig.name}</h1>
         <p className="text-base text-gray-600 mb-2">{appConfig.tagline}</p>
-        <p className="text-xs text-muted-foreground font-mono mb-8">invitationkami@2026</p>
+        <p className="text-xs text-muted-foreground font-sans mb-8">Copyright © 2026 InvitationKami</p>
         
         <div className="flex gap-4 justify-center w-full max-w-xs">
           <Link href="/register" className="flex-1">

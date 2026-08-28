@@ -26,7 +26,7 @@ export function DashboardNav({ user }: { user: NavUser }) {
         <img src="/images/logo.png" alt="Logo" className="h-9 w-auto object-contain" />
         <div>
           <h2 className="font-bold text-base tracking-tight leading-tight">{appConfig.name}</h2>
-          <p className="text-[10px] text-muted-foreground font-mono">invitationkami@2026</p>
+          <p className="text-[10px] text-muted-foreground font-sans">Copyright © 2026 InvitationKami</p>
         </div>
       </div>
       <nav className="flex-1 p-4 space-y-1">

@@ -16,7 +16,7 @@ export default function LoginPage() {
           </Link>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{appConfig.name}</h1>
           <p className="text-gray-600 mt-1 text-sm">{appConfig.tagline}</p>
-          <p className="text-[11px] text-muted-foreground font-mono mt-1">invitationkami@2026</p>
+          <p className="text-[11px] text-muted-foreground font-sans mt-1">Copyright © 2026 InvitationKami</p>
         </div>
         <LoginForm />
         <p className="text-center mt-4 text-sm text-gray-600">

@@ -62,8 +62,8 @@ export function PublicSharedSections({ data }: { data: ThemeData }) {
               INVITATIONKAMI
             </span>
           </a>
-          <p className="text-[11px] text-gray-500 font-mono">
-            invitationkami@2026
+          <p className="text-[11px] text-gray-500 font-sans">
+            Copyright © 2026 InvitationKami
           </p>
         </div>
       </section>
