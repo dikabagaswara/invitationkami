@@ -23,10 +23,10 @@ export function DashboardNav({ user }: { user: NavUser }) {
   return (
     <aside className="w-64 min-h-screen bg-white border-r border-gray-200 flex flex-col">
       <div className="p-5 border-b flex items-center gap-3">
-        <img src="/images/logo.svg" alt="Logo" className="h-8 w-8 object-contain" />
+        <img src="/images/logo.png" alt="Logo" className="h-9 w-auto object-contain" />
         <div>
           <h2 className="font-bold text-base tracking-tight leading-tight">{appConfig.name}</h2>
-          <p className="text-[10px] text-muted-foreground font-medium">Platform © 2026</p>
+          <p className="text-[10px] text-muted-foreground font-mono">invitationkami@2026</p>
         </div>
       </div>
       <nav className="flex-1 p-4 space-y-1">
