@@ -10,6 +10,7 @@ interface PublicInvitationWrapperProps {
   brideName: string
   guestName?: string
   openingTitle?: string | null
+  eventDate?: string
   musicUrl?: string | null
 }
 
@@ -19,6 +20,7 @@ export function PublicInvitationWrapper({
   brideName,
   guestName,
   openingTitle,
+  eventDate,
   musicUrl
 }: PublicInvitationWrapperProps) {
   const [isOpened, setIsOpened] = useState(false)
@@ -30,6 +32,7 @@ export function PublicInvitationWrapper({
         brideName={brideName}
         guestName={guestName}
         openingTitle={openingTitle}
+        eventDate={eventDate}
         onOpen={() => setIsOpened(true)}
       />
       <MusicPlayer musicUrl={musicUrl} isPlaying={isOpened} />

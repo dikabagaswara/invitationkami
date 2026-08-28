@@ -7,16 +7,21 @@ interface OpeningOverlayProps {
   brideName: string
   guestName?: string
   openingTitle?: string | null
+  eventDate?: string
   onOpen: () => void
 }
 
-export function OpeningOverlay({ groomName, brideName, guestName, openingTitle, onOpen }: OpeningOverlayProps) {
+export function OpeningOverlay({ groomName, brideName, guestName, openingTitle, eventDate, onOpen }: OpeningOverlayProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
 
   const handleOpen = () => {
-    setIsOpen(true)
-    document.body.style.overflow = 'auto'
-    onOpen()
+    setIsClosing(true)
+    setTimeout(() => {
+      setIsOpen(true)
+      document.body.style.overflow = 'auto'
+      onOpen()
+    }, 800)
   }
 
   useEffect(() => {
@@ -29,7 +34,7 @@ export function OpeningOverlay({ groomName, brideName, guestName, openingTitle, 
   if (isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/90 backdrop-blur-md text-center p-4 transition-opacity duration-1000">
+    <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/95 backdrop-blur-md text-center p-4 transition-all duration-800 ease-in-out ${isClosing ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'}`}>
       <div className="max-w-md w-full space-y-6">
         <h1 className="text-sm font-semibold tracking-widest uppercase text-gray-500">
           {openingTitle || 'The Wedding Of'}
@@ -37,6 +42,11 @@ export function OpeningOverlay({ groomName, brideName, guestName, openingTitle, 
         <h2 className="text-4xl font-serif text-gray-800">
           {groomName} & {brideName}
         </h2>
+        {eventDate && (
+          <p className="text-sm font-medium tracking-wide uppercase text-gray-500 mt-2">
+            {eventDate}
+          </p>
+        )}
         {guestName && (
           <div className="mt-8">
             <p className="text-sm text-gray-500 mb-2">Kepada Yth. Bapak/Ibu/Saudara/i</p>

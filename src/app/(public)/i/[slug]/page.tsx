@@ -155,12 +155,17 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
   const themeSlug = invitation.theme.slug
   const ThemeComponent = (await import(`@/themes/${themeSlug}/index`)).default
 
+  const eventDate = invitation.events[0] ? new Date(invitation.events[0].date).toLocaleDateString('id-ID', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  }) : undefined
+
   return (
     <PublicInvitationWrapper
       groomName={invitation.groomName}
       brideName={invitation.brideName}
       guestName={guestName}
       openingTitle={invitation.openingTitle}
+      eventDate={eventDate}
       musicUrl={invitation.music?.fileUrl}
     >
       <ThemeComponent data={themeData} />

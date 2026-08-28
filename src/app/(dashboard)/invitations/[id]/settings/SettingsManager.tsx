@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Switch } from '@/components/ui/switch'
 import { toast } from 'sonner'
-import { Loader2, AlertTriangle, Link as LinkIcon, Globe, Lock } from 'lucide-react'
+import { Loader2, AlertTriangle, Link as LinkIcon, Globe, Lock, Copy } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
 
 export default function SettingsManager({
   invitationId,
@@ -87,21 +88,44 @@ export default function SettingsManager({
             <p className="text-xs text-muted-foreground mt-1">Gunakan huruf kecil, angka, dan strip (-). Contoh: rama-ayu</p>
           </div>
 
-          <div className="pt-4 flex items-center justify-between border-t mt-6">
-            <div className="space-y-0.5">
-              <Label className="text-base flex items-center gap-2">
-                {isPublished ? <Globe className="h-4 w-4 text-green-500" /> : <Lock className="h-4 w-4 text-amber-500" />}
-                Status Publikasi
-              </Label>
-              <p className="text-sm text-muted-foreground">
-                {isPublished ? "Undangan dapat diakses oleh siapa saja dengan tautan." : "Undangan hanya dapat diakses oleh Anda."}
-              </p>
+            <div className="pt-4 flex items-center justify-between border-t mt-6">
+              <div className="space-y-0.5">
+                <Label className="text-base flex items-center gap-2">
+                  {isPublished ? <Globe className="h-4 w-4 text-green-500" /> : <Lock className="h-4 w-4 text-amber-500" />}
+                  Status Publikasi
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  {isPublished ? "Undangan dapat diakses oleh siapa saja dengan tautan." : "Undangan hanya dapat diakses oleh Anda."}
+                </p>
+              </div>
+              <Switch
+                checked={isPublished}
+                onCheckedChange={setIsPublished}
+              />
             </div>
-            <Switch
-              checked={isPublished}
-              onCheckedChange={setIsPublished}
-            />
-          </div>
+            
+            {isPublished && (
+              <div className="pt-4 mt-4 border-t space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <div className="bg-white p-2 rounded-lg border shadow-sm w-fit">
+                    <QRCodeSVG value={`https://invitationkami.com/i/${slug}`} size={120} />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-sm">Bagikan Undangan</h4>
+                    <p className="text-sm text-muted-foreground">Scan QR Code atau salin tautan untuk membagikan undangan Anda.</p>
+                    <div className="flex gap-2 items-center">
+                      <Input readOnly value={`https://invitationkami.com/i/${slug}`} className="text-sm bg-muted/50" />
+                      <Button variant="outline" size="icon" onClick={() => {
+                        navigator.clipboard.writeText(`https://invitationkami.com/i/${slug}`)
+                        toast.success("Tautan disalin")
+                      }}>
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
           <div className="pt-4">
             <Button onClick={handleSaveSettings} disabled={isPending}>
