@@ -19,12 +19,6 @@ export default function LoginPage() {
           <p className="text-[11px] text-muted-foreground font-sans mt-1">Copyright © 2026 InvitationKami</p>
         </div>
         <LoginForm />
-        <p className="text-center mt-4 text-sm text-gray-600">
-          Don&apos;t have an account?{' '}
-          <Link href="/register" className="text-blue-600 hover:underline">
-            Register
-          </Link>
-        </p>
       </div>
     </div>
   )

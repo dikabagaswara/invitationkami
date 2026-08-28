@@ -82,11 +82,14 @@ export async function createInvitationAction(formData: FormData) {
   const brideName = formData.get('brideName') as string
   const slug = (formData.get('slug') as string).toLowerCase().trim().replace(/[^a-z0-9-]/g, '-')
   const themeSlug = (formData.get('themeSlug') as string) || 'elegant'
+  const targetUserId = (formData.get('userId') as string) || user.id
+
+  const finalUserId = user.role === 'SUPER_ADMIN' ? targetUserId : user.id
 
   const theme = await prisma.theme.findUnique({ where: { slug: themeSlug } })
   if (!theme) throw new Error('Theme not found')
 
-  const invitation = await invitationService.createInvitation(user.id, {
+  const invitation = await invitationService.createInvitation(finalUserId, {
     slug,
     groomName,
     brideName,
@@ -108,6 +111,7 @@ export async function createInvitationAction(formData: FormData) {
   })
 
   revalidatePath('/invitations')
+  revalidatePath('/admin/invitations')
   revalidatePath('/dashboard')
   return { id: invitation.id, slug: invitation.slug }
 }

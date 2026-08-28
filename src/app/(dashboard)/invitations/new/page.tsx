@@ -9,8 +9,13 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 export default async function NewInvitationPage() {
-  await requireAuth()
-  const themes = await prisma.theme.findMany({ where: { isActive: true } })
+  const currentUser = await requireAuth()
+  const [themes, users] = await Promise.all([
+    prisma.theme.findMany({ where: { isActive: true } }),
+    currentUser.role === 'SUPER_ADMIN'
+      ? prisma.user.findMany({ select: { id: true, name: true, email: true, role: true }, orderBy: { name: 'asc' } })
+      : Promise.resolve([]),
+  ])
 
   async function handleCreate(formData: FormData) {
     'use server'
@@ -36,6 +41,25 @@ export default async function NewInvitationPage() {
         </CardHeader>
         <CardContent>
           <form action={handleCreate} className="space-y-5">
+            {currentUser.role === 'SUPER_ADMIN' && users.length > 0 && (
+              <div className="space-y-2 p-3 bg-amber-50/70 border border-amber-200 rounded-lg">
+                <Label htmlFor="userId" className="text-amber-900 font-semibold">Pemilik Undangan (Agent / Customer)</Label>
+                <select
+                  id="userId"
+                  name="userId"
+                  className="w-full h-10 px-3 rounded-md border border-input bg-white text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  defaultValue={currentUser.id}
+                >
+                  {users.map((u) => (
+                    <option key={u.id} value={u.id}>
+                      {u.name} ({u.email}) — {u.role === 'SUPER_ADMIN' ? 'Super Admin' : 'Agent/Customer'}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-amber-700">Sebagai Admin, Anda dapat membuatkan undangan langsung atas nama agent/customer tertentu.</p>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="groomName">Nama Panggilan Pria</Label>

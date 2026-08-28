@@ -9,16 +9,24 @@ import { appConfig } from '@/lib/config'
 interface NavUser {
   name?: string | null
   email?: string | null
+  role?: string | null
 }
-
-const navItems = [
-  { href: '/dashboard', label: 'Dashboard' },
-  { href: '/invitations', label: 'Invitations' },
-  { href: '/settings', label: 'Settings' },
-]
 
 export function DashboardNav({ user }: { user: NavUser }) {
   const pathname = usePathname()
+
+  const navItems = [
+    { href: '/dashboard', label: 'Dashboard' },
+    { href: '/invitations', label: 'Invitations' },
+    { href: '/settings', label: 'Settings' },
+  ]
+
+  const adminNavItems = [
+    { href: '/admin/users', label: 'User & Agent (CRUD)' },
+    { href: '/admin/invitations', label: 'Semua Undangan' },
+    { href: '/admin/themes', label: 'Master Tema' },
+    { href: '/admin/music', label: 'Master Musik' },
+  ]
 
   return (
     <aside className="w-64 min-h-screen bg-white border-r border-gray-200 flex flex-col">
@@ -29,21 +37,48 @@ export function DashboardNav({ user }: { user: NavUser }) {
           <p className="text-[10px] text-muted-foreground font-sans">Copyright © 2026 InvitationKami</p>
         </div>
       </div>
-      <nav className="flex-1 p-4 space-y-1">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
-              pathname === item.href || pathname.startsWith(item.href + '/')
-                ? 'bg-gray-100 text-gray-900'
-                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-            )}
-          >
-            {item.label}
-          </Link>
-        ))}
+      <nav className="flex-1 p-4 space-y-4 overflow-y-auto">
+        <div className="space-y-1">
+          <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
+            Menu Utama
+          </p>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href))
+                  ? 'bg-gray-100 text-gray-900 font-semibold'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
+        {user.role === 'SUPER_ADMIN' && (
+          <div className="space-y-1 pt-2 border-t">
+            <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-700 mb-1">
+              Super Admin Panel
+            </p>
+            {adminNavItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  pathname.startsWith(item.href)
+                    ? 'bg-amber-50 text-amber-950 font-semibold border border-amber-200'
+                    : 'text-amber-800 hover:bg-amber-50/50',
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </nav>
       <div className="p-4 border-t">
         <p className="text-sm text-gray-700 truncate mb-2">{user.email}</p>

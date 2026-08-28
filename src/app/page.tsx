@@ -13,12 +13,9 @@ export default function HomePage() {
         <p className="text-base text-gray-600 mb-2">{appConfig.tagline}</p>
         <p className="text-xs text-muted-foreground font-sans mb-8">Copyright © 2026 InvitationKami</p>
         
-        <div className="flex gap-4 justify-center w-full max-w-xs">
-          <Link href="/register" className="flex-1">
-            <Button size="lg" className="w-full">Get Started</Button>
-          </Link>
-          <Link href="/login" className="flex-1">
-            <Button variant="outline" size="lg" className="w-full">Login</Button>
+        <div className="flex justify-center w-full max-w-xs">
+          <Link href="/login" className="w-full">
+            <Button size="lg" className="w-full">Masuk ke Dashboard</Button>
           </Link>
         </div>
       </div>

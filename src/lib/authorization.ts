@@ -30,10 +30,25 @@ export async function requireAdmin() {
  * Throws ForbiddenError or NotFoundError if not.
  */
 export async function requireInvitationOwnership(invitationId: string, userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { role: true },
+  })
+
+  // SUPER_ADMIN has full access to all invitations
+  if (user?.role === 'SUPER_ADMIN') {
+    const invitation = await prisma.invitation.findUnique({
+      where: { id: invitationId },
+      select: { id: true },
+    })
+    if (!invitation) throw new NotFoundError('Invitation')
+    return invitation
+  }
+
   const invitation = await prisma.invitation.findFirst({
     where: {
       id: invitationId,
-      userId, // MANDATORY tenant filter
+      userId, // MANDATORY tenant filter for regular users
     },
     select: { id: true },
   })
