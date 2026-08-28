@@ -21,16 +21,24 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
     setSuccess(false)
 
     const formData = new FormData(e.currentTarget)
-    const name = formData.get('name') as string
-    const phone = formData.get('phone') as string
+    const name = (formData.get('name') as string || '').trim()
     const rsvpStatus = formData.get('rsvpStatus') as 'ATTENDING' | 'NOT_ATTENDING' | 'PENDING'
-    const attendance = parseInt(formData.get('attendance') as string) || 1
-    const message = formData.get('message') as string
+    const attendance = parseInt(formData.get('attendance') as string, 10) || 1
+
+    if (!name || name.length < 2) {
+      setError('Mohon masukkan nama lengkap Anda minimal 2 karakter.')
+      setIsSubmitting(false)
+      return
+    }
 
     try {
-      await submitRsvpAction({ slug, name, phone, rsvpStatus, attendance, message })
-      setSuccess(true)
-      ;(e.target as HTMLFormElement).reset()
+      const res = await submitRsvpAction({ slug, name, rsvpStatus, attendance })
+      if (res?.success) {
+        setSuccess(true)
+        ;(e.target as HTMLFormElement).reset()
+      } else {
+        setError('Gagal mengirim konfirmasi. Silakan coba kembali.')
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
@@ -87,11 +95,6 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
           <option value="NOT_ATTENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Tidak Hadir</option>
           <option value="PENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Masih Ragu</option>
         </select>
-      </div>
-
-      <div>
-        <label htmlFor="message" className={labelClasses}>Pesan / Doa Restu (Opsional)</label>
-        <textarea id="message" name="message" rows={3} className={inputClasses} placeholder="Tuliskan ucapan..."></textarea>
       </div>
 
       <button

@@ -1,6 +1,6 @@
 const store = new Map<string, { count: number; expiresAt: number }>()
 
-export function rateLimit(ip: string, limit: number, windowMs: number): boolean {
+export function rateLimit(ip: string, limit: number = 30, windowMs: number = 60 * 1000): boolean {
   const now = Date.now()
   const record = store.get(ip)
 

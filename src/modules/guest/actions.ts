@@ -7,30 +7,38 @@ import { publicRsvpSchema, publicGuestMessageSchema } from './schemas/guest.sche
 import { rateLimit } from '@/lib/rate-limit'
 
 async function checkRateLimit() {
-  const headersList = await headers()
-  const ip = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown'
-  const isAllowed = rateLimit(ip, 5, 2 * 60 * 1000)
-  if (!isAllowed) {
-    throw new Error('Rate limit exceeded. Please try again later.')
+  try {
+    const headersList = await headers()
+    const ip = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || '127.0.0.1'
+    const isAllowed = rateLimit(ip, 30, 60 * 1000)
+    if (!isAllowed) {
+      throw new Error('Terlalu banyak permintaan. Mohon tunggu beberapa saat.')
+    }
+  } catch (err: unknown) {
+    if (err instanceof Error && err.message.includes('Terlalu banyak')) {
+      throw err
+    }
   }
 }
 
 export async function submitRsvpAction(input: { slug: string; name: string; phone?: string; rsvpStatus: 'ATTENDING' | 'NOT_ATTENDING' | 'PENDING'; attendance: number; message?: string }) {
   await checkRateLimit()
   const validated = publicRsvpSchema.safeParse(input)
-  if (!validated.success) throw new Error('Invalid input data')
+  if (!validated.success) {
+    throw new Error('Data tidak valid: ' + (validated.error.issues[0]?.message || 'Periksa input Anda.'))
+  }
 
   const { slug, name, phone, rsvpStatus, attendance, message } = { ...input, ...validated.data }
 
   const invitation = await prisma.invitation.findUnique({ where: { slug } })
-  if (!invitation) throw new Error('Invitation not found')
+  if (!invitation) throw new Error('Undangan tidak ditemukan.')
 
-  // Create guest
+  // Create or record guest RSVP
   await prisma.guest.create({
     data: {
       invitationId: invitation.id,
       name,
-      phone,
+      phone: phone || null,
       rsvpStatus,
       attendance,
       rsvpAt: new Date(),
