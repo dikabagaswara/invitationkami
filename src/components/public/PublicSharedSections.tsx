@@ -48,6 +48,24 @@ export function PublicSharedSections({ data }: { data: ThemeData }) {
           groomName={invitation.groomName} 
           brideName={invitation.brideName} 
         />
+
+        {/* InvitationKami Branding Footer */}
+        <div className="mt-16 flex flex-col items-center justify-center space-y-2 opacity-80 hover:opacity-100 transition-opacity">
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-gray-200/60 shadow-xs hover:bg-white transition"
+          >
+            <img src="/images/logo.svg" alt="InvitationKami" className="h-5 w-5 object-contain" />
+            <span className="text-xs font-serif font-semibold tracking-wider text-gray-800">
+              INVITATIONKAMI
+            </span>
+          </a>
+          <p className="text-[10px] text-gray-500 font-sans tracking-wide">
+            Platform Undangan Digital Premium © 2026
+          </p>
+        </div>
       </section>
     </div>
   )

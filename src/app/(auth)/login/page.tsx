@@ -10,9 +10,12 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">{appConfig.name}</h1>
-          <p className="text-gray-600 mt-2">{appConfig.tagline}</p>
+        <div className="text-center mb-8 flex flex-col items-center">
+          <Link href="/" className="mb-4 inline-block hover:scale-105 transition-transform">
+            <img src="/images/logo.svg" alt="InvitationKami Logo" className="h-14 w-14 object-contain mx-auto" />
+          </Link>
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{appConfig.name}</h1>
+          <p className="text-gray-600 mt-1 text-sm">{appConfig.tagline}</p>
         </div>
         <LoginForm />
         <p className="text-center mt-4 text-sm text-gray-600">
