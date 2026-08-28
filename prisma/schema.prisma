@@ -1,0 +1,255 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── ENUMS ──────────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  SUPER_ADMIN
+}
+
+enum RsvpStatus {
+  PENDING
+  ATTENDING
+  NOT_ATTENDING
+}
+
+enum MessageStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum GiftType {
+  BANK_TRANSFER
+  EWALLET
+  SHIPPING_ADDRESS
+}
+
+enum AnimationIntensity {
+  NONE
+  SUBTLE
+  NORMAL
+  DRAMATIC
+}
+
+// ─── USER (TENANT) ──────────────────────────────────────────────────────────
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  name         String
+  passwordHash String
+  role         Role         @default(CUSTOMER)
+  invitations  Invitation[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([email])
+}
+
+// ─── WEDDING DATA ───────────────────────────────────────────────────────────
+
+model Invitation {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Slug & publish state
+  slug        String  @unique
+  isPublished Boolean @default(false)
+
+  // Groom
+  groomName     String
+  groomFullName String?
+  groomFather   String?
+  groomMother   String?
+  groomPhoto    String?
+
+  // Bride
+  brideName     String
+  brideFullName String?
+  brideFather   String?
+  brideMother   String?
+  bridePhoto    String?
+
+  // Appearance
+  themeId            String
+  theme              Theme              @relation(fields: [themeId], references: [id])
+  colorPreset        String             @default("default")
+  fontPreset         String             @default("default")
+  animationIntensity AnimationIntensity @default(NORMAL)
+
+  // Music
+  musicId String?
+  music   Music?  @relation(fields: [musicId], references: [id])
+
+  // Section visibility config (JSON: { hero: true, story: false, ... })
+  sectionConfig Json @default("{}")
+
+  // Opening text overrides
+  openingTitle String?
+  openingText  String?
+
+  // Quote
+  quote       String?
+  quoteSource String?
+
+  // Relations
+  events        Event[]
+  gallery       GalleryItem[]
+  loveStory     LoveStory[]
+  guests        Guest[]
+  guestMessages GuestMessage[]
+  weddingGifts  WeddingGift[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([slug])
+}
+
+model Event {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  title     String
+  date      DateTime
+  startTime String?
+  endTime   String?
+  venue     String
+  address   String?
+  mapUrl    String?
+  order     Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([invitationId])
+}
+
+model GalleryItem {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  imageUrl String
+  caption  String?
+  order    Int    @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@index([invitationId])
+}
+
+model LoveStory {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String
+  date        String?
+  imageUrl    String?
+  order       Int    @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@index([invitationId])
+}
+
+model Guest {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  name       String
+  slug       String?
+  phone      String?
+  rsvpStatus RsvpStatus @default(PENDING)
+  attendance Int        @default(1)
+  rsvpAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([invitationId, slug])
+  @@index([invitationId])
+}
+
+model GuestMessage {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  name    String
+  message String
+  status  MessageStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+
+  @@index([invitationId])
+}
+
+model WeddingGift {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+
+  type          GiftType
+  bankName      String?
+  accountNumber String?
+  accountHolder String?
+  address       String?
+  notes         String?
+  order         Int      @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@index([invitationId])
+}
+
+// ─── SYSTEM DATA (shared, not tenant-owned) ─────────────────────────────────
+
+model Theme {
+  id String @id @default(cuid())
+
+  slug        String @unique
+  name        String
+  description String?
+  thumbnail   String?
+  category    String?
+
+  colorPresets Json @default("[]")
+  fontPresets  Json @default("[]")
+
+  isActive  Boolean @default(true)
+  isPremium Boolean @default(false)
+
+  invitations Invitation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Music {
+  id String @id @default(cuid())
+
+  title    String
+  artist   String?
+  fileUrl  String
+  category String?
+  isActive Boolean @default(true)
+
+  invitations Invitation[]
+
+  createdAt DateTime @default(now())
+}

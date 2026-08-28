@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  output: 'standalone',
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [],
+  },
+  experimental: {
+    // serverActions are stable in Next 15
+  },
+}
 
-export default nextConfig;
+export default nextConfig
