@@ -177,7 +177,7 @@ export default function LuxuryTheme({ data }: { data: ThemeData }) {
         </section>
       )}
     
-      <PublicSharedSections data={data} />
+      <PublicSharedSections data={data} isDark={true} />
     </div>
   )
 }
