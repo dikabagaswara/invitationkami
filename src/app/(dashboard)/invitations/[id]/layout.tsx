@@ -66,7 +66,7 @@ export default async function InvitationEditorLayout({
       {/* Main Content Area with Sidebar */}
       <div className="flex flex-1 overflow-hidden">
         <aside className="w-64 flex-shrink-0 border-r bg-white flex flex-col">
-          <SidebarNav items={navItems} />
+          <SidebarNav invitationId={resolvedParams.id} />
         </aside>
         <main className="flex-1 overflow-y-auto p-8">
           <div className="mx-auto max-w-4xl">
