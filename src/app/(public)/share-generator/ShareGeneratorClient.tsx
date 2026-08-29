@@ -21,8 +21,7 @@ import {
   MessageCircle,
   Users,
   ArrowLeft,
-  Link2,
-  Lock
+  Link2
 } from 'lucide-react'
 
 export interface InvitationOption {
@@ -60,13 +59,14 @@ export function ShareGeneratorClient({
   baseUrl: string
   isLoggedIn?: boolean
 }) {
-  // Mode selection: 'preset' (if has invitations in DB) or 'manual' (input slug directly)
+  // Mode selection: 'preset' (if has invitations in DB) or 'manual' (input slug/url directly)
   const [selectedInvId, setSelectedInvId] = useState<string>(invitations[0]?.id || 'custom')
   const [customSlug, setCustomSlug] = useState<string>('demo-elegant')
   const [customCouple, setCustomCouple] = useState<string>('Romeo & Juliet')
 
+  // Default guest list: focused on simple requested samples
   const [guestNamesInput, setGuestNamesInput] = useState<string>(
-    'Dika dan Istri\nNurdi dan Istri\nBapak Ahmad & Keluarga\nSahabat Terbaik (Agus)\nKeluarga Besar Budi'
+    'Dika dan Istri\nKeluarga Besar Ahmad'
   )
   const [messageTemplate, setMessageTemplate] = useState<string>(DEFAULT_MESSAGE_TEMPLATE)
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
@@ -88,7 +88,7 @@ export function ShareGeneratorClient({
 
   // Generate links and personalized messages
   const generatedShares = guestList.map((name, index) => {
-    // Sanitize slug if user inputs full url or just slug
+    // Sanitize slug if user inputs full URL or slug
     let cleanSlug = activeSlug
     if (cleanSlug.startsWith('http://') || cleanSlug.startsWith('https://')) {
       try {
@@ -211,13 +211,13 @@ export function ShareGeneratorClient({
           <div className="relative z-10 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
               <Share2 className="w-3.5 h-3.5" />
-              <span>Free Public Tool • Bagikan Undangan Massal</span>
+              <span>Bagikan Undangan Massal &amp; Personal</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-serif font-normal tracking-tight">
               Generator Link &amp; Pesan WhatsApp Tamu
             </h1>
             <p className="text-stone-300 text-xs sm:text-sm font-light max-w-2xl leading-relaxed">
-              Buat link undangan personal &amp; draf pesan WhatsApp untuk banyak tamu sekaligus (contoh: <em>&quot;Dika dan Istri&quot;</em>, <em>&quot;Nurdi dan Istri&quot;</em>) dengan 1 kali klik.
+              Ketik atau tempel (*copas*) daftar nama tamu Anda di bawah. Sistem otomatis menghasilkan link personal dan format pesan WhatsApp siap kirim.
             </p>
           </div>
         </div>
@@ -233,7 +233,7 @@ export function ShareGeneratorClient({
                   1. Data Undangan
                 </CardTitle>
                 <CardDescription>
-                  Pilih undangan dari akun Anda atau masukkan tautan / slug manual.
+                  Pilih undangan dari database atau masukkan link / slug undangan Anda.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -250,7 +250,7 @@ export function ShareGeneratorClient({
                             {inv.groomName} &amp; {inv.brideName} ({inv.themeName}) - /{inv.slug}
                           </SelectItem>
                         ))}
-                        <SelectItem value="custom">✍️ Tulis Slug / Tautan Manual</SelectItem>
+                        <SelectItem value="custom">✍️ Tulis Slug / URL Manual</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -306,22 +306,22 @@ export function ShareGeneratorClient({
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-600" />
-                  2. Daftar Nama Tamu
+                  2. Daftar Nama Tamu (Copas Manual)
                 </CardTitle>
                 <CardDescription>
-                  Tulis satu nama per baris (bebas pakai &quot;&amp;&quot;, &quot;dan istri&quot;, &quot;keluarga&quot;).
+                  Tulis atau copas daftar nama tamu (1 nama per baris).
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Textarea
-                  rows={8}
+                  rows={6}
                   value={guestNamesInput}
                   onChange={(e) => setGuestNamesInput(e.target.value)}
-                  placeholder={"Dika dan Istri\nNurdi dan Istri\nBapak Agus & Keluarga\nTeman Kantor"}
+                  placeholder={"Dika dan Istri\nKeluarga Besar Ahmad"}
                   className="font-mono text-xs leading-relaxed"
                 />
                 <div className="flex items-center justify-between text-xs text-stone-500">
-                  <span>Total Tamu: <strong className="text-stone-900">{guestList.length} orang/pasangan</strong></span>
+                  <span>Total Tamu: <strong className="text-stone-900">{guestList.length} orang/keluarga</strong></span>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -396,7 +396,7 @@ export function ShareGeneratorClient({
                   <div className="text-center py-16 text-stone-400 space-y-2">
                     <Users className="w-8 h-8 mx-auto stroke-1" />
                     <p className="text-sm">Belum ada nama tamu yang dimasukkan.</p>
-                    <p className="text-xs text-stone-400">Tulis daftar nama pada kotak di sebelah kiri untuk membuat link otomatis.</p>
+                    <p className="text-xs text-stone-400">Tulis atau copas daftar nama pada kotak di sebelah kiri untuk membuat link otomatis.</p>
                   </div>
                 ) : (
                   generatedShares.map((item) => {
