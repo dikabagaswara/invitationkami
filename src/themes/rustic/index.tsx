@@ -7,153 +7,112 @@ export default function RusticTheme({ data }: { data: ThemeData }) {
   const { sectionConfig } = invitation
 
   return (
-    <div className="font-serif bg-stone-100 text-stone-700 min-h-screen">
+    <div className="font-serif bg-[#f6f4f0] text-[#4e5340] min-h-screen">
       {/* Hero Section */}
       {sectionConfig.hero && (
-        <section className="min-h-screen flex flex-col items-center justify-center text-center p-8 border-8 border-double border-stone-300 m-4 relative">
-          <h2 className="text-xl tracking-[0.3em] uppercase mb-8 text-stone-600 font-light">
-            {invitation.openingTitle || 'The Wedding Of'}
-          </h2>
-          <h1 className="text-6xl md:text-8xl mb-8 font-light tracking-wider drop-shadow-sm">
-            {invitation.groomName} <span className="text-stone-500 italic">&</span> {invitation.brideName}
-          </h1>
-          {events.length > 0 && (
-            <p className="text-xl tracking-widest uppercase border-t border-b border-stone-400 py-4 px-12 mt-8 text-stone-700">
-              {new Date(events[0].date).toLocaleDateString('id-ID', {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-              })}
-            </p>
-          )}
+        <section className="min-h-screen flex flex-col items-center justify-center p-6 relative">
+          <div className="w-full max-w-4xl h-[85vh] bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 relative overflow-hidden border border-[#d3cec4]">
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,#f9f8f6,transparent_50%)]"></div>
+            <h2 className="relative z-10 text-sm tracking-[0.3em] uppercase mb-12 text-[#8b9176] font-semibold">
+              {invitation.openingTitle || 'The Wedding Of'}
+            </h2>
+            <div className="relative z-10 flex flex-col items-center gap-4">
+              <h1 className="text-6xl md:text-8xl font-normal text-[#4e5340]">
+                {invitation.groomName}
+              </h1>
+              <span className="text-5xl text-[#6b705c] italic">&</span>
+              <h1 className="text-6xl md:text-8xl font-normal text-[#4e5340]">
+                {invitation.brideName}
+              </h1>
+            </div>
+            {events.length > 0 && (
+              <div className="relative z-10 mt-16 px-8 py-3 bg-[#f6f4f0] rounded-full text-[#6b705c] tracking-widest uppercase text-sm border border-[#e2dfd8]">
+                {new Date(events[0].date).toLocaleDateString('id-ID', {
+                  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                })}
+              </div>
+            )}
+          </div>
         </section>
       )}
 
       {/* Quote Section */}
       {sectionConfig.quote && invitation.quote && (
-        <section className="py-20 px-8 text-center max-w-2xl mx-auto">
-          <p className="text-stone-500 text-3xl mb-4">❧</p>
-          <p className="italic text-lg md:text-xl text-stone-600 leading-relaxed">
-            "{invitation.quote}"
-          </p>
-          {invitation.quoteSource && (
-            <p className="mt-4 font-semibold text-sm uppercase tracking-wider text-stone-600">
-              - {invitation.quoteSource} -
+        <section className="py-20 px-6 max-w-2xl mx-auto text-center">
+          <div className="bg-white p-10 rounded-3xl shadow-sm border border-[#d3cec4]">
+            <p className="italic text-xl text-[#6b705c] leading-relaxed">
+              "{invitation.quote}"
             </p>
-          )}
+            {invitation.quoteSource && (
+              <p className="mt-6 font-semibold text-sm uppercase tracking-wider text-[#8b9176]">
+                - {invitation.quoteSource} -
+              </p>
+            )}
+          </div>
         </section>
       )}
 
       {/* Couple Section */}
       {sectionConfig.couple && (
-        <section className="py-24 px-8 max-w-4xl mx-auto text-center relative">
-          <h2 className="text-4xl italic text-stone-600 mb-20 font-light">Meet the Couple</h2>
-          <div className="grid md:grid-cols-2 gap-16">
-            <div className="space-y-6">
-              <div className="w-56 h-72 mx-auto bg-stone-200 rounded-t-full shadow-lg overflow-hidden border-8 border-white">
-                {invitation.groomPhoto ? (
-                  <img src={invitation.groomPhoto} alt="Groom" className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full bg-stone-300/50"></div>
-                )}
+        <section className="py-20 px-6 max-w-5xl mx-auto">
+          <h2 className="text-3xl text-center text-[#6b705c] mb-16 uppercase tracking-widest">The Couple</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="bg-white p-6 rounded-3xl shadow-md border border-[#d3cec4] text-center">
+              <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-6">
+                <img src={invitation.groomPhoto || '/placeholder.jpg'} alt="Groom" className="w-full h-full object-cover" />
               </div>
-              <div>
-                <h3 className="text-3xl font-semibold mb-2">{invitation.groomFullName || invitation.groomName}</h3>
-                <p className="text-sm text-stone-500 uppercase tracking-widest mb-2">The Groom</p>
-                {(invitation.groomFather || invitation.groomMother) && (
-                  <p className="text-sm text-stone-600">
-                    Putra dari <br />
-                    Bapak {invitation.groomFather} & Ibu {invitation.groomMother}
-                  </p>
-                )}
-              </div>
+              <h3 className="text-2xl font-bold mb-2">{invitation.groomFullName || invitation.groomName}</h3>
+              <p className="text-sm text-[#8b9176] mb-4 uppercase tracking-wider">The Groom</p>
+              {(invitation.groomFather || invitation.groomMother) && (
+                <p className="text-sm text-[#6b705c]">
+                  Putra dari Bapak {invitation.groomFather} & Ibu {invitation.groomMother}
+                </p>
+              )}
             </div>
-            <div className="space-y-6">
-              <div className="w-56 h-72 mx-auto bg-stone-200 rounded-t-full shadow-lg overflow-hidden border-8 border-white">
-                {invitation.bridePhoto ? (
-                  <img src={invitation.bridePhoto} alt="Bride" className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full bg-stone-300/50"></div>
-                )}
+            <div className="bg-white p-6 rounded-3xl shadow-md border border-[#d3cec4] text-center">
+              <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-6">
+                <img src={invitation.bridePhoto || '/placeholder.jpg'} alt="Bride" className="w-full h-full object-cover" />
               </div>
-              <div>
-                <h3 className="text-3xl font-semibold mb-2">{invitation.brideFullName || invitation.brideName}</h3>
-                <p className="text-sm text-stone-500 uppercase tracking-widest mb-2">The Bride</p>
-                {(invitation.brideFather || invitation.brideMother) && (
-                  <p className="text-sm text-stone-600">
-                    Putri dari <br />
-                    Bapak {invitation.brideFather} & Ibu {invitation.brideMother}
-                  </p>
-                )}
-              </div>
+              <h3 className="text-2xl font-bold mb-2">{invitation.brideFullName || invitation.brideName}</h3>
+              <p className="text-sm text-[#8b9176] mb-4 uppercase tracking-wider">The Bride</p>
+              {(invitation.brideFather || invitation.brideMother) && (
+                <p className="text-sm text-[#6b705c]">
+                  Putri dari Bapak {invitation.brideFather} & Ibu {invitation.brideMother}
+                </p>
+              )}
             </div>
           </div>
-        </section>
-      )}
-
-      {/* Countdown Section */}
-      {sectionConfig.countdown && events.length > 0 && (
-        <section className="py-20 px-8 bg-stone-200/50 text-center border-y border-stone-300">
-          <h2 className="text-3xl italic text-stone-600 mb-12 font-light">Save the Date</h2>
-          <CountdownTimer targetDate={events[0].date} />
         </section>
       )}
 
       {/* Events Section */}
       {sectionConfig.events && events.length > 0 && (
-        <section className="py-24 px-8 bg-white text-center">
-          <h2 className="text-4xl italic text-stone-600 mb-20 font-light">Wedding Events</h2>
-          <div className="max-w-3xl mx-auto space-y-12">
-            {events.map(event => (
-              <div key={event.id} className="p-10 border border-stone-300 shadow-sm relative bg-stone-100/30">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-stone-500 text-2xl">❧</div>
-                <h3 className="text-3xl mb-4 font-semibold">{event.title}</h3>
-                <p className="mb-2 font-semibold text-lg text-stone-700">
-                  {new Date(event.date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </p>
-                {(event.startTime || event.endTime) && (
-                  <p className="text-stone-600 mb-4">{event.startTime || '??'} - {event.endTime || 'Selesai'}</p>
-                )}
-                <div className="w-16 h-px bg-stone-300 mx-auto my-4"></div>
-                <p className="font-medium text-lg mb-1">{event.venue}</p>
-                {event.address && <p className="text-stone-500 text-sm mb-6 max-w-md mx-auto">{event.address}</p>}
-                
-                {event.mapUrl && (
-                  <a href={event.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 px-6 py-2 border border-stone-600 text-stone-600 hover:bg-stone-600 hover:text-white transition-colors rounded-full text-sm uppercase tracking-widest">
-                    Buka Google Maps
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Story Section */}
-      {sectionConfig.story && loveStory.length > 0 && (
-        <section className="py-24 px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl italic text-stone-600 mb-20 font-light">Our Love Story</h2>
-          <div className="space-y-12 relative before:absolute before:inset-0 before:ml-1/2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-stone-300">
-            {loveStory.map((story, i) => (
-              <div key={story.id} className="relative z-10 bg-stone-100 p-6 md:p-8 border border-stone-300 shadow-sm max-w-lg mx-auto">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-stone-1000 border-4 border-stone-50"></div>
-                <h3 className="text-2xl mb-2 font-semibold text-stone-700">{story.title}</h3>
-                {story.date && <p className="text-sm font-semibold text-stone-600 mb-4">{story.date}</p>}
-                <p className="text-stone-600 leading-relaxed text-sm md:text-base">{story.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Gallery Section */}
-      {sectionConfig.gallery && gallery.length > 0 && (
-        <section className="py-24 px-8 bg-stone-200/50">
-          <h2 className="text-4xl italic text-stone-600 mb-16 font-light text-center">Gallery</h2>
-          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {gallery.map(item => (
-              <div key={item.id} className="aspect-square bg-stone-300 overflow-hidden shadow-md border-4 border-white">
-                <img src={item.imageUrl} alt={item.caption || 'Gallery'} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-              </div>
-            ))}
+        <section className="py-20 px-6">
+          <div className="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-16 shadow-xl border border-[#d3cec4]">
+            <h2 className="text-3xl text-center text-[#6b705c] mb-16 uppercase tracking-widest">Events</h2>
+            <div className="space-y-12">
+              {events.map((event, index) => (
+                <div key={event.id} className={`relative pl-8 md:pl-0 md:flex items-start gap-8 ${index !== events.length - 1 ? 'border-b border-[#e2dfd8] pb-12' : ''}`}>
+                  <div className="md:w-1/3 md:text-right mb-4 md:mb-0">
+                    <h3 className="text-2xl font-bold text-[#4e5340] mb-2">{event.title}</h3>
+                    <p className="text-[#6b705c] font-medium">
+                      {new Date(event.date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    </p>
+                    <p className="text-[#8b9176] text-sm mt-1">{event.startTime || '??'} - {event.endTime || 'Selesai'}</p>
+                  </div>
+                  <div className="hidden md:block w-px bg-[#d3cec4] h-full absolute left-1/3 top-0 bottom-0 mx-4"></div>
+                  <div className="md:w-2/3 md:pl-8">
+                    <p className="font-bold text-lg mb-2">{event.venue}</p>
+                    {event.address && <p className="text-[#6b705c] mb-6">{event.address}</p>}
+                    {event.mapUrl && (
+                      <a href={event.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-6 py-2 bg-[#6b705c] text-white rounded-xl text-sm font-medium hover:bg-[#4e5340] transition-colors">
+                        View Map
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       )}
@@ -162,4 +121,3 @@ export default function RusticTheme({ data }: { data: ThemeData }) {
     </div>
   )
 }
-

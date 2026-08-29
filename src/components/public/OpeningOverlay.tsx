@@ -92,6 +92,12 @@ export function OpeningOverlay({
     textSecondary = 'text-[#4b6b43]'
     accentColor = 'bg-[#2d4a22] hover:bg-[#1a2f14] text-white shadow-[#2d4a22]/20'
     borderClass = 'border-[#c1d1bd]'
+  } else if (themeSlug === 'oceanic') {
+    bgClass = 'bg-[#f0f9ff] bg-[linear-gradient(to_bottom,#f0f9ff_0%,#e0f2fe_100%)]'
+    textPrimary = 'text-[#0369a1]' // sky-700
+    textSecondary = 'text-[#0284c7]' // sky-600
+    accentColor = 'bg-[#0ea5e9] hover:bg-[#0284c7] text-white shadow-[#0ea5e9]/30'
+    borderClass = 'border-[#bae6fd]'
   }
 
   return (

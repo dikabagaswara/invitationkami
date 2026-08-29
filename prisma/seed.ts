@@ -107,6 +107,18 @@ async function main() {
         { id: 'default', name: 'Prata + Lato', heading: 'Prata', body: 'Lato' },
       ],
     },
+    {
+      slug: 'oceanic',
+      name: 'Oceanic',
+      description: 'Deep ocean blues, gentle waves, and elegant sapphire aesthetics.',
+      category: 'modern',
+      colorPresets: [
+        { id: 'default', name: 'Sapphire & Sea', primary: '#0ea5e9', background: '#f0f9ff' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Montserrat + Open Sans', heading: 'Montserrat', body: 'Open Sans' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -256,6 +268,15 @@ async function main() {
       bride: 'Bella Safira',
       brideNick: 'Bella',
       opening: 'IN BLOOM',
+    },
+    {
+      slug: 'demo-oceanic',
+      themeSlug: 'oceanic',
+      groom: 'Samudra Dirgantara',
+      groomNick: 'Samudra',
+      bride: 'Mutiara Laut',
+      brideNick: 'Mutiara',
+      opening: 'OCEAN OF LOVE',
     },
   ]
 
