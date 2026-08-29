@@ -13,11 +13,13 @@ export interface CatalogItem {
   isPremium?: boolean
 }
 
-// Visual animated backdrop & icon treatments for each theme
+// Visual animated backdrop & icon treatments with high-contrast text and badge colors for every theme
 const THEME_ANIMATION_STYLES: Record<string, {
   bgGradient: string
-  accentColor: string
-  textColor: string
+  isDarkTheme: boolean
+  titleColor: string
+  subColor: string
+  bottomColor: string
   badgeBg: string
   badgeText: string
   icon: any
@@ -25,8 +27,10 @@ const THEME_ANIMATION_STYLES: Record<string, {
 }> = {
   oceanic: {
     bgGradient: 'from-[#0077B6] via-[#023E8A] to-[#03045E]',
-    accentColor: '#0077B6',
-    textColor: 'text-[#023E8A]',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-sky-200/90',
+    bottomColor: 'text-sky-100/90 border-white/20',
     badgeBg: 'bg-[#E0F2FE]',
     badgeText: 'text-[#0284C7]',
     icon: Waves,
@@ -39,10 +43,12 @@ const THEME_ANIMATION_STYLES: Record<string, {
     ),
   },
   terracotta: {
-    bgGradient: 'from-[#C85A32] via-[#D48B6C] to-[#735140]',
-    accentColor: '#C85A32',
-    textColor: 'text-[#3D2619]',
-    badgeBg: 'bg-[#F5E6DF]',
+    bgGradient: 'from-[#C85A32] via-[#B85028] to-[#733518]',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-[#FED7AA]',
+    bottomColor: 'text-[#FFEDD5] border-white/20',
+    badgeBg: 'bg-[#FFEDD5]',
     badgeText: 'text-[#C85A32]',
     icon: Sun,
     animationElement: (
@@ -55,10 +61,12 @@ const THEME_ANIMATION_STYLES: Record<string, {
   },
   botanical: {
     bgGradient: 'from-[#132c1b] via-[#0b170e] to-[#070f09]',
-    accentColor: '#15803d',
-    textColor: 'text-[#f0fdf4]',
-    badgeBg: 'bg-emerald-950 border border-emerald-800/40',
-    badgeText: 'text-emerald-400',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-emerald-300',
+    bottomColor: 'text-emerald-200/90 border-emerald-800/60',
+    badgeBg: 'bg-emerald-950 border border-emerald-700/60',
+    badgeText: 'text-emerald-300',
     icon: Leaf,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -70,9 +78,11 @@ const THEME_ANIMATION_STYLES: Record<string, {
   },
   celestial: {
     bgGradient: 'from-[#1D143D] via-[#110C29] to-[#060411]',
-    accentColor: '#8B5CF6',
-    textColor: 'text-white',
-    badgeBg: 'bg-purple-950 border border-purple-800/40',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-purple-300',
+    bottomColor: 'text-purple-200/90 border-purple-800/60',
+    badgeBg: 'bg-purple-950 border border-purple-700/60',
     badgeText: 'text-purple-300',
     icon: Star,
     animationElement: (
@@ -85,32 +95,36 @@ const THEME_ANIMATION_STYLES: Record<string, {
     ),
   },
   rustic: {
-    bgGradient: 'from-[#785338] via-[#8C6D53] to-[#4A3728]',
-    accentColor: '#785338',
-    textColor: 'text-[#4A3728]',
-    badgeBg: 'bg-[#F3ECE2]',
-    badgeText: 'text-[#785338]',
+    bgGradient: 'from-[#785338] via-[#63422A] to-[#3D2619]',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-[#E8DDD0]',
+    bottomColor: 'text-[#FAF6F0]/90 border-white/20',
+    badgeBg: 'bg-[#FAF6F0]',
+    badgeText: 'text-[#63422A]',
     icon: Feather,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-8 -right-8 w-40 h-40 bg-[#D9CBB9]/40 rounded-full blur-2xl"></div>
         <div className="absolute -bottom-8 -left-8 w-44 h-44 bg-[#8C6D53]/25 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute inset-4 border border-dashed border-[#8C6D53]/30 rounded-2xl"></div>
+        <div className="absolute inset-4 border border-dashed border-[#FAF6F0]/30 rounded-2xl"></div>
       </div>
     ),
   },
   vintage: {
-    bgGradient: 'from-[#4A2E1B] via-[#7D5E46] to-[#302217]',
-    accentColor: '#4A2E1B',
-    textColor: 'text-[#302217]',
-    badgeBg: 'bg-[#EAE2D2]',
+    bgGradient: 'from-[#4A2E1B] via-[#382112] to-[#24150A]',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-[#EAE2D2]',
+    bottomColor: 'text-[#F7F3EB]/90 border-white/20',
+    badgeBg: 'bg-[#F7F3EB]',
     badgeText: 'text-[#4A2E1B]',
     icon: ScrollText,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-3 border-2 border-[#C2AB91]/50 rounded-xl"></div>
-        <div className="absolute inset-4 border border-[#C2AB91]/30 rounded-lg"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#C2AB91]/20 font-serif text-6xl select-none">
+        <div className="absolute inset-3 border-2 border-[#C2AB91]/40 rounded-xl"></div>
+        <div className="absolute inset-4 border border-[#C2AB91]/20 rounded-lg"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#C2AB91]/25 font-serif text-6xl select-none">
           ❧
         </div>
       </div>
@@ -118,72 +132,83 @@ const THEME_ANIMATION_STYLES: Record<string, {
   },
   luxury: {
     bgGradient: 'from-[#1a1a1a] via-[#111111] to-[#0A0A0A]',
-    accentColor: '#C9A84C',
-    textColor: 'text-white',
-    badgeBg: 'bg-stone-900 border border-amber-500/30',
+    isDarkTheme: true,
+    titleColor: 'text-amber-100',
+    subColor: 'text-amber-400',
+    bottomColor: 'text-amber-200/80 border-amber-500/20',
+    badgeBg: 'bg-stone-900 border border-amber-500/40',
     badgeText: 'text-amber-400',
     icon: Sparkles,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-10 -left-10 w-44 h-44 bg-amber-500/15 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-yellow-600/15 rounded-full blur-3xl"></div>
-        <div className="absolute inset-5 border border-amber-500/20 rounded-xl"></div>
+        <div className="absolute inset-5 border border-amber-500/30 rounded-xl"></div>
       </div>
     ),
   },
+  // HIGH-CONTRAST LIGHT PALETTES WITH CRISP DARK STONE/SLATE TEXT:
   elegant: {
-    bgGradient: 'from-[#FAF7F2] via-[#F5EFEB] to-[#EBDED3]',
-    accentColor: '#C9A84C',
-    textColor: 'text-stone-800',
-    badgeBg: 'bg-amber-50 border border-amber-200',
-    badgeText: 'text-amber-800',
+    bgGradient: 'from-[#FDFBF7] via-[#F7F2EA] to-[#EFE7D8]',
+    isDarkTheme: false,
+    titleColor: 'text-stone-900 font-semibold',
+    subColor: 'text-stone-700 font-medium',
+    bottomColor: 'text-stone-800 border-stone-300',
+    badgeBg: 'bg-white border border-amber-300 shadow-xs',
+    badgeText: 'text-amber-900 font-semibold',
     icon: Heart,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-200/40 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-rose-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute inset-4 border border-amber-200/60 rounded-2xl"></div>
+        <div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-300/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-rose-200/40 rounded-full blur-3xl"></div>
+        <div className="absolute inset-4 border border-amber-300/70 rounded-2xl"></div>
       </div>
     ),
   },
   modern: {
-    bgGradient: 'from-[#2C2C2C] via-[#1A1A1A] to-[#0F0F0F]',
-    accentColor: '#2C2C2C',
-    textColor: 'text-stone-900',
-    badgeBg: 'bg-stone-100',
-    badgeText: 'text-stone-800',
+    bgGradient: 'from-[#1F2937] via-[#111827] to-[#030712]',
+    isDarkTheme: true,
+    titleColor: 'text-white',
+    subColor: 'text-stone-300',
+    bottomColor: 'text-stone-200 border-stone-700',
+    badgeBg: 'bg-stone-800 border border-stone-700',
+    badgeText: 'text-white',
     icon: Compass,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-stone-200/50 rounded-bl-full"></div>
-        <div className="absolute bottom-4 left-4 w-12 h-1 bg-stone-300 rounded-full"></div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-stone-700/40 rounded-bl-full"></div>
+        <div className="absolute bottom-4 left-4 w-12 h-1 bg-stone-600 rounded-full"></div>
       </div>
     ),
   },
   floral: {
-    bgGradient: 'from-[#FFF5F5] via-[#FFEBEB] to-[#FCDCDC]',
-    accentColor: '#E8A5A0',
-    textColor: 'text-stone-800',
-    badgeBg: 'bg-rose-50 border border-rose-200',
-    badgeText: 'text-rose-700',
+    bgGradient: 'from-[#FFF1F2] via-[#FFE4E6] to-[#FECDD3]',
+    isDarkTheme: false,
+    titleColor: 'text-rose-950 font-semibold',
+    subColor: 'text-rose-800 font-medium',
+    bottomColor: 'text-rose-900 border-rose-300',
+    badgeBg: 'bg-white border border-rose-300 shadow-xs',
+    badgeText: 'text-rose-800 font-semibold',
     icon: Heart,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-10 -right-10 w-44 h-44 bg-rose-300/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-10 -left-10 w-44 h-44 bg-pink-200/40 rounded-full blur-3xl"></div>
+        <div className="absolute -top-10 -right-10 w-44 h-44 bg-rose-300/40 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-10 -left-10 w-44 h-44 bg-pink-300/30 rounded-full blur-3xl"></div>
       </div>
     ),
   },
   minimalist: {
-    bgGradient: 'from-[#FFFFFF] via-[#F9F9F9] to-[#F0F0F0]',
-    accentColor: '#1A1A1A',
-    textColor: 'text-stone-900',
-    badgeBg: 'bg-stone-100',
-    badgeText: 'text-stone-800',
+    bgGradient: 'from-[#F8FAFC] via-[#F1F5F9] to-[#E2E8F0]',
+    isDarkTheme: false,
+    titleColor: 'text-slate-900 font-semibold',
+    subColor: 'text-slate-700 font-medium',
+    bottomColor: 'text-slate-800 border-slate-300',
+    badgeBg: 'bg-white border border-slate-300 shadow-xs',
+    badgeText: 'text-slate-900 font-semibold',
     icon: Sparkles,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-stone-200 rounded-full"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-slate-300/80 rounded-full"></div>
       </div>
     ),
   },
@@ -201,7 +226,7 @@ export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
             key={item.id}
             href={`/i/${item.demoSlug}`}
             target="_blank"
-            className="group relative aspect-[4/5] rounded-3xl border border-stone-200/80 shadow-xs hover:shadow-2xl hover:border-stone-400/90 transition-all duration-500 overflow-hidden flex flex-col justify-between p-6 cursor-pointer"
+            className="group relative aspect-[4/5] rounded-3xl border border-stone-300/80 shadow-sm hover:shadow-2xl hover:border-stone-500 transition-all duration-500 overflow-hidden flex flex-col justify-between p-6 cursor-pointer"
           >
             {/* Background Animated Atmosphere */}
             <div
@@ -226,24 +251,24 @@ export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
               )}
             </div>
 
-            {/* Center: Clean Thematic Title */}
+            {/* Center: Clean High-Contrast Thematic Title */}
             <div className="relative z-10 text-center my-auto py-4">
-              <span className="text-[9px] tracking-[0.3em] uppercase opacity-75 block mb-1 font-sans text-white">
+              <span className={`text-[10px] tracking-[0.25em] uppercase block mb-1 font-sans ${style.subColor}`}>
                 Tema Pernikahan
               </span>
-              <h3 className="text-2xl sm:text-3xl font-serif font-light text-white tracking-wide drop-shadow-xs group-hover:scale-108 transition-transform duration-500">
+              <h3 className={`text-2xl sm:text-3xl font-serif tracking-wide drop-shadow-xs group-hover:scale-108 transition-transform duration-500 ${style.titleColor}`}>
                 {item.name}
               </h3>
             </div>
 
-            {/* Bottom Bar: Quick Indicator (Static State) */}
-            <div className="relative z-10 flex items-center justify-between text-xs text-white/80 border-t border-white/10 pt-3 group-hover:opacity-0 transition-opacity duration-300">
-              <span className="text-[10px] tracking-widest uppercase text-white/70">100% Responsif</span>
-              <span className="text-[11px] text-white/90">Lihat Desain</span>
+            {/* Bottom Bar: Quick Indicator (Static State) with distinct contrast */}
+            <div className={`relative z-10 flex items-center justify-between text-xs border-t pt-3 group-hover:opacity-0 transition-opacity duration-300 ${style.bottomColor}`}>
+              <span className="text-[10px] tracking-widest uppercase font-medium">100% Responsif</span>
+              <span className="text-[11px] font-medium">Lihat Desain</span>
             </div>
 
             {/* Full-Cover Hover Overlay: Instantly Shows "Buka Full Preview" on Hover */}
-            <div className="absolute inset-0 z-20 bg-stone-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-3 p-6 text-center text-white">
+            <div className="absolute inset-0 z-20 bg-stone-950/80 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-3 p-6 text-center text-white">
               <div className="w-12 h-12 rounded-full bg-white/15 border border-white/30 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-300 shadow-lg">
                 <Eye className="w-5 h-5 text-white" />
               </div>
