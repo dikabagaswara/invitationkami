@@ -205,9 +205,14 @@ async function main() {
   })
   console.log(`  ✓ Admin user: ${admin.email}`)
 
-  console.log('Seeding demo wedding invitations for all 5 themes...')
+  console.log('Seeding demo wedding invitations for all themes...')
   const allThemes = await prisma.theme.findMany()
-  const firstMusic = await prisma.music.findFirst()
+  const firstMusic = await prisma.music.findFirst({
+    where: {
+      isActive: true,
+      fileUrl: { not: '' },
+    },
+  })
 
   const demoPresets = [
     {
