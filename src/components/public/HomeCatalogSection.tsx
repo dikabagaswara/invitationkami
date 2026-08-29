@@ -13,7 +13,7 @@ export interface CatalogItem {
   isPremium?: boolean
 }
 
-// Rich animated visual atmospheres & micro-interactions for each theme
+// Visual animated atmospheres perfectly calibrated to each theme's live preview identity
 const THEME_ANIMATION_STYLES: Record<string, {
   bgGradient: string
   isDarkTheme: boolean
@@ -25,6 +25,7 @@ const THEME_ANIMATION_STYLES: Record<string, {
   icon: any
   animationElement: React.ReactNode
 }> = {
+  // 1. Oceanic: Deep Azure to Marine Navy Glass
   oceanic: {
     bgGradient: 'from-[#0077B6] via-[#023E8A] to-[#03045E]',
     isDarkTheme: true,
@@ -43,6 +44,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 2. Terracotta: Mediterranean Warm Clay & Desert Sunset
   terracotta: {
     bgGradient: 'from-[#C85A32] via-[#A8431E] to-[#6A2B13]',
     isDarkTheme: true,
@@ -61,6 +64,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 3. Botanical: Deep Emerald Green Luxury
   botanical: {
     bgGradient: 'from-[#143820] via-[#0b1e11] to-[#050e08]',
     isDarkTheme: true,
@@ -79,6 +84,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 4. Celestial: Cosmic Starlight & Purple Nebula
   celestial: {
     bgGradient: 'from-[#23154C] via-[#130B2E] to-[#070414]',
     isDarkTheme: true,
@@ -97,6 +104,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 5. Rustic: Natural Wood, Paper & Kraft Brown
   rustic: {
     bgGradient: 'from-[#785338] via-[#5C3E28] to-[#362112]',
     isDarkTheme: true,
@@ -115,6 +124,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 6. Vintage: Classical European Sepia & Double Border
   vintage: {
     bgGradient: 'from-[#4A2E1B] via-[#351E0F] to-[#201006]',
     isDarkTheme: true,
@@ -134,6 +145,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 7. Luxury: Deep Matte Obsidian & Rich Champagne Gold
   luxury: {
     bgGradient: 'from-[#1f190e] via-[#120f08] to-[#080603]',
     isDarkTheme: true,
@@ -152,6 +165,8 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 8. Elegant: Royal Ivory & Gold Palette
   elegant: {
     bgGradient: 'from-[#FAF4EB] via-[#F3E8D7] to-[#E9D9C3]',
     isDarkTheme: false,
@@ -170,23 +185,29 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 9. Modern: Bold Editorial Monochrome (Zinc-50 Light with Black Geometric Bar Accent matching Modern Theme)
   modern: {
-    bgGradient: 'from-[#1F2937] via-[#111827] to-[#030712]',
-    isDarkTheme: true,
-    titleColor: 'text-white',
-    subColor: 'text-stone-300',
-    bottomColor: 'text-stone-200 border-stone-700',
-    badgeBg: 'bg-stone-900/80 border border-stone-600 backdrop-blur-md',
-    badgeText: 'text-white',
+    bgGradient: 'from-[#FAFAFA] via-[#F4F4F5] to-[#E4E4E7]',
+    isDarkTheme: false,
+    titleColor: 'text-zinc-900 font-black tracking-tight',
+    subColor: 'text-zinc-600 font-bold',
+    bottomColor: 'text-zinc-900 border-zinc-300',
+    badgeBg: 'bg-zinc-900 text-white shadow-xs',
+    badgeText: 'text-white font-bold',
     icon: Compass,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-36 h-36 bg-blue-500/15 rounded-bl-full"></div>
-        <div className="absolute bottom-4 left-4 w-14 h-1 bg-stone-500 rounded-full"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#9ca3af_1px,transparent_1px)] opacity-[0.25] [background-size:24px_24px]"></div>
+        {/* Bold geometric black bar matching actual modern theme hero */}
+        <div className="absolute top-6 left-6 w-12 h-1.5 bg-black"></div>
+        <div className="absolute top-0 right-0 w-36 h-36 bg-zinc-200/60 rounded-bl-3xl"></div>
+        <div className="absolute bottom-6 right-6 w-16 h-1 bg-zinc-400"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(#18181b_1px,transparent_1px)] opacity-[0.12] [background-size:20px_20px]"></div>
       </div>
     ),
   },
+
+  // 10. Floral: Rose Petal & Garden Blossom Pastel
   floral: {
     bgGradient: 'from-[#FFF1F2] via-[#FDE2E4] to-[#FCC2D7]',
     isDarkTheme: false,
@@ -204,19 +225,21 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 11. Minimalist: Pure Slate White & Crisp Typography
   minimalist: {
-    bgGradient: 'from-[#F8FAFC] via-[#EEF2F6] to-[#E2E8F0]',
+    bgGradient: 'from-[#FFFFFF] via-[#F8FAFC] to-[#F1F5F9]',
     isDarkTheme: false,
-    titleColor: 'text-slate-900 font-semibold',
-    subColor: 'text-slate-700 font-medium',
-    bottomColor: 'text-slate-800 border-slate-300',
-    badgeBg: 'bg-white/85 border border-slate-300 shadow-xs backdrop-blur-md',
+    titleColor: 'text-slate-900 font-light',
+    subColor: 'text-slate-600 font-medium',
+    bottomColor: 'text-slate-800 border-slate-200',
+    badgeBg: 'bg-white border border-slate-300 shadow-xs backdrop-blur-md',
     badgeText: 'text-slate-900 font-semibold',
     icon: Sparkles,
     animationElement: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 border-2 border-slate-300/90 rounded-full"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#64748b_1px,transparent_1px)] opacity-[0.2] [background-size:24px_24px]"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 border border-slate-300 rounded-full"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(#64748b_1px,transparent_1px)] opacity-[0.15] [background-size:24px_24px]"></div>
       </div>
     ),
   },
@@ -253,7 +276,7 @@ export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
               </div>
 
               {/* Discreet Logo Mark */}
-              <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center p-1 border border-white/25 opacity-70 group-hover:opacity-100 transition-opacity">
+              <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center p-1 border border-stone-300/40 opacity-70 group-hover:opacity-100 transition-opacity">
                 <img src="/images/logo.png" alt="IK" className="w-full h-full object-contain" />
               </div>
             </div>
