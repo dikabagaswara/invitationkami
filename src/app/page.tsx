@@ -227,7 +227,7 @@ export default async function HomePage() {
               <p className="text-xs text-stone-500 font-light mt-0.5">Momen berkesan</p>
             </div>
             <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
-              Sensasi membuka amplop digital dengan alunan lagu romantis pilihan untuk menyambut tamu.
+              Sensasi membuka undangan digital dengan alunan lagu romantis pilihan untuk menyambut tamu.
             </p>
           </div>
 
