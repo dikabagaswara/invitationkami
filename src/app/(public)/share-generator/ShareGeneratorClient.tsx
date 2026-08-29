@@ -7,32 +7,21 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
 import { 
   Share2, 
   Copy, 
   Send, 
   Check, 
-  Sparkles, 
+  Link2, 
   FileText, 
   RefreshCw, 
   ExternalLink,
   MessageCircle,
   Users,
   ArrowLeft,
-  Link2
+  Heart
 } from 'lucide-react'
-
-export interface InvitationOption {
-  id: string
-  slug: string
-  groomName: string
-  brideName: string
-  themeName: string
-  eventDate?: string
-  venue?: string
-}
 
 const DEFAULT_MESSAGE_TEMPLATE = `Kepada Yth.
 Bapak/Ibu/Saudara/i: *{nama}*
@@ -51,20 +40,17 @@ Hormat kami,
 *{pengantin}*`
 
 export function ShareGeneratorClient({
-  invitations,
   baseUrl,
   isLoggedIn = false,
 }: {
-  invitations: InvitationOption[]
   baseUrl: string
   isLoggedIn?: boolean
 }) {
-  // Mode selection: 'preset' (if has invitations in DB) or 'manual' (input slug/url directly)
-  const [selectedInvId, setSelectedInvId] = useState<string>(invitations[0]?.id || 'custom')
-  const [customSlug, setCustomSlug] = useState<string>('demo-elegant')
-  const [customCouple, setCustomCouple] = useState<string>('Romeo & Juliet')
+  // Pure Manual Input Mode
+  const [invitationUrlInput, setInvitationUrlInput] = useState<string>('demo-oceanic')
+  const [coupleNameInput, setCoupleNameInput] = useState<string>('Romeo & Juliet')
 
-  // Default guest list: focused on simple requested samples
+  // Guest list manual copas
   const [guestNamesInput, setGuestNamesInput] = useState<string>(
     'Dika dan Istri\nKeluarga Besar Ahmad'
   )
@@ -72,13 +58,22 @@ export function ShareGeneratorClient({
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
   const [copiedAll, setCopiedAll] = useState(false)
 
-  const isCustomMode = selectedInvId === 'custom' || invitations.length === 0
-  const selectedInvitation = invitations.find((inv) => inv.id === selectedInvId)
+  // Clean slug / URL from input (supports full URL or just slug)
+  let cleanSlug = invitationUrlInput.trim() || 'demo-oceanic'
+  if (cleanSlug.startsWith('http://') || cleanSlug.startsWith('https://')) {
+    try {
+      const urlObj = new URL(cleanSlug)
+      cleanSlug = urlObj.pathname.replace(/^\/i\//, '').replace(/^\//, '')
+    } catch {
+      // keep as is
+    }
+  } else if (cleanSlug.startsWith('/i/')) {
+    cleanSlug = cleanSlug.replace(/^\/i\//, '')
+  } else if (cleanSlug.startsWith('/')) {
+    cleanSlug = cleanSlug.replace(/^\//, '')
+  }
 
-  const activeSlug = isCustomMode ? (customSlug.trim() || 'demo-elegant') : (selectedInvitation?.slug || 'demo-elegant')
-  const coupleTitle = isCustomMode 
-    ? (customCouple.trim() || 'Mempelai')
-    : (selectedInvitation ? `${selectedInvitation.groomName} & ${selectedInvitation.brideName}` : 'Mempelai')
+  const coupleTitle = coupleNameInput.trim() || 'Mempelai'
 
   // Parse names line by line (filter empty lines)
   const guestList = guestNamesInput
@@ -88,19 +83,6 @@ export function ShareGeneratorClient({
 
   // Generate links and personalized messages
   const generatedShares = guestList.map((name, index) => {
-    // Sanitize slug if user inputs full URL or slug
-    let cleanSlug = activeSlug
-    if (cleanSlug.startsWith('http://') || cleanSlug.startsWith('https://')) {
-      try {
-        const urlObj = new URL(cleanSlug)
-        cleanSlug = urlObj.pathname.replace(/^\/i\//, '').replace(/^\//, '')
-      } catch {
-        // keep as is
-      }
-    } else if (cleanSlug.startsWith('/i/')) {
-      cleanSlug = cleanSlug.replace(/^\/i\//, '')
-    }
-
     const link = `${baseUrl}/i/${cleanSlug}?to=${encodeURIComponent(name)}`
     const message = messageTemplate
       .replace(/{nama}/g, name)
@@ -211,13 +193,13 @@ export function ShareGeneratorClient({
           <div className="relative z-10 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
               <Share2 className="w-3.5 h-3.5" />
-              <span>Bagikan Undangan Massal &amp; Personal</span>
+              <span>Free Public Tool • Bagikan Undangan Massal</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-serif font-normal tracking-tight">
               Generator Link &amp; Pesan WhatsApp Tamu
             </h1>
             <p className="text-stone-300 text-xs sm:text-sm font-light max-w-2xl leading-relaxed">
-              Ketik atau tempel (*copas*) daftar nama tamu Anda di bawah. Sistem otomatis menghasilkan link personal dan format pesan WhatsApp siap kirim.
+              Cukup masukkan link undangan dan copas daftar nama tamu. Sistem otomatis membuat tautan personal dan draf pesan WhatsApp siap kirim.
             </p>
           </div>
         </div>
@@ -226,90 +208,64 @@ export function ShareGeneratorClient({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column: Input Settings (5 Cols) */}
           <div className="lg:col-span-5 space-y-6">
+            {/* 1. Manual Link & Couple Name */}
             <Card className="rounded-2xl border-stone-200 shadow-xs bg-white">
-              <CardHeader>
+              <CardHeader className="pb-3">
                 <CardTitle className="text-base flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-600" />
-                  1. Data Undangan
+                  <Link2 className="w-4 h-4 text-amber-600" />
+                  1. Link &amp; Nama Undangan
                 </CardTitle>
                 <CardDescription>
-                  Pilih undangan dari database atau masukkan link / slug undangan Anda.
+                  Masukkan link / slug undangan dan nama kedua mempelai.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {invitations.length > 0 && (
-                  <div className="space-y-2">
-                    <Label htmlFor="invitation-select">Pilih Dari Daftar Undangan</Label>
-                    <Select value={selectedInvId} onValueChange={(val) => setSelectedInvId(val ?? '')}>
-                      <SelectTrigger id="invitation-select" className="w-full">
-                        <SelectValue placeholder="Pilih undangan..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {invitations.map((inv) => (
-                          <SelectItem key={inv.id} value={inv.id}>
-                            {inv.groomName} &amp; {inv.brideName} ({inv.themeName}) - /{inv.slug}
-                          </SelectItem>
-                        ))}
-                        <SelectItem value="custom">✍️ Tulis Slug / URL Manual</SelectItem>
-                      </SelectContent>
-                    </Select>
+                <div className="space-y-1.5">
+                  <Label htmlFor="invitation-url" className="text-xs font-medium">
+                    Link atau Slug Undangan
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="invitation-url"
+                      value={invitationUrlInput}
+                      onChange={(e) => setInvitationUrlInput(e.target.value)}
+                      placeholder="contoh: demo-oceanic atau https://invitationkami.com/i/dika-dan-istri"
+                      className="font-mono text-xs pl-8"
+                    />
+                    <Link2 className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400" />
                   </div>
-                )}
+                  <p className="text-[11px] text-stone-500">
+                    Preview Target URL: <code className="text-stone-900 font-mono font-medium">{baseUrl}/i/{cleanSlug}</code>
+                  </p>
+                </div>
 
-                {isCustomMode && (
-                  <div className="space-y-3 pt-1">
-                    <div className="space-y-1.5">
-                      <Label htmlFor="custom-slug" className="text-xs">
-                        Slug atau URL Undangan
-                      </Label>
-                      <div className="relative">
-                        <Input
-                          id="custom-slug"
-                          value={customSlug}
-                          onChange={(e) => setCustomSlug(e.target.value)}
-                          placeholder="contoh: dika-dan-istri atau demo-oceanic"
-                          className="font-mono text-xs pl-8"
-                        />
-                        <Link2 className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400" />
-                      </div>
-                      <p className="text-[11px] text-stone-500">
-                        Target Link: <code className="text-stone-800 font-mono">{baseUrl}/i/{activeSlug}</code>
-                      </p>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <Label htmlFor="custom-couple" className="text-xs">
-                        Nama Mempelai (Untuk Pesan WA)
-                      </Label>
-                      <Input
-                        id="custom-couple"
-                        value={customCouple}
-                        onChange={(e) => setCustomCouple(e.target.value)}
-                        placeholder="contoh: Romeo & Juliet"
-                        className="text-xs"
-                      />
-                    </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="couple-name" className="text-xs font-medium">
+                    Nama Mempelai (Untuk Format Pesan WhatsApp)
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="couple-name"
+                      value={coupleNameInput}
+                      onChange={(e) => setCoupleNameInput(e.target.value)}
+                      placeholder="contoh: Romeo & Juliet"
+                      className="text-xs pl-8"
+                    />
+                    <Heart className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-rose-400" />
                   </div>
-                )}
-
-                {!isCustomMode && selectedInvitation && (
-                  <div className="p-3 bg-stone-50 rounded-xl border border-stone-200/80 text-xs space-y-1 text-stone-600">
-                    <p><strong className="text-stone-900">Mempelai:</strong> {selectedInvitation.groomName} &amp; {selectedInvitation.brideName}</p>
-                    <p><strong className="text-stone-900">Tema:</strong> {selectedInvitation.themeName}</p>
-                    <p><strong className="text-stone-900">Link Utama:</strong> <span className="font-mono text-stone-800">{baseUrl}/i/{selectedInvitation.slug}</span></p>
-                  </div>
-                )}
+                </div>
               </CardContent>
             </Card>
 
+            {/* 2. Manual Guest List Copas */}
             <Card className="rounded-2xl border-stone-200 shadow-xs bg-white">
-              <CardHeader>
+              <CardHeader className="pb-3">
                 <CardTitle className="text-base flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-600" />
                   2. Daftar Nama Tamu (Copas Manual)
                 </CardTitle>
                 <CardDescription>
-                  Tulis atau copas daftar nama tamu (1 nama per baris).
+                  Copas daftar nama tamu di bawah (1 nama per baris).
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -334,6 +290,7 @@ export function ShareGeneratorClient({
               </CardContent>
             </Card>
 
+            {/* 3. WhatsApp Message Template */}
             <Card className="rounded-2xl border-stone-200 shadow-xs bg-white">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <div>
@@ -357,7 +314,7 @@ export function ShareGeneratorClient({
               </CardHeader>
               <CardContent className="pt-2">
                 <Textarea
-                  rows={9}
+                  rows={8}
                   value={messageTemplate}
                   onChange={(e) => setMessageTemplate(e.target.value)}
                   className="text-xs leading-relaxed font-sans"
