@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
+import { HomeNavbar } from '@/components/public/HomeNavbar'
 import { ArrowRight, MessageCircle, Sparkles, Music, Smartphone } from 'lucide-react'
 
 // Force dynamic rendering so build does not fail when DB is unseeded/offline during docker build
@@ -133,41 +134,9 @@ export default async function HomePage() {
       </div>
 
       {/* ─────────────────────────────────────────────
-          1. HEADER / NAVBAR (RESPONSIVE & CLEAN)
+          1. HEADER / NAVBAR (RESPONSIVE & MOBILE-OPTIMIZED)
          ───────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-[#FAF8F5]/85 backdrop-blur-md border-b border-stone-200/60 transition-all shadow-2xs">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
-            <div className="p-1 rounded-xl bg-white shadow-xs border border-stone-200/80 group-hover:scale-105 transition-transform">
-              <img src="/images/logo.png" alt={appConfig.name} className="h-6 sm:h-7 w-auto object-contain" />
-            </div>
-            <span className="font-serif tracking-wider text-base sm:text-lg text-stone-900 uppercase font-semibold leading-tight">
-              {appConfig.name}
-            </span>
-          </Link>
-
-          <nav className="flex items-center gap-4 sm:gap-7 text-xs sm:text-sm font-light text-stone-600">
-            <a href="#koleksi" className="hover:text-stone-900 transition-colors">
-              Koleksi Tema
-            </a>
-            <Link href="/share-generator" className="hover:text-stone-900 transition-colors">
-              Bagi Undangan
-            </Link>
-            <a href="#keunggulan" className="hidden sm:inline-block hover:text-stone-900 transition-colors">
-              Fitur
-            </a>
-            <a href="#tentang" className="hidden sm:inline-block hover:text-stone-900 transition-colors">
-              Bantuan
-            </a>
-            <Link
-              href="/login"
-              className="px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full border border-stone-300 text-stone-900 hover:bg-stone-900 hover:text-white transition-all shadow-xs"
-            >
-              Masuk
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <HomeNavbar appName={appConfig.name} />
 
       {/* ─────────────────────────────────────────────
           2. HERO SECTION (RESPONSIVE)
