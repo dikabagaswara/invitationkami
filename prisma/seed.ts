@@ -71,6 +71,42 @@ async function main() {
         { id: 'default', name: 'DM Serif + DM Sans', heading: 'DM Serif Display', body: 'DM Sans' },
       ],
     },
+    {
+      slug: 'rustic',
+      name: 'Rustic',
+      description: 'Earthy tones, natural wood textures, and warm sage greens.',
+      category: 'nature',
+      colorPresets: [
+        { id: 'default', name: 'Sage & Wood', primary: '#6B705C', background: '#F6F4F0' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Lora + Nunito', heading: 'Lora', body: 'Nunito' },
+      ],
+    },
+    {
+      slug: 'vintage',
+      name: 'Vintage',
+      description: 'Classic sepia tones, ornate typography, and old-world charm.',
+      category: 'classic',
+      colorPresets: [
+        { id: 'default', name: 'Sepia & Gold', primary: '#8B5A2B', background: '#FDFBF7' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Libre Baskerville', heading: 'Libre Baskerville', body: 'Libre Baskerville' },
+      ],
+    },
+    {
+      slug: 'botanical',
+      name: 'Botanical',
+      description: 'Deep emerald greens, gold leaf accents, and lush foliage themes.',
+      category: 'nature',
+      colorPresets: [
+        { id: 'default', name: 'Emerald & Gold', primary: '#2D4A22', background: '#FAFAFA' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Prata + Lato', heading: 'Prata', body: 'Lato' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -193,6 +229,33 @@ async function main() {
       bride: 'Alya Sabrina',
       brideNick: 'Alya',
       opening: 'WALKING TOGETHER',
+    },
+    {
+      slug: 'demo-rustic',
+      themeSlug: 'rustic',
+      groom: 'Baskara Putra',
+      groomNick: 'Baskara',
+      bride: 'Nadin Amizah',
+      brideNick: 'Nadin',
+      opening: 'OUR RUSTIC TALE',
+    },
+    {
+      slug: 'demo-vintage',
+      themeSlug: 'vintage',
+      groom: 'Raden Mas Haryo',
+      groomNick: 'Haryo',
+      bride: 'Sekar Arum',
+      brideNick: 'Sekar',
+      opening: 'A CLASSIC LOVE STORY',
+    },
+    {
+      slug: 'demo-botanical',
+      themeSlug: 'botanical',
+      groom: 'Adrian Hakim',
+      groomNick: 'Adrian',
+      bride: 'Bella Safira',
+      brideNick: 'Bella',
+      opening: 'IN BLOOM',
     },
   ]
 
