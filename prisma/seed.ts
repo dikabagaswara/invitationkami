@@ -121,16 +121,15 @@ async function main() {
       ],
     },
     {
-      slug: 'celestial',
-      name: 'Celestial',
-      description: 'Deep midnight cosmos and starlight romantic wedding with glowing nebula halos, gold stars, and starlight typography.',
-      category: 'luxury',
-      isPremium: true,
+      slug: 'terracotta',
+      name: 'Terracotta',
+      description: 'Warm Mediterranean terracotta clay and desert sunset aesthetics with elegant arch frames and earthy warmth.',
+      category: 'nature',
       colorPresets: [
-        { id: 'default', name: 'Midnight Starlight', primary: '#8B5CF6', background: '#0A071B' },
+        { id: 'default', name: 'Desert Terracotta & Clay', primary: '#C85A32', background: '#FBF6F0' },
       ],
       fontPresets: [
-        { id: 'default', name: 'Cinzel + Plus Jakarta Sans', heading: 'Cinzel', body: 'Plus Jakarta Sans' },
+        { id: 'default', name: 'Cormorant + Plus Jakarta Sans', heading: 'Cormorant Garamond', body: 'Plus Jakarta Sans' },
       ],
     },
   ]
@@ -293,13 +292,13 @@ async function main() {
       opening: 'BOTANICAL ELEGANCE',
     },
     {
-      slug: 'demo-celestial',
-      themeSlug: 'celestial',
-      groom: 'Orion Althair, S.Si.',
-      groomNick: 'Orion',
-      bride: 'Lyra Vega, S.T.',
-      brideNick: 'Lyra',
-      opening: 'WRITTEN IN THE STARS',
+      slug: 'demo-terracotta',
+      themeSlug: 'terracotta',
+      groom: 'Elang Danendra, S.Sn.',
+      groomNick: 'Elang',
+      bride: 'Kinanti Senja, S.Ds.',
+      brideNick: 'Kinanti',
+      opening: 'TERRACOTTA SUNSET ROMANCE',
     },
   ]
 

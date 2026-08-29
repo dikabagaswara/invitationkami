@@ -75,11 +75,11 @@ export function OpeningOverlay({
     accentColor = 'bg-stone-800 hover:bg-stone-900 text-amber-50 font-medium border border-amber-900/20 shadow-amber-900/10'
     borderClass = 'border-amber-200'
   } else if (themeSlug === 'oceanic') {
-    bgClass = 'bg-[#F4F8FA] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-[#EBF3F7] to-[#DFECF2]'
-    textPrimary = 'text-[#2F4A58]'
-    textSecondary = 'text-[#5A8296]'
-    accentColor = 'bg-[#5A8296] hover:bg-[#486B7D] text-white font-medium shadow-md shadow-[#5A8296]/20'
-    borderClass = 'border-[#D1E3ED]'
+    bgClass = 'bg-[#F0F7FA] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-[#E0F2FE] to-[#BAE6FD]/40'
+    textPrimary = 'text-[#023E8A]'
+    textSecondary = 'text-[#0077B6]'
+    accentColor = 'bg-gradient-to-r from-[#0077B6] to-[#023E8A] hover:from-[#023E8A] hover:to-[#03045E] text-white font-medium shadow-md shadow-[#0077B6]/25'
+    borderClass = 'border-[#BAE6FD]'
   } else if (themeSlug === 'rustic') {
     bgClass = 'bg-[#FAF6F0] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#FAF6F0] via-[#F3ECE2] to-[#E9DFD0]'
     textPrimary = 'text-[#4A3728]'
@@ -98,12 +98,12 @@ export function OpeningOverlay({
     textSecondary = 'text-[#86efac]'
     accentColor = 'bg-[#15803d] hover:bg-[#166534] text-white font-medium border border-emerald-400/30 shadow-lg shadow-emerald-950/40'
     borderClass = 'border-emerald-600/30'
-  } else if (themeSlug === 'celestial') {
-    bgClass = 'bg-[#0A071B] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1D143D] via-[#110C29] to-[#060411]'
-    textPrimary = 'text-white'
-    textSecondary = 'text-[#C4B5FD]'
-    accentColor = 'bg-gradient-to-r from-[#7C3AED] to-[#9333EA] hover:from-[#6D28D9] hover:to-[#7E22CE] text-white font-medium border border-[#A78BFA]/30 shadow-lg shadow-purple-950/60'
-    borderClass = 'border-[#8B5CF6]/30'
+  } else if (themeSlug === 'terracotta') {
+    bgClass = 'bg-[#FBF6F0] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-[#F5E6DF] to-[#EBD7CE]/50'
+    textPrimary = 'text-[#3D2619]'
+    textSecondary = 'text-[#C85A32]'
+    accentColor = 'bg-[#C85A32] hover:bg-[#A84521] text-white font-medium shadow-md shadow-[#C85A32]/25'
+    borderClass = 'border-[#EBD7CE]'
   }
 
   return (
