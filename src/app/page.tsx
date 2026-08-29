@@ -130,11 +130,6 @@ export default async function HomePage() {
           2. HERO SECTION
          ───────────────────────────────────────────── */}
       <section className="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 border border-stone-200 text-stone-700 text-xs uppercase tracking-widest mb-6 shadow-xs">
-          <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-          <span>Platform Undangan Digital Masa Kini</span>
-        </div>
-
         <h1 className="text-4xl sm:text-6xl font-serif font-normal text-stone-900 tracking-tight leading-[1.2] mb-6">
           Undangan Digital Eksklusif untuk <br />
           <span className="italic font-light text-stone-700">Momen Terindah Anda</span>
@@ -258,7 +253,7 @@ export default async function HomePage() {
           6. FOOTER
          ───────────────────────────────────────────── */}
       <footer className="border-t border-stone-200/80 py-8 text-center text-xs text-stone-400 font-light">
-        <p>Copyright © 2026 {appConfig.name}. Seluruh hak cipta dilindungi.</p>
+        <p>© 2026 {appConfig.name}</p>
       </footer>
     </div>
   )
