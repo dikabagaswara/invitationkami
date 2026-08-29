@@ -202,34 +202,88 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 sm:space-y-3.5 hover:shadow-md transition-all">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-amber-50 border border-amber-200/70 flex items-center justify-center text-amber-700">
-              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {/* 1. Tema Eksklusif */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/70 flex items-center justify-center text-2xl shadow-2xs">
+              🎨
             </div>
-            <h3 className="font-serif text-base sm:text-lg text-stone-900">Karakter Visual Berbeda</h3>
-            <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Bukan sekadar ganti warna. Setiap tema memiliki tata letak, bingkai foto artistik, dan tipografi eksklusif yang unik.
+            <div>
+              <h3 className="font-serif text-lg text-stone-900 font-medium">Tema Eksklusif</h3>
+              <p className="text-xs text-stone-500 font-light mt-0.5">Karakter unik</p>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
+              Desain visual berkelas dengan tipografi artistik yang dirancang khusus untuk momen istimewa Anda.
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 sm:space-y-3.5 hover:shadow-md transition-all">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-50 border border-blue-200/70 flex items-center justify-center text-blue-700">
-              <Music className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* 2. Musik & Opening */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200/70 flex items-center justify-center text-2xl shadow-2xs">
+              🎵
             </div>
-            <h3 className="font-serif text-base sm:text-lg text-stone-900">Musik &amp; Buka Undangan</h3>
-            <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Latar musik otomatis terputar saat amplop digital dibuka, menciptakan momen pertama yang berkesan bagi para tamu.
+            <div>
+              <h3 className="font-serif text-lg text-stone-900 font-medium">Musik &amp; Opening</h3>
+              <p className="text-xs text-stone-500 font-light mt-0.5">Momen berkesan</p>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
+              Sensasi membuka amplop digital dengan alunan lagu romantis pilihan untuk menyambut tamu.
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 sm:space-y-3.5 hover:shadow-md transition-all">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-50 border border-emerald-200/70 flex items-center justify-center text-emerald-700">
-              <Smartphone className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* 3. RSVP */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200/70 flex items-center justify-center text-2xl shadow-2xs">
+              💌
             </div>
-            <h3 className="font-serif text-base sm:text-lg text-stone-900">RSVP &amp; Amplop Digital</h3>
-            <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Lengkap dengan konfirmasi kehadiran via WhatsApp, buku tamu interaktif, dan rekening transfer amplop kado langsung.
+            <div>
+              <h3 className="font-serif text-lg text-stone-900 font-medium">RSVP</h3>
+              <p className="text-xs text-stone-500 font-light mt-0.5">Kelola tamu</p>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
+              Konfirmasi kehadiran instan langsung terhubung ke WhatsApp dan rekap daftar tamu yang rapi.
+            </p>
+          </div>
+
+          {/* 4. Love Story */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="w-12 h-12 rounded-2xl bg-pink-50 border border-pink-200/70 flex items-center justify-center text-2xl shadow-2xs">
+              📸
+            </div>
+            <div>
+              <h3 className="font-serif text-lg text-stone-900 font-medium">Love Story</h3>
+              <p className="text-xs text-stone-500 font-light mt-0.5">Ceritakan kisah</p>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
+              Bagikan perjalanan cinta manis dan galeri foto kenangan Anda dalam timeline yang indah.
+            </p>
+          </div>
+
+          {/* 5. Amplop Digital */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200/70 flex items-center justify-center text-2xl shadow-2xs">
+              🎁
+            </div>
+            <div>
+              <h3 className="font-serif text-lg text-stone-900 font-medium">Amplop Digital</h3>
+              <p className="text-xs text-stone-500 font-light mt-0.5">Hadiah lebih mudah</p>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
+              Fitur kado cashless memudahkan tamu mengirimkan tanda kasih langsung ke rekening/e-wallet.
+            </p>
+          </div>
+
+          {/* 6. Lokasi */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200/70 flex items-center justify-center text-2xl shadow-2xs">
+              📍
+            </div>
+            <div>
+              <h3 className="font-serif text-lg text-stone-900 font-medium">Lokasi</h3>
+              <p className="text-xs text-stone-500 font-light mt-0.5">Navigasi mudah</p>
+            </div>
+            <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
+              Petunjuk arah langsung terintegrasi dengan Google Maps untuk memandu tamu sampai di lokasi.
             </p>
           </div>
         </div>
