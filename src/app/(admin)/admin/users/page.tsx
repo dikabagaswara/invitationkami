@@ -7,11 +7,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
+import { signIn } from '@/lib/auth'
 import { Users, UserPlus, Trash2, Shield, KeyRound, Mail, Calendar } from 'lucide-react'
-import { AdminDeleteUserButton, AdminResetPasswordForm } from './AdminUserActionButtons'
+import { AdminUserRowActions } from './AdminUserRowActions'
 
 export default async function AdminUsersPage() {
-  await requireAdmin()
+  const currentAdmin = await requireAdmin()
 
   const users = await prisma.user.findMany({
     include: {
@@ -47,11 +48,37 @@ export default async function AdminUsersPage() {
     revalidatePath('/admin/users')
   }
 
+  async function updateUser(userId: string, data: { name: string; email: string }) {
+    'use server'
+    await requireAdmin()
+
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        name: data.name,
+        email: data.email.toLowerCase().trim(),
+      },
+    })
+
+    revalidatePath('/admin/users')
+    revalidatePath('/admin/invitations')
+    revalidatePath('/invitations')
+  }
+
   async function deleteUser(targetUserId: string) {
     'use server'
     const admin = await requireAdmin()
     if (admin.id === targetUserId) {
       throw new Error('Tidak dapat menghapus akun admin yang sedang login')
+    }
+
+    // Guard: Prevent deletion of user if they have created invitations
+    const invCount = await prisma.invitation.count({
+      where: { userId: targetUserId },
+    })
+
+    if (invCount > 0) {
+      throw new Error(`Tidak dapat menghapus akun ini karena memiliki ${invCount} undangan aktif`)
     }
 
     await prisma.user.delete({
@@ -61,12 +88,9 @@ export default async function AdminUsersPage() {
     revalidatePath('/admin/users')
   }
 
-  async function resetPassword(formData: FormData) {
+  async function resetPassword(targetUserId: string, newPassword: string) {
     'use server'
     await requireAdmin()
-
-    const targetUserId = formData.get('userId') as string
-    const newPassword = formData.get('newPassword') as string
 
     if (!targetUserId || !newPassword) return
 
@@ -78,6 +102,17 @@ export default async function AdminUsersPage() {
     })
 
     revalidatePath('/admin/users')
+  }
+
+  async function impersonateUser(targetUserId: string) {
+    'use server'
+    await requireAdmin()
+
+    await signIn('credentials', {
+      impersonate: 'true',
+      userId: targetUserId,
+      redirectTo: '/dashboard',
+    })
   }
 
   return (
@@ -208,21 +243,20 @@ export default async function AdminUsersPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 self-end md:self-center">
-                  {/* Reset Password Form */}
-                  <AdminResetPasswordForm
-                    userId={u.id}
-                    userName={u.name}
-                    resetAction={resetPassword}
-                  />
-
-                  {/* Delete User */}
-                  <AdminDeleteUserButton
-                    userId={u.id}
-                    userName={u.name}
-                    deleteAction={deleteUser}
-                  />
-                </div>
+                <AdminUserRowActions
+                  user={{
+                    id: u.id,
+                    name: u.name,
+                    email: u.email,
+                    role: u.role,
+                    invitationsCount: u._count.invitations,
+                  }}
+                  currentAdminId={currentAdmin.id as string}
+                  updateUserAction={updateUser}
+                  deleteUserAction={deleteUser}
+                  resetPasswordAction={resetPassword}
+                  impersonateUserAction={impersonateUser}
+                />
               </div>
             ))}
           </div>

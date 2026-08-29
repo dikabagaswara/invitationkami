@@ -15,8 +15,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
+        impersonate: { label: 'Impersonate', type: 'text' },
+        userId: { label: 'UserId', type: 'text' },
       },
       async authorize(credentials) {
+        // Impersonation Login (for Super Admin)
+        if (credentials?.impersonate === 'true' && credentials?.userId) {
+          const targetUser = await prisma.user.findUnique({
+            where: { id: credentials.userId as string },
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true,
+            },
+          })
+          if (!targetUser) return null
+          return targetUser
+        }
+
         const parsed = loginSchema.safeParse(credentials)
         if (!parsed.success) return null
 
@@ -33,7 +50,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user) return null
 
-        const valid = await bcrypt.compare(parsed.data.password, user.passwordHash)
+        const valid = await bcrypt.compare(parsed.data.password as string, user.passwordHash)
         if (!valid) return null
 
         return {
