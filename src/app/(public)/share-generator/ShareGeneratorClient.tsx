@@ -169,15 +169,9 @@ export function ShareGeneratorClient({
               <>
                 <Link
                   href="/"
-                  className="hidden sm:inline-flex items-center gap-1 text-stone-600 hover:text-stone-900 transition-colors"
+                  className="inline-flex items-center gap-1 text-stone-600 hover:text-stone-900 transition-colors"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" /> Beranda
-                </Link>
-                <Link
-                  href="/login"
-                  className="px-4 py-1.5 rounded-full border border-stone-300 text-stone-900 hover:bg-stone-900 hover:text-white transition-all shadow-xs"
-                >
-                  Masuk Akun
                 </Link>
               </>
             )}
@@ -191,10 +185,6 @@ export function ShareGeneratorClient({
         <div className="bg-gradient-to-r from-stone-900 via-stone-800 to-stone-900 text-white rounded-3xl p-6 sm:p-10 shadow-lg relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
           <div className="relative z-10 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
-              <Share2 className="w-3.5 h-3.5" />
-              <span>Free Public Tool • Bagikan Undangan Massal</span>
-            </div>
             <h1 className="text-2xl sm:text-4xl font-serif font-normal tracking-tight">
               Generator Link &amp; Pesan WhatsApp Tamu
             </h1>

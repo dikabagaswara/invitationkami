@@ -110,7 +110,7 @@ export default async function HomePage() {
             <a href="#koleksi" className="hover:text-stone-900 transition-colors">
               Koleksi Tema
             </a>
-            <Link href="/share-generator" className="text-emerald-700 font-medium hover:text-emerald-900 transition-colors">
+            <Link href="/share-generator" className="hover:text-stone-900 transition-colors">
               Bagi Undangan
             </Link>
             <a href="#keunggulan" className="hover:text-stone-900 transition-colors">
@@ -142,19 +142,13 @@ export default async function HomePage() {
           Setiap tema dirancang dengan karakter visual yang unik, animasi yang elegan, dan fitur lengkap siap dibagikan ke semua tamu.
         </p>
 
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center">
           <a
             href="#koleksi"
             className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 transition-all shadow-md"
           >
             Jelajahi Koleksi Tema <ArrowRight className="h-4 w-4" />
           </a>
-          <Link
-            href="/register"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white border border-stone-300 text-stone-900 text-xs sm:text-sm font-medium hover:bg-stone-50 transition-all shadow-xs"
-          >
-            Mulai Buat Gratis
-          </Link>
         </div>
       </section>
 
