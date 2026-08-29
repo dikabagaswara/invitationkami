@@ -132,6 +132,19 @@ async function main() {
         { id: 'default', name: 'Cormorant + Plus Jakarta Sans', heading: 'Cormorant Garamond', body: 'Plus Jakarta Sans' },
       ],
     },
+    {
+      slug: 'celestial',
+      name: 'Celestial',
+      description: 'Deep midnight cosmos and starlight romantic wedding with glowing nebula halos, gold stars, and starlight typography.',
+      category: 'luxury',
+      isPremium: true,
+      colorPresets: [
+        { id: 'default', name: 'Midnight Starlight', primary: '#8B5CF6', background: '#0A071B' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Cinzel + Plus Jakarta Sans', heading: 'Cinzel', body: 'Plus Jakarta Sans' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -304,6 +317,15 @@ async function main() {
       bride: 'Kinanti Senja, S.Ds.',
       brideNick: 'Kinanti',
       opening: 'TERRACOTTA SUNSET ROMANCE',
+    },
+    {
+      slug: 'demo-celestial',
+      themeSlug: 'celestial',
+      groom: 'Orion Althair, S.Si.',
+      groomNick: 'Orion',
+      bride: 'Lyra Vega, S.T.',
+      brideNick: 'Lyra',
+      opening: 'WRITTEN IN THE STARS',
     },
   ]
 

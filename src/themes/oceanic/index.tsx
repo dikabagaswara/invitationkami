@@ -34,10 +34,7 @@ export default function OceanicTheme({ data }: { data: ThemeData }) {
       {sectionConfig.hero && (
         <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:px-6">
           {/* Main Floating Sea Glass Container */}
-          <div className="w-full max-w-4xl mx-auto rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-12 md:p-16 backdrop-blur-2xl bg-white/80 border border-white shadow-[0_20px_50px_rgba(0,119,182,0.12)] text-center relative overflow-hidden transition-all duration-700 hover:shadow-[0_25px_60px_rgba(0,119,182,0.18)]">
-            {/* Ambient sea wave sheen */}
-            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-gradient-to-b from-[#90E0EF]/40 to-transparent rounded-full blur-2xl pointer-events-none"></div>
-
+          <div className="w-full max-w-4xl mx-auto rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-12 md:p-16 backdrop-blur-2xl bg-white/85 border border-white shadow-[0_20px_50px_rgba(0,119,182,0.12)] text-center relative transition-all duration-700 hover:shadow-[0_25px_60px_rgba(0,119,182,0.18)]">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-xs font-semibold uppercase tracking-[0.25em] mb-6 shadow-xs">
               <Waves className="w-3.5 h-3.5 text-[#0077B6] animate-bounce" />
               <span>{invitation.openingTitle || 'The Wedding Celebration'}</span>
@@ -60,15 +57,19 @@ export default function OceanicTheme({ data }: { data: ThemeData }) {
             )}
 
             {/* Typography with Rich Ocean Blue & Navy Palette */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 leading-tight my-2">
-              <span className="bg-gradient-to-r from-[#023E8A] via-[#0077B6] to-[#0096C7] bg-clip-text text-transparent">
-                {invitation.groomName}
-              </span>
-              <span className="text-[#48CAE4] font-serif font-normal italic mx-3">&</span>
-              <span className="bg-gradient-to-r from-[#0096C7] via-[#0077B6] to-[#023E8A] bg-clip-text text-transparent">
-                {invitation.brideName}
-              </span>
-            </h1>
+            <div className="space-y-2 my-4">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 leading-tight">
+                <span className="bg-gradient-to-r from-[#023E8A] via-[#0077B6] to-[#0096C7] bg-clip-text text-transparent">
+                  {invitation.groomName}
+                </span>
+              </h1>
+              <span className="text-[#0077B6] font-serif font-normal italic text-2xl sm:text-3xl block my-1">&</span>
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 leading-tight">
+                <span className="bg-gradient-to-r from-[#0096C7] via-[#0077B6] to-[#023E8A] bg-clip-text text-transparent">
+                  {invitation.brideName}
+                </span>
+              </h1>
+            </div>
 
             {eventDateFormatted && (
               <div className="inline-flex items-center gap-2 mt-6 px-5 py-2 rounded-2xl bg-[#E0F2FE]/80 border border-[#BAE6FD] shadow-xs text-[#023E8A] font-medium text-sm sm:text-base">
@@ -189,9 +190,7 @@ export default function OceanicTheme({ data }: { data: ThemeData }) {
                   key={evt.id}
                   className="rounded-3xl p-8 sm:p-10 backdrop-blur-xl bg-white/85 border border-white shadow-xl shadow-[#0077B6]/10 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-[#BAE6FD]"
                 >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#E0F2FE]/60 rounded-bl-[4rem] pointer-events-none"></div>
-
-                  <div>
+                  <div className="relative z-10">
                     <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E0F2FE] text-[#023E8A] text-xs font-semibold uppercase tracking-wider mb-4 border border-[#BAE6FD]">
                       <Sparkles className="w-3.5 h-3.5 text-[#0077B6]" />
                       <span>{evt.title}</span>
@@ -234,7 +233,7 @@ export default function OceanicTheme({ data }: { data: ThemeData }) {
                       href={evt.mapUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0077B6] to-[#023E8A] hover:from-[#023E8A] hover:to-[#03045E] text-white text-xs font-semibold uppercase tracking-wider shadow-md shadow-[#0077B6]/25 transition-all active:scale-[0.99]"
+                      className="relative z-10 mt-4 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0077B6] to-[#023E8A] hover:from-[#023E8A] hover:to-[#03045E] text-white text-xs font-semibold uppercase tracking-wider shadow-md shadow-[#0077B6]/25 transition-all active:scale-[0.99]"
                     >
                       <Compass className="w-4 h-4" />
                       <span>Petunjuk Lokasi (Google Maps)</span>

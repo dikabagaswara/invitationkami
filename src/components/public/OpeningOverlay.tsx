@@ -104,6 +104,12 @@ export function OpeningOverlay({
     textSecondary = 'text-[#C85A32]'
     accentColor = 'bg-[#C85A32] hover:bg-[#A84521] text-white font-medium shadow-md shadow-[#C85A32]/25'
     borderClass = 'border-[#EBD7CE]'
+  } else if (themeSlug === 'celestial') {
+    bgClass = 'bg-[#0A071B] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1D143D] via-[#110C29] to-[#060411]'
+    textPrimary = 'text-white'
+    textSecondary = 'text-[#C4B5FD]'
+    accentColor = 'bg-gradient-to-r from-[#7C3AED] to-[#9333EA] hover:from-[#6D28D9] hover:to-[#7E22CE] text-white font-medium border border-[#A78BFA]/30 shadow-lg shadow-purple-950/60'
+    borderClass = 'border-[#8B5CF6]/30'
   }
 
   return (

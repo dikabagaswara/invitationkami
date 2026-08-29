@@ -34,7 +34,7 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
         {sectionConfig.hero && (
           <section className="relative flex flex-col items-center justify-center text-center pt-8">
             {/* Mediterranean Arch Outer Card */}
-            <div className="w-full bg-[#FFFBF7] rounded-t-[10rem] rounded-b-[2.5rem] p-8 sm:p-14 border border-[#EBD7CE] shadow-[0_20px_50px_rgba(200,90,50,0.08)] relative overflow-hidden">
+            <div className="w-full bg-[#FFFBF7] rounded-t-[5rem] sm:rounded-t-[8rem] rounded-b-[2.5rem] p-6 sm:p-14 border border-[#EBD7CE] shadow-[0_20px_50px_rgba(200,90,50,0.08)] relative overflow-hidden">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5E6DF] border border-[#EBD7CE] text-[#C85A32] text-xs font-semibold uppercase tracking-[0.25em] mb-8">
                 <Sun className="w-3.5 h-3.5 text-[#C85A32]" />
                 <span>{invitation.openingTitle || 'TERRACOTTA CELEBRATION'}</span>
@@ -42,8 +42,8 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
 
               {/* Arch Shaped Photo Frame */}
               {(invitation.groomPhoto || invitation.bridePhoto || gallery[0]?.imageUrl) && (
-                <div className="relative mx-auto mb-8 w-44 h-60 sm:w-56 sm:h-72 rounded-t-[8rem] rounded-b-2xl overflow-hidden p-2 border-2 border-[#D48B6C]/50 bg-[#FBF6F0] shadow-md">
-                  <div className="w-full h-full rounded-t-[7.5rem] rounded-b-xl overflow-hidden">
+                <div className="relative mx-auto mb-8 w-44 h-60 sm:w-56 sm:h-72 rounded-t-[5rem] sm:rounded-t-[7rem] rounded-b-2xl overflow-hidden p-2 border-2 border-[#D48B6C]/50 bg-[#FBF6F0] shadow-md">
+                  <div className="w-full h-full rounded-t-[4.5rem] sm:rounded-t-[6.5rem] rounded-b-xl overflow-hidden">
                     <img
                       src={invitation.groomPhoto || gallery[0]?.imageUrl || invitation.bridePhoto || '/placeholder.jpg'}
                       alt="Couple"
@@ -56,14 +56,18 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
                 </div>
               )}
 
-              {/* Typography */}
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#3D2619] tracking-tight leading-tight my-2">
-                {invitation.groomName}
-                <span className="block text-2xl sm:text-3xl text-[#C85A32] italic my-1 font-serif">
+              {/* Typography - Clean and fully visible */}
+              <div className="space-y-2 my-4">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#3D2619] tracking-tight leading-tight">
+                  {invitation.groomName}
+                </h1>
+                <span className="block text-2xl sm:text-3xl text-[#C85A32] italic font-serif my-1">
                   — &amp; —
                 </span>
-                {invitation.brideName}
-              </h1>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif text-[#3D2619] tracking-tight leading-tight">
+                  {invitation.brideName}
+                </h1>
+              </div>
 
               {eventDateFormatted && (
                 <div className="inline-block mt-6 px-6 py-2 rounded-full bg-[#F5E6DF] text-[#C85A32] font-semibold text-xs sm:text-sm tracking-widest uppercase border border-[#EBD7CE]">
@@ -108,8 +112,8 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Groom Arch Card */}
-              <div className="bg-[#FFFBF7] rounded-t-[7rem] rounded-b-3xl p-8 border border-[#EBD7CE] shadow-md flex flex-col items-center text-center">
-                <div className="w-44 h-56 rounded-t-[6rem] rounded-b-xl overflow-hidden shadow-inner mb-6 border-2 border-[#EBD7CE] bg-[#F5E6DF]">
+              <div className="bg-[#FFFBF7] rounded-t-[5rem] rounded-b-3xl p-8 border border-[#EBD7CE] shadow-md flex flex-col items-center text-center">
+                <div className="w-44 h-56 rounded-t-[4.5rem] rounded-b-xl overflow-hidden shadow-inner mb-6 border-2 border-[#EBD7CE] bg-[#F5E6DF]">
                   {invitation.groomPhoto ? (
                     <img src={invitation.groomPhoto} alt="Groom" className="w-full h-full object-cover" />
                   ) : (
@@ -130,8 +134,8 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
               </div>
 
               {/* Bride Arch Card */}
-              <div className="bg-[#FFFBF7] rounded-t-[7rem] rounded-b-3xl p-8 border border-[#EBD7CE] shadow-md flex flex-col items-center text-center">
-                <div className="w-44 h-56 rounded-t-[6rem] rounded-b-xl overflow-hidden shadow-inner mb-6 border-2 border-[#EBD7CE] bg-[#F5E6DF]">
+              <div className="bg-[#FFFBF7] rounded-t-[5rem] rounded-b-3xl p-8 border border-[#EBD7CE] shadow-md flex flex-col items-center text-center">
+                <div className="w-44 h-56 rounded-t-[4.5rem] rounded-b-xl overflow-hidden shadow-inner mb-6 border-2 border-[#EBD7CE] bg-[#F5E6DF]">
                   {invitation.bridePhoto ? (
                     <img src={invitation.bridePhoto} alt="Bride" className="w-full h-full object-cover" />
                   ) : (
@@ -176,9 +180,7 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
 
             <div className="space-y-8">
               {events.map((evt, idx) => (
-                <div key={evt.id} className="bg-[#FFFBF7] rounded-3xl p-8 sm:p-10 border border-[#EBD7CE] shadow-md relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-28 h-28 bg-[#F5E6DF] rounded-bl-full pointer-events-none"></div>
-
+                <div key={evt.id} className="bg-[#FFFBF7] rounded-3xl p-8 sm:p-10 border border-[#EBD7CE] shadow-md relative">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EBD7CE] pb-4 mb-6">
                     <div>
                       <span className="inline-block px-3 py-1 rounded-full bg-[#F5E6DF] text-[#C85A32] text-xs uppercase tracking-wider font-semibold mb-2">
