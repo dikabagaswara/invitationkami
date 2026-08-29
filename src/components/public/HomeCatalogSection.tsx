@@ -235,20 +235,14 @@ export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
               {style.animationElement}
             </div>
 
-            {/* Top Bar: Icon Badge & Premium Tag */}
-            <div className="relative z-10 flex items-center justify-between">
+            {/* Top Bar: Clean Thematic Icon Badge */}
+            <div className="relative z-10 flex items-center justify-start">
               <div
                 className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider backdrop-blur-md ${style.badgeBg} ${style.badgeText} shadow-xs`}
               >
                 <IconComponent className="w-3 h-3" />
                 <span>{item.name}</span>
               </div>
-
-              {item.isPremium && (
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-amber-400 text-stone-950 shadow-xs">
-                  Exclusive
-                </span>
-              )}
             </div>
 
             {/* Center: Clean High-Contrast Thematic Title */}
