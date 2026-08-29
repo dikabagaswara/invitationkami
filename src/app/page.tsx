@@ -160,15 +160,12 @@ export default async function HomePage() {
          ───────────────────────────────────────────── */}
       <section id="koleksi" className="py-20 px-6 border-t border-stone-200/80 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-14">
-            <span className="text-xs uppercase tracking-[0.3em] font-semibold text-stone-400 block mb-2">
-              Katalog Pilihan
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-3">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-2">
               Koleksi Tema Pernikahan
             </h2>
-            <p className="text-stone-500 text-xs sm:text-sm font-light leading-relaxed">
-              Pilih karakter desain yang paling sesuai dengan konsep pernikahan impian Anda. Klik preview untuk melihat tampilan langsung di browser.
+            <p className="text-stone-500 text-xs sm:text-sm font-light">
+              Arahkan kursor atau klik pada tema untuk melihat live preview.
             </p>
           </div>
 
