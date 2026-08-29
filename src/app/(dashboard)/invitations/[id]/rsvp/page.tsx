@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { revalidatePath } from 'next/cache'
 import { Trash2, UserPlus, Phone, Users, CheckCircle, XCircle, HelpCircle } from 'lucide-react'
 import { GuestLinkGenerator } from './GuestLinkGenerator'
+import { DeleteGuestButton } from './DeleteGuestButton'
 import { appConfig } from '@/lib/config'
 
 export default async function RsvpPage({ params }: { params: Promise<{ id: string }> }) {
@@ -218,12 +219,11 @@ export default async function RsvpPage({ params }: { params: Promise<{ id: strin
                           </Button>
                         </a>
                       )}
-                      <form action={deleteGuest.bind(null, g.id)}>
-                        <Button variant="ghost" size="icon" type="submit" className="text-red-500 hover:text-red-700 hover:bg-red-50">
-                          <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Hapus</span>
-                        </Button>
-                      </form>
+                      <DeleteGuestButton
+                        guestId={g.id}
+                        guestName={g.name}
+                        deleteAction={deleteGuest}
+                      />
                     </div>
                   </div>
                 )

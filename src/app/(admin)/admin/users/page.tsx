@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
 import { Users, UserPlus, Trash2, Shield, KeyRound, Mail, Calendar } from 'lucide-react'
+import { AdminDeleteUserButton, AdminResetPasswordForm } from './AdminUserActionButtons'
 
 export default async function AdminUsersPage() {
   await requireAdmin()
@@ -209,32 +210,18 @@ export default async function AdminUsersPage() {
 
                 <div className="flex items-center gap-3 self-end md:self-center">
                   {/* Reset Password Form */}
-                  <form action={resetPassword} className="flex items-center gap-2">
-                    <input type="hidden" name="userId" value={u.id} />
-                    <Input
-                      name="newPassword"
-                      type="password"
-                      placeholder="Password baru"
-                      className="h-8 w-32 text-xs"
-                      required
-                    />
-                    <Button variant="outline" size="sm" type="submit" className="h-8 text-xs">
-                      <KeyRound className="mr-1 h-3 w-3" /> Reset
-                    </Button>
-                  </form>
+                  <AdminResetPasswordForm
+                    userId={u.id}
+                    userName={u.name}
+                    resetAction={resetPassword}
+                  />
 
                   {/* Delete User */}
-                  <form action={deleteUser.bind(null, u.id)}>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      type="submit"
-                      className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-50"
-                      title="Hapus Akun"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </form>
+                  <AdminDeleteUserButton
+                    userId={u.id}
+                    userName={u.name}
+                    deleteAction={deleteUser}
+                  />
                 </div>
               </div>
             ))}

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { revalidatePath } from 'next/cache'
 import { ExternalLink, Edit3, Trash2, Globe, User, Plus } from 'lucide-react'
+import { AdminDeleteInvitationButton } from './AdminDeleteInvitationButton'
 
 export default async function AdminInvitationsPage() {
   await requireAdmin()
@@ -110,17 +111,11 @@ export default async function AdminInvitationsPage() {
                       </Button>
                     </Link>
 
-                    <form action={deleteInvitation.bind(null, inv.id)}>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        type="submit"
-                        className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-50"
-                        title="Hapus Undangan"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </form>
+                    <AdminDeleteInvitationButton
+                      invitationId={inv.id}
+                      title={`${inv.groomName} & ${inv.brideName}`}
+                      deleteAction={deleteInvitation}
+                    />
                   </div>
                 </div>
               ))}

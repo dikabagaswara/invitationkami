@@ -310,6 +310,7 @@ async function main() {
       where: { slug: demo.slug },
       update: {
         themeId: matchedTheme.id,
+        musicId: firstMusic?.id,
         isPublished: true,
       },
       create: {
