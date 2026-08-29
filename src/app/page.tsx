@@ -4,11 +4,36 @@ import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
 import { ArrowRight, MessageCircle, Sparkles, Music, Smartphone } from 'lucide-react'
 
+// Force dynamic rendering so build does not fail when DB is unseeded/offline during docker build
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
-  const themes = await prisma.theme.findMany({
-    where: { isActive: true },
-    orderBy: { createdAt: 'asc' },
-  })
+  let themes: Array<{ id: string; name: string; slug: string; category: string | null; description: string | null; isPremium: boolean }> = []
+
+  try {
+    themes = await prisma.theme.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: 'asc' },
+    })
+  } catch {
+    // Graceful fallback during build phase if DB is unreachable
+    themes = []
+  }
+
+  // Fallback themes catalog if database is not yet seeded
+  const ALL_THEME_SLUGS = [
+    'oceanic',
+    'terracotta',
+    'botanical',
+    'celestial',
+    'rustic',
+    'vintage',
+    'elegant',
+    'luxury',
+    'modern',
+    'floral',
+    'minimalist',
+  ]
 
   // Simple, concise & customer-focused descriptions
   const THEME_DATA_MAP: Record<string, { displayName: string; tagline: string; category: string }> = {
@@ -69,21 +94,21 @@ export default async function HomePage() {
     },
   }
 
-  const catalogItems: CatalogItem[] = themes.map((t) => {
-    const custom = THEME_DATA_MAP[t.slug] || {
-      displayName: t.name,
-      category: t.category || t.name,
-      tagline: t.description || 'Desain undangan digital eksklusif.',
+  const catalogItems: CatalogItem[] = (themes.length > 0 ? themes.map((t) => t.slug) : ALL_THEME_SLUGS).map((slug, idx) => {
+    const custom = THEME_DATA_MAP[slug] || {
+      displayName: slug,
+      category: 'Wedding',
+      tagline: 'Desain undangan digital eksklusif.',
     }
 
     return {
-      id: t.id,
+      id: `theme-${slug}-${idx}`,
       name: custom.displayName,
-      themeSlug: t.slug,
+      themeSlug: slug,
       category: custom.category,
-      demoSlug: `demo-${t.slug}`,
+      demoSlug: `demo-${slug}`,
       tagline: custom.tagline,
-      isPremium: t.isPremium,
+      isPremium: slug === 'luxury' || slug === 'botanical' || slug === 'celestial',
     }
   })
 

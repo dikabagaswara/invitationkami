@@ -13,6 +13,13 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 COPY . .
+
+# Dummy environment variables so Next.js static build doesn't fail on missing env/db
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
+ENV DATABASE_URL="postgresql://user:password@localhost:5432/db"
+ENV AUTH_SECRET="temporary_build_secret_min_32_characters_long_123"
+
 RUN npx prisma generate
 RUN npm run build
 
@@ -21,6 +28,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
