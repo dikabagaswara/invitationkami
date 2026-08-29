@@ -192,10 +192,25 @@ async function main() {
   const bcrypt = await import('bcryptjs')
   const passwordHash = await bcrypt.default.hash('Password123!', 12)
 
-  // Demo Customer
+  // Demo Customer (customer@gmail.com requested by user)
   const customer = await prisma.user.upsert({
+    where: { email: 'customer@gmail.com' },
+    update: {
+      passwordHash,
+    },
+    create: {
+      email: 'customer@gmail.com',
+      name: 'Dika Bagaswara & Nurdi',
+      passwordHash,
+      role: 'CUSTOMER',
+    },
+  })
+  console.log(`  ✓ Customer user: ${customer.email}`)
+
+  // Fallback demo customer
+  await prisma.user.upsert({
     where: { email: 'customer@invitationkami.com' },
-    update: {},
+    update: { passwordHash },
     create: {
       email: 'customer@invitationkami.com',
       name: 'Budi Santoso',
@@ -203,7 +218,6 @@ async function main() {
       role: 'CUSTOMER',
     },
   })
-  console.log(`  ✓ Customer user: ${customer.email}`)
 
   // Demo Admin
   const admin = await prisma.user.upsert({
