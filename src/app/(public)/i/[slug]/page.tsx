@@ -167,6 +167,8 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
       openingTitle={invitation.openingTitle}
       eventDate={eventDate}
       musicUrl={invitation.music?.fileUrl}
+      themeSlug={themeSlug}
+      coverPhoto={invitation.gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || undefined}
     >
       <ThemeComponent data={themeData} />
     </PublicInvitationWrapper>

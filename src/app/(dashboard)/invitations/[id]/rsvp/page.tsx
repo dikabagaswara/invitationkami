@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { revalidatePath } from 'next/cache'
 import { Trash2, UserPlus, Phone, Users, CheckCircle, XCircle, HelpCircle } from 'lucide-react'
+import { GuestLinkGenerator } from './GuestLinkGenerator'
+import { appConfig } from '@/lib/config'
 
 export default async function RsvpPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -125,6 +127,14 @@ export default async function RsvpPage({ params }: { params: Promise<{ id: strin
           </CardContent>
         </Card>
       </div>
+
+      {/* Instant Custom Link & WhatsApp Generator */}
+      <GuestLinkGenerator
+        slug={invitation.slug}
+        appUrl={appConfig.url || 'http://localhost:3000'}
+        groomName={invitation.groomName}
+        brideName={invitation.brideName}
+      />
 
       {/* Add Guest Form */}
       <Card>
