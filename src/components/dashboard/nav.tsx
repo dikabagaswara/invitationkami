@@ -18,12 +18,14 @@ export function DashboardNav({ user }: { user: NavUser }) {
   const navItems = [
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/invitations', label: 'Invitations' },
+    { href: '/share-generator', label: 'Convert & Bagi Tamu' },
     { href: '/settings', label: 'Settings' },
   ]
 
   const adminNavItems = [
     { href: '/admin/users', label: 'User & Agent (CRUD)' },
     { href: '/admin/invitations', label: 'Semua Undangan' },
+    { href: '/share-generator', label: 'Convert & Bagi Tamu' },
     { href: '/admin/themes', label: 'Master Tema' },
     { href: '/admin/music', label: 'Master Musik' },
   ]

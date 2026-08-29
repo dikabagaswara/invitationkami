@@ -18,7 +18,8 @@ import {
   Filter,
   CheckCircle2,
   FileEdit,
-  Timer
+  Timer,
+  Share2
 } from 'lucide-react'
 
 export interface InvitationItemData {
@@ -260,11 +261,18 @@ export function InvitationsListClient({
                       </Button>
                     </Link>
                   </div>
-                  <Link href={`/invitations/${inv.id}/settings`}>
-                    <Button variant="ghost" size="sm" className="w-full text-xs text-muted-foreground hover:text-foreground">
-                      <Settings className="w-3.5 h-3.5 mr-1" /> Pengaturan &amp; Publish
-                    </Button>
-                  </Link>
+                  <div className="flex gap-2">
+                    <Link href={`/share-generator`} className="flex-1">
+                      <Button variant="outline" size="sm" className="w-full text-xs text-emerald-700 border-emerald-200 hover:bg-emerald-50">
+                        <Share2 className="w-3.5 h-3.5 mr-1" /> Bagi Undangan
+                      </Button>
+                    </Link>
+                    <Link href={`/invitations/${inv.id}/settings`} className="flex-1">
+                      <Button variant="ghost" size="sm" className="w-full text-xs text-muted-foreground hover:text-foreground">
+                        <Settings className="w-3.5 h-3.5 mr-1" /> Pengaturan
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </Card>
             )
