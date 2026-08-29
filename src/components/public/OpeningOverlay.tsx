@@ -69,11 +69,11 @@ export function OpeningOverlay({
     accentColor = 'bg-slate-900 hover:bg-slate-800 text-white'
     borderClass = 'border-slate-200'
   } else if (themeSlug === 'elegant') {
-    bgClass = 'bg-[#faf8f5] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-[#f4eee6]'
-    textPrimary = 'text-[#5c4d3c]'
-    textSecondary = 'text-[#8c7a6b]'
-    accentColor = 'bg-[#8c7a6b] hover:bg-[#736356] text-white'
-    borderClass = 'border-[#d4c5b9]'
+    bgClass = 'bg-amber-50/95 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-amber-100/40'
+    textPrimary = 'text-stone-800'
+    textSecondary = 'text-amber-700'
+    accentColor = 'bg-stone-800 hover:bg-stone-900 text-amber-50 font-medium border border-amber-900/20 shadow-amber-900/10'
+    borderClass = 'border-amber-200'
   }
 
   return (
