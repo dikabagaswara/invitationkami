@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
-import { ArrowRight, MessageCircle, ExternalLink, Sparkles } from 'lucide-react'
+import { ArrowRight, MessageCircle, ExternalLink, Sparkles, ShieldCheck, Music, Smartphone, Heart } from 'lucide-react'
 
 export default async function HomePage() {
   const themes = await prisma.theme.findMany({
@@ -99,24 +99,31 @@ export default async function HomePage() {
          ───────────────────────────────────────────── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Soft Ambient Aurora Gradient Orbs */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[750px] h-[550px] bg-gradient-to-tr from-amber-200/35 via-rose-100/30 to-purple-100/25 rounded-full blur-[110px]"></div>
-        <div className="absolute top-[35%] -left-32 w-[500px] h-[500px] bg-gradient-to-br from-emerald-100/30 via-teal-50/20 to-transparent rounded-full blur-[100px]"></div>
-        <div className="absolute top-[60%] -right-32 w-[550px] h-[550px] bg-gradient-to-bl from-amber-100/40 via-orange-50/25 to-transparent rounded-full blur-[110px]"></div>
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[600px] bg-gradient-to-tr from-amber-200/35 via-rose-100/30 to-purple-100/25 rounded-full blur-[120px]"></div>
+        <div className="absolute top-[35%] -left-32 w-[550px] h-[550px] bg-gradient-to-br from-emerald-100/35 via-teal-50/25 to-transparent rounded-full blur-[110px]"></div>
+        <div className="absolute top-[60%] -right-32 w-[600px] h-[600px] bg-gradient-to-bl from-amber-100/45 via-orange-50/30 to-transparent rounded-full blur-[120px]"></div>
 
         {/* Delicate Modern Mesh Grid Pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(#d6c7b2_1px,transparent_1px)] opacity-[0.22] [background-size:28px_28px]"></div>
       </div>
 
       {/* ─────────────────────────────────────────────
-          1. HEADER / NAVBAR
+          1. HEADER / NAVBAR (BRANDED)
          ───────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-[#FAF8F5]/80 backdrop-blur-md border-b border-stone-200/60 transition-all">
+      <header className="sticky top-0 z-50 bg-[#FAF8F5]/85 backdrop-blur-md border-b border-stone-200/60 transition-all shadow-2xs">
         <div className="max-w-6xl mx-auto px-6 h-18 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <img src="/images/logo.png" alt={appConfig.name} className="h-8 w-auto object-contain" />
-            <span className="font-serif tracking-wider text-base text-stone-900 uppercase font-medium">
-              {appConfig.name}
-            </span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="p-1 rounded-xl bg-white shadow-xs border border-stone-200/80 group-hover:scale-105 transition-transform">
+              <img src="/images/logo.png" alt={appConfig.name} className="h-7 w-auto object-contain" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif tracking-wider text-base text-stone-900 uppercase font-semibold leading-tight">
+                {appConfig.name}
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 font-sans">
+                Wedding Platform
+              </span>
+            </div>
           </Link>
 
           <nav className="flex items-center gap-5 sm:gap-7 text-xs sm:text-sm font-light text-stone-600">
@@ -143,11 +150,15 @@ export default async function HomePage() {
       </header>
 
       {/* ─────────────────────────────────────────────
-          2. HERO SECTION
+          2. HERO SECTION (WITH EMBEDDED BRAND BADGE)
          ───────────────────────────────────────────── */}
-      <section className="relative z-10 pt-24 pb-20 px-6 text-center max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/70 border border-stone-200/80 text-stone-700 text-xs font-serif italic mb-6 shadow-xs backdrop-blur-xs">
-          <span>Digital Wedding Invitation Platform</span>
+      <section className="relative z-10 pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
+        {/* Prominent Brand Identity Pill */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 border border-stone-200/90 text-stone-800 text-xs shadow-xs backdrop-blur-md mb-6 hover:shadow-sm transition-shadow">
+          <img src="/images/logo.png" alt="Logo" className="w-4 h-4 object-contain" />
+          <span className="font-serif font-medium tracking-wide">InvitationKami</span>
+          <span className="text-stone-300">•</span>
+          <span className="text-stone-500 font-sans">Digital Wedding Invitation</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-serif font-normal text-stone-900 tracking-tight leading-[1.18] mb-6">
@@ -162,7 +173,7 @@ export default async function HomePage() {
         <div className="flex items-center justify-center">
           <a
             href="#koleksi"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 hover:scale-[1.02] transition-all shadow-md"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 hover:scale-[1.02] transition-all shadow-lg shadow-stone-900/15"
           >
             Jelajahi Koleksi Tema <ArrowRight className="h-4 w-4" />
           </a>
@@ -170,16 +181,20 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          3. KATALOG DESAIN (CLEAN & ANIMATED)
+          3. KATALOG DESAIN (WITH AMBIENT LIGHT & BADGES)
          ───────────────────────────────────────────── */}
-      <section id="koleksi" className="relative z-10 py-20 px-6 border-t border-stone-200/70 bg-white/65 backdrop-blur-xs">
+      <section id="koleksi" className="relative z-10 py-24 px-6 border-t border-stone-200/70 bg-white/70 backdrop-blur-xs">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-12">
+          <div className="text-center max-w-xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] font-semibold text-amber-700 mb-2">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Pilihan Desain Eksklusif</span>
+            </div>
             <h2 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-2">
               Koleksi Tema Pernikahan
             </h2>
             <p className="text-stone-500 text-xs sm:text-sm font-light">
-              Arahkan kursor atau klik pada tema untuk melihat live preview.
+              Arahkan kursor atau klik pada tema untuk melihat live preview di smartphone &amp; desktop.
             </p>
           </div>
 
@@ -188,46 +203,46 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          4. FITUR & KEUNGGULAN
+          4. FITUR & KEUNGGULAN (BRAND-CENTERED)
          ───────────────────────────────────────────── */}
-      <section id="keunggulan" className="relative z-10 py-20 px-6 max-w-5xl mx-auto border-t border-stone-200/70">
+      <section id="keunggulan" className="relative z-10 py-24 px-6 max-w-5xl mx-auto border-t border-stone-200/70">
         <div className="text-center max-w-xl mx-auto mb-16">
           <h2 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900 mb-2">
-            Mengapa Memilih {appConfig.name}?
+            Kelebihan Undangan {appConfig.name}
           </h2>
           <p className="text-xs sm:text-sm text-stone-500 font-light">
-            Semua yang Anda butuhkan untuk berbagi kebahagiaan dengan para tamu tercinta.
+            Dirancang secara khusus untuk memberikan pengalaman terbaik bagi Anda dan para tamu undangan.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md transition-all">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 font-serif font-bold text-lg">
-              1
+          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3.5 hover:shadow-md transition-all">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/70 flex items-center justify-center text-amber-700">
+              <Sparkles className="w-6 h-6" />
             </div>
             <h3 className="font-serif text-lg text-stone-900">Karakter Visual Berbeda</h3>
             <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Bukan sekadar ganti warna. Setiap tema memiliki tata letak, bingkai foto, dan tipografi eksklusif yang unik.
+              Bukan sekadar ganti warna. Setiap tema memiliki tata letak, bingkai foto artistik, dan tipografi eksklusif yang unik.
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md transition-all">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 font-serif font-bold text-lg">
-              2
+          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3.5 hover:shadow-md transition-all">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200/70 flex items-center justify-center text-blue-700">
+              <Music className="w-6 h-6" />
             </div>
             <h3 className="font-serif text-lg text-stone-900">Musik &amp; Buka Undangan</h3>
             <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Latar musik otomatis terputar saat amplop digital dibuka, menciptakan momen pertama yang berkesan bagi tamu.
+              Latar musik otomatis terputar saat amplop digital dibuka, menciptakan momen pertama yang berkesan bagi para tamu.
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md transition-all">
-            <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center text-green-700 font-serif font-bold text-lg">
-              3
+          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3.5 hover:shadow-md transition-all">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200/70 flex items-center justify-center text-emerald-700">
+              <Smartphone className="w-6 h-6" />
             </div>
             <h3 className="font-serif text-lg text-stone-900">RSVP &amp; Amplop Digital</h3>
             <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Lengkap dengan konfirmasi kehadiran tamu via WhatsApp, buku tamu terintegrasi, dan rekening kado langsung.
+              Lengkap dengan konfirmasi kehadiran via WhatsApp, buku tamu interaktif, dan rekening transfer amplop kado langsung.
             </p>
           </div>
         </div>
@@ -237,7 +252,10 @@ export default async function HomePage() {
           5. BANTUAN & WHATSAPP
          ───────────────────────────────────────────── */}
       <section id="tentang" className="relative z-10 py-20 px-6 max-w-4xl mx-auto text-center border-t border-stone-200/70">
-        <div className="p-10 sm:p-14 rounded-3xl border border-stone-200/80 bg-white/85 backdrop-blur-sm shadow-sm space-y-5">
+        <div className="p-10 sm:p-14 rounded-3xl border border-stone-200/80 bg-white/90 backdrop-blur-md shadow-sm space-y-5">
+          <div className="w-12 h-12 rounded-2xl bg-stone-100 p-2.5 mx-auto border border-stone-200 shadow-2xs">
+            <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain" />
+          </div>
           <span className="text-xs uppercase tracking-[0.3em] font-semibold text-stone-400 block">
             Konsultasi &amp; Dukungan
           </span>
@@ -245,14 +263,14 @@ export default async function HomePage() {
             Punya Pertanyaan Seputar Pembuatan Undangan?
           </h2>
           <p className="text-xs sm:text-sm text-stone-500 max-w-md mx-auto font-light leading-relaxed">
-            Tim kami siap membantu Anda memilih tema terbaik dan menyesuaikan kebutuhan pernikahan Anda.
+            Tim <strong>{appConfig.name}</strong> siap membantu Anda memilih tema terbaik dan menyesuaikan kebutuhan pernikahan Anda.
           </p>
           <div className="pt-2">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 hover:scale-[1.02] transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 hover:scale-[1.02] transition-all shadow-md"
             >
               <MessageCircle className="h-4 w-4" /> Hubungi Kami via WhatsApp
             </a>
@@ -261,10 +279,16 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          6. FOOTER
+          6. FOOTER (BRANDED WITH LOGO)
          ───────────────────────────────────────────── */}
-      <footer className="relative z-10 border-t border-stone-200/70 py-8 text-center text-xs text-stone-400 font-light">
-        <p>© 2026 {appConfig.name}</p>
+      <footer className="relative z-10 border-t border-stone-200/70 py-10 text-center space-y-3">
+        <div className="flex items-center justify-center gap-2">
+          <img src="/images/logo.png" alt="Logo" className="h-5 w-auto object-contain opacity-80" />
+          <span className="font-serif tracking-wider text-xs text-stone-700 uppercase font-semibold">
+            {appConfig.name}
+          </span>
+        </div>
+        <p className="text-xs text-stone-400 font-light">© 2026 {appConfig.name}. Platform Undangan Pernikahan Digital.</p>
       </footer>
     </div>
   )
