@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
-import { ArrowRight, MessageCircle, ExternalLink } from 'lucide-react'
+import { ArrowRight, MessageCircle, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react'
 
 export default async function HomePage() {
   const themes = await prisma.theme.findMany({
@@ -10,36 +10,62 @@ export default async function HomePage() {
     orderBy: { createdAt: 'asc' },
   })
 
-  const THEME_DATA_MAP: Record<string, { displayName: string; cover: string; tagline: string; category: string }> = {
+  // Simple, concise & customer-focused descriptions
+  const THEME_DATA_MAP: Record<string, { displayName: string; tagline: string; category: string }> = {
+    oceanic: {
+      displayName: 'Oceanic',
+      category: 'Nature',
+      tagline: 'Nuansa biru laut mediterania dengan kartu kaca modern yang tenang dan menyejukkan.',
+    },
+    terracotta: {
+      displayName: 'Terracotta',
+      category: 'Nature',
+      tagline: 'Warna hangat tanah liat dan senja gurun dengan bingkai lengkung Mediterania yang estetik.',
+    },
+    botanical: {
+      displayName: 'Botanical',
+      category: 'Luxury',
+      tagline: 'Kemewahan hijau zamrud dengan tata letak editorial majalah fashion yang elegan.',
+    },
+    celestial: {
+      displayName: 'Celestial',
+      category: 'Luxury',
+      tagline: 'Romansa malam berbintang dengan partikel cahaya kosmik dan aksen ungu keemasan.',
+    },
+    rustic: {
+      displayName: 'Rustic',
+      category: 'Nature',
+      tagline: 'Sentuhan kertas daur ulang hangat berpadu bingkai foto polaroid dan ornamen alami.',
+    },
+    vintage: {
+      displayName: 'Vintage',
+      category: 'Classic',
+      tagline: 'Gaya koran klasik Eropa dengan bingkai ganda dan sentuhan warna sepia nostalgia.',
+    },
     elegant: {
-      displayName: 'Amora & Romeo',
-      category: 'Elegant',
-      cover: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=80',
-      tagline: 'Kemewahan klasik dengan sentuhan tipografi serif.',
-    },
-    minimalist: {
-      displayName: 'Aurelia & Dimas',
-      category: 'Minimalis',
-      cover: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&auto=format&fit=crop&q=80',
-      tagline: 'Desain bersih yang menonjolkan esensi cinta Anda.',
-    },
-    floral: {
-      displayName: 'Laras & Bintang',
-      category: 'Floral',
-      cover: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&auto=format&fit=crop&q=80',
-      tagline: 'Nuansa taman romantis dengan palet warna lembut.',
+      displayName: 'Elegant',
+      category: 'Classic',
+      tagline: 'Keindahan abadi berpalet ivory & gold dengan tipografi serif kerajaan yang anggun.',
     },
     luxury: {
-      displayName: 'Victoria & Alex',
+      displayName: 'Luxury',
       category: 'Luxury',
-      cover: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&auto=format&fit=crop&q=80',
-      tagline: 'Sentuhan elegan latar gelap berpadu aksen champagne.',
+      tagline: 'Kemewahan latar hitam pekat berpadu kilau emas champagne yang glamor dan eksklusif.',
     },
     modern: {
-      displayName: 'Hawa & Adam',
+      displayName: 'Modern',
       category: 'Modern',
-      cover: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80',
-      tagline: 'Gaya visual kontemporer bernuansa majalah editorial.',
+      tagline: 'Desain monokrom bersih dengan elemen geometris tegas yang simpel dan kekinian.',
+    },
+    floral: {
+      displayName: 'Floral',
+      category: 'Romantic',
+      tagline: 'Taman bunga mawar lembut bernuansa pastel cerah yang feminin dan manis.',
+    },
+    minimalist: {
+      displayName: 'Minimalist',
+      category: 'Minimal',
+      tagline: 'Ruang putih bersih yang lapang, mengutamakan keterbacaan dan keindahan esensial.',
     },
   }
 
@@ -47,7 +73,6 @@ export default async function HomePage() {
     const custom = THEME_DATA_MAP[t.slug] || {
       displayName: t.name,
       category: t.category || t.name,
-      cover: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=80',
       tagline: t.description || 'Desain undangan digital eksklusif.',
     }
 
@@ -56,7 +81,6 @@ export default async function HomePage() {
       name: custom.displayName,
       themeSlug: t.slug,
       category: custom.category,
-      coverImage: custom.cover,
       demoSlug: `demo-${t.slug}`,
       tagline: custom.tagline,
       isPremium: t.isPremium,
@@ -69,31 +93,34 @@ export default async function HomePage() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-stone-900 font-sans selection:bg-stone-200">
+    <div className="min-h-screen bg-[#FAF9F6] text-stone-900 font-sans selection:bg-stone-200">
       {/* ─────────────────────────────────────────────
           1. HEADER / NAVBAR
          ───────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-[#FAFAF8]/90 backdrop-blur-md border-b border-stone-200/70">
-        <div className="max-w-5xl mx-auto px-6 h-18 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-stone-200/70">
+        <div className="max-w-6xl mx-auto px-6 h-18 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <img src="/images/logo.png" alt={appConfig.name} className="h-8 w-auto object-contain" />
-            <span className="font-serif tracking-wider text-base text-stone-900 uppercase">
+            <span className="font-serif tracking-wider text-base text-stone-900 uppercase font-medium">
               {appConfig.name}
             </span>
           </Link>
 
           <nav className="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-light text-stone-600">
             <a href="#koleksi" className="hover:text-stone-900 transition-colors">
-              Koleksi
+              Koleksi Tema
+            </a>
+            <a href="#keunggulan" className="hover:text-stone-900 transition-colors">
+              Fitur
             </a>
             <a href="#tentang" className="hover:text-stone-900 transition-colors">
-              Tentang
+              Bantuan
             </a>
             <Link
               href="/login"
-              className="px-4 py-1.5 rounded-full border border-stone-300 text-stone-900 hover:bg-stone-900 hover:text-white transition-all"
+              className="px-4 py-1.5 rounded-full border border-stone-300 text-stone-900 hover:bg-stone-900 hover:text-white transition-all shadow-xs"
             >
-              Login
+              Masuk
             </Link>
           </nav>
         </div>
@@ -102,63 +129,51 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────
           2. HERO SECTION
          ───────────────────────────────────────────── */}
-      <section className="pt-20 pb-16 px-6 text-center max-w-3xl mx-auto">
-        <h1 className="text-3xl sm:text-5xl font-serif font-normal text-stone-900 tracking-tight leading-[1.25] mb-6">
-          Undangan Digital untuk <br />
-          <span className="italic font-light text-stone-700">Momen yang Tak Terlupakan</span>
-        </h1>
-
-        <p className="text-sm sm:text-base text-stone-500 max-w-lg mx-auto mb-10 leading-relaxed font-light">
-          Temukan desain undangan yang sesuai dengan kisah dan gaya pernikahan Anda.
-        </p>
-
-        <div className="flex items-center justify-center gap-4 mb-16">
-          <a
-            href="#koleksi"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 transition-all shadow-xs"
-          >
-            Lihat Koleksi <ArrowRight className="h-3.5 w-3.5" />
-          </a>
+      <section className="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 border border-stone-200 text-stone-700 text-xs uppercase tracking-widest mb-6 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+          <span>Platform Undangan Digital Masa Kini</span>
         </div>
 
-        {/* ─── PREVIEW BESAR (CLEAN FRAME) ─── */}
-        <div className="relative mx-auto max-w-3xl rounded-xl border border-stone-200 bg-white p-3 sm:p-4 shadow-sm overflow-hidden group">
-          <div className="relative aspect-[16/9] sm:aspect-[2/1] rounded-lg overflow-hidden bg-stone-100">
-            <img
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&auto=format&fit=crop&q=80"
-              alt="Preview Undangan"
-              className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent flex flex-col items-center justify-end p-6 sm:p-8 text-white text-center">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-stone-300 font-light mb-1">
-                Featured Design • Elegant
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-serif font-light mb-3">
-                Romeo & Juliet
-              </h2>
-              <Link
-                href="/i/demo-elegant"
-                target="_blank"
-                className="inline-flex items-center gap-1.5 text-xs text-stone-200 hover:text-white border-b border-stone-400 pb-0.5 transition-colors"
-              >
-                Buka Full Preview <ExternalLink className="h-3 w-3" />
-              </Link>
-            </div>
-          </div>
+        <h1 className="text-4xl sm:text-6xl font-serif font-normal text-stone-900 tracking-tight leading-[1.2] mb-6">
+          Undangan Digital Eksklusif untuk <br />
+          <span className="italic font-light text-stone-700">Momen Terindah Anda</span>
+        </h1>
+
+        <p className="text-sm sm:text-base text-stone-600 max-w-xl mx-auto mb-10 leading-relaxed font-light">
+          Setiap tema dirancang dengan karakter visual yang unik, animasi yang elegan, dan fitur lengkap siap dibagikan ke semua tamu.
+        </p>
+
+        <div className="flex items-center justify-center gap-4">
+          <a
+            href="#koleksi"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 transition-all shadow-md"
+          >
+            Jelajahi Koleksi Tema <ArrowRight className="h-4 w-4" />
+          </a>
+          <Link
+            href="/register"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white border border-stone-300 text-stone-900 text-xs sm:text-sm font-medium hover:bg-stone-50 transition-all shadow-xs"
+          >
+            Mulai Buat Gratis
+          </Link>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          3. KATALOG DESAIN
+          3. KATALOG DESAIN (CLEAN & ANIMATED)
          ───────────────────────────────────────────── */}
       <section id="koleksi" className="py-20 px-6 border-t border-stone-200/80 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900 mb-2">
-              Temukan Desain Favorit Anda
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-xl mx-auto mb-14">
+            <span className="text-xs uppercase tracking-[0.3em] font-semibold text-stone-400 block mb-2">
+              Katalog Pilihan
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-3">
+              Koleksi Tema Pernikahan
             </h2>
-            <p className="text-stone-500 text-xs sm:text-sm font-light">
-              Pilihan tipografi dan tata letak elegan untuk hari istimewa Anda.
+            <p className="text-stone-500 text-xs sm:text-sm font-light leading-relaxed">
+              Pilih karakter desain yang paling sesuai dengan konsep pernikahan impian Anda. Klik preview untuk melihat tampilan langsung di browser.
             </p>
           </div>
 
@@ -167,45 +182,84 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          4. TENTANG & WHATSAPP
+          4. FITUR & KEUNGGULAN
          ───────────────────────────────────────────── */}
-      <section id="tentang" className="py-20 px-6 max-w-3xl mx-auto text-center border-t border-stone-200/80">
-        <h2 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900 mb-4">
-          Tentang {appConfig.name}
-        </h2>
-        <p className="text-stone-500 text-xs sm:text-sm font-light leading-relaxed mb-10 max-w-lg mx-auto">
-          Platform undangan pernikahan digital modern yang menyatukan estetika desain klasik dengan kemudahan berbagi momen bahagia secara instan.
-        </p>
+      <section id="keunggulan" className="py-20 px-6 max-w-5xl mx-auto border-t border-stone-200/80">
+        <div className="text-center max-w-xl mx-auto mb-16">
+          <h2 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900 mb-2">
+            Mengapa Memilih {appConfig.name}?
+          </h2>
+          <p className="text-xs sm:text-sm text-stone-500 font-light">
+            Semua yang Anda butuhkan untuk berbagi kebahagiaan dengan para tamu tercinta.
+          </p>
+        </div>
 
-        {/* Simple WhatsApp Card */}
-        <div className="p-8 rounded-2xl border border-stone-200 bg-[#FAFAF8] text-center space-y-4">
-          <h3 className="text-lg font-serif text-stone-900">
-            Butuh Bantuan atau Desain Khusus?
-          </h3>
-          <p className="text-xs text-stone-500 max-w-md mx-auto font-light">
-            Konsultasikan detail pernikahan Anda langsung dengan tim kami melalui WhatsApp.
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xs space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 font-serif font-bold text-lg">
+              1
+            </div>
+            <h3 className="font-serif text-lg text-stone-900">Karakter Visual Berbeda</h3>
+            <p className="text-xs text-stone-500 leading-relaxed font-light">
+              Bukan sekadar ganti warna. Setiap tema memiliki tata letak, bingkai foto, dan tipografi eksklusif yang unik.
+            </p>
+          </div>
+
+          <div className="p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xs space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 font-serif font-bold text-lg">
+              2
+            </div>
+            <h3 className="font-serif text-lg text-stone-900">Musik &amp; Buka Undangan</h3>
+            <p className="text-xs text-stone-500 leading-relaxed font-light">
+              Latar musik otomatis terputar saat amplop digital dibuka, menciptakan momen pertama yang berkesan bagi tamu.
+            </p>
+          </div>
+
+          <div className="p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xs space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center text-green-700 font-serif font-bold text-lg">
+              3
+            </div>
+            <h3 className="font-serif text-lg text-stone-900">RSVP &amp; Amplop Digital</h3>
+            <p className="text-xs text-stone-500 leading-relaxed font-light">
+              Lengkap dengan konfirmasi kehadiran tamu via WhatsApp, buku tamu terintegrasi, dan rekening kado langsung.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────
+          5. BANTUAN & WHATSAPP
+         ───────────────────────────────────────────── */}
+      <section id="tentang" className="py-20 px-6 max-w-4xl mx-auto text-center border-t border-stone-200/80">
+        <div className="p-10 sm:p-14 rounded-3xl border border-stone-200 bg-white shadow-sm space-y-5">
+          <span className="text-xs uppercase tracking-[0.3em] font-semibold text-stone-400 block">
+            Konsultasi &amp; Dukungan
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900">
+            Punya Pertanyaan Seputar Pembuatan Undangan?
+          </h2>
+          <p className="text-xs sm:text-sm text-stone-500 max-w-md mx-auto font-light leading-relaxed">
+            Tim kami siap membantu Anda memilih tema terbaik dan menyesuaikan kebutuhan pernikahan Anda.
           </p>
           <div className="pt-2">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-stone-900 text-white text-xs font-medium hover:bg-stone-800 transition-all shadow-xs"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 transition-all shadow-md"
             >
-              <MessageCircle className="h-4 w-4" /> Hubungi via WhatsApp
+              <MessageCircle className="h-4 w-4" /> Hubungi Kami via WhatsApp
             </a>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          5. FOOTER
+          6. FOOTER
          ───────────────────────────────────────────── */}
       <footer className="border-t border-stone-200/80 py-8 text-center text-xs text-stone-400 font-light">
-        <p>Copyright © 2026 InvitationKami</p>
+        <p>Copyright © 2026 {appConfig.name}. Seluruh hak cipta dilindungi.</p>
       </footer>
     </div>
   )
 }
-
-
