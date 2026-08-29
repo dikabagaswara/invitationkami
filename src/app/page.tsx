@@ -106,10 +106,13 @@ export default async function HomePage() {
             </span>
           </Link>
 
-          <nav className="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-light text-stone-600">
+          <nav className="flex items-center gap-5 sm:gap-7 text-xs sm:text-sm font-light text-stone-600">
             <a href="#koleksi" className="hover:text-stone-900 transition-colors">
               Koleksi Tema
             </a>
+            <Link href="/share-generator" className="text-emerald-700 font-medium hover:text-emerald-900 transition-colors">
+              Bagi Undangan
+            </Link>
             <a href="#keunggulan" className="hover:text-stone-900 transition-colors">
               Fitur
             </a>
