@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
-import { ArrowRight, MessageCircle, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, MessageCircle, ExternalLink, Sparkles } from 'lucide-react'
 
 export default async function HomePage() {
   const themes = await prisma.theme.findMany({
@@ -93,11 +93,24 @@ export default async function HomePage() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-stone-900 font-sans selection:bg-stone-200">
+    <div className="relative min-h-screen bg-[#FAF8F5] text-stone-900 font-sans selection:bg-amber-100 overflow-x-hidden">
+      {/* ─────────────────────────────────────────────
+          AESTHETIC LUXURY BACKGROUND LAYER
+         ───────────────────────────────────────────── */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Soft Ambient Aurora Gradient Orbs */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[750px] h-[550px] bg-gradient-to-tr from-amber-200/35 via-rose-100/30 to-purple-100/25 rounded-full blur-[110px]"></div>
+        <div className="absolute top-[35%] -left-32 w-[500px] h-[500px] bg-gradient-to-br from-emerald-100/30 via-teal-50/20 to-transparent rounded-full blur-[100px]"></div>
+        <div className="absolute top-[60%] -right-32 w-[550px] h-[550px] bg-gradient-to-bl from-amber-100/40 via-orange-50/25 to-transparent rounded-full blur-[110px]"></div>
+
+        {/* Delicate Modern Mesh Grid Pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#d6c7b2_1px,transparent_1px)] opacity-[0.22] [background-size:28px_28px]"></div>
+      </div>
+
       {/* ─────────────────────────────────────────────
           1. HEADER / NAVBAR
          ───────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-stone-200/70">
+      <header className="sticky top-0 z-50 bg-[#FAF8F5]/80 backdrop-blur-md border-b border-stone-200/60 transition-all">
         <div className="max-w-6xl mx-auto px-6 h-18 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <img src="/images/logo.png" alt={appConfig.name} className="h-8 w-auto object-contain" />
@@ -132,8 +145,12 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────
           2. HERO SECTION
          ───────────────────────────────────────────── */}
-      <section className="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
-        <h1 className="text-4xl sm:text-6xl font-serif font-normal text-stone-900 tracking-tight leading-[1.2] mb-6">
+      <section className="relative z-10 pt-24 pb-20 px-6 text-center max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/70 border border-stone-200/80 text-stone-700 text-xs font-serif italic mb-6 shadow-xs backdrop-blur-xs">
+          <span>Digital Wedding Invitation Platform</span>
+        </div>
+
+        <h1 className="text-4xl sm:text-6xl font-serif font-normal text-stone-900 tracking-tight leading-[1.18] mb-6">
           Undangan Digital Eksklusif untuk <br />
           <span className="italic font-light text-stone-700">Momen Terindah Anda</span>
         </h1>
@@ -145,7 +162,7 @@ export default async function HomePage() {
         <div className="flex items-center justify-center">
           <a
             href="#koleksi"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 transition-all shadow-md"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 hover:scale-[1.02] transition-all shadow-md"
           >
             Jelajahi Koleksi Tema <ArrowRight className="h-4 w-4" />
           </a>
@@ -155,7 +172,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────
           3. KATALOG DESAIN (CLEAN & ANIMATED)
          ───────────────────────────────────────────── */}
-      <section id="koleksi" className="py-20 px-6 border-t border-stone-200/80 bg-white">
+      <section id="koleksi" className="relative z-10 py-20 px-6 border-t border-stone-200/70 bg-white/65 backdrop-blur-xs">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-2">
@@ -173,7 +190,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────
           4. FITUR & KEUNGGULAN
          ───────────────────────────────────────────── */}
-      <section id="keunggulan" className="py-20 px-6 max-w-5xl mx-auto border-t border-stone-200/80">
+      <section id="keunggulan" className="relative z-10 py-20 px-6 max-w-5xl mx-auto border-t border-stone-200/70">
         <div className="text-center max-w-xl mx-auto mb-16">
           <h2 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900 mb-2">
             Mengapa Memilih {appConfig.name}?
@@ -184,7 +201,7 @@ export default async function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xs space-y-3">
+          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md transition-all">
             <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 font-serif font-bold text-lg">
               1
             </div>
@@ -194,7 +211,7 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xs space-y-3">
+          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md transition-all">
             <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 font-serif font-bold text-lg">
               2
             </div>
@@ -204,7 +221,7 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xs space-y-3">
+          <div className="p-8 rounded-3xl bg-white/85 border border-stone-200/80 shadow-xs backdrop-blur-xs space-y-3 hover:shadow-md transition-all">
             <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center text-green-700 font-serif font-bold text-lg">
               3
             </div>
@@ -219,8 +236,8 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────
           5. BANTUAN & WHATSAPP
          ───────────────────────────────────────────── */}
-      <section id="tentang" className="py-20 px-6 max-w-4xl mx-auto text-center border-t border-stone-200/80">
-        <div className="p-10 sm:p-14 rounded-3xl border border-stone-200 bg-white shadow-sm space-y-5">
+      <section id="tentang" className="relative z-10 py-20 px-6 max-w-4xl mx-auto text-center border-t border-stone-200/70">
+        <div className="p-10 sm:p-14 rounded-3xl border border-stone-200/80 bg-white/85 backdrop-blur-sm shadow-sm space-y-5">
           <span className="text-xs uppercase tracking-[0.3em] font-semibold text-stone-400 block">
             Konsultasi &amp; Dukungan
           </span>
@@ -235,7 +252,7 @@ export default async function HomePage() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-stone-800 hover:scale-[1.02] transition-all shadow-md"
             >
               <MessageCircle className="h-4 w-4" /> Hubungi Kami via WhatsApp
             </a>
@@ -246,7 +263,7 @@ export default async function HomePage() {
       {/* ─────────────────────────────────────────────
           6. FOOTER
          ───────────────────────────────────────────── */}
-      <footer className="border-t border-stone-200/80 py-8 text-center text-xs text-stone-400 font-light">
+      <footer className="relative z-10 border-t border-stone-200/70 py-8 text-center text-xs text-stone-400 font-light">
         <p>© 2026 {appConfig.name}</p>
       </footer>
     </div>
