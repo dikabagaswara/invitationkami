@@ -120,6 +120,19 @@ async function main() {
         { id: 'default', name: 'Cinzel + Cormorant', heading: 'Cinzel', body: 'Cormorant Garamond' },
       ],
     },
+    {
+      slug: 'celestial',
+      name: 'Celestial',
+      description: 'Deep midnight cosmos and starlight romantic wedding with glowing nebula halos, gold stars, and starlight typography.',
+      category: 'luxury',
+      isPremium: true,
+      colorPresets: [
+        { id: 'default', name: 'Midnight Starlight', primary: '#8B5CF6', background: '#0A071B' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Cinzel + Plus Jakarta Sans', heading: 'Cinzel', body: 'Plus Jakarta Sans' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -278,6 +291,15 @@ async function main() {
       bride: 'Bella Safira, M.A.',
       brideNick: 'Bella',
       opening: 'BOTANICAL ELEGANCE',
+    },
+    {
+      slug: 'demo-celestial',
+      themeSlug: 'celestial',
+      groom: 'Orion Althair, S.Si.',
+      groomNick: 'Orion',
+      bride: 'Lyra Vega, S.T.',
+      brideNick: 'Lyra',
+      opening: 'WRITTEN IN THE STARS',
     },
   ]
 
