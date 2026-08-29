@@ -94,18 +94,23 @@ async function main() {
   console.log('Seeding music...')
 
   const musicList = [
-    { title: 'A Thousand Years', artist: 'Christina Perri', fileUrl: '', category: 'pop' },
-    { title: 'Perfect', artist: 'Ed Sheeran', fileUrl: '', category: 'pop' },
-    { title: 'All of Me', artist: 'John Legend', fileUrl: '', category: 'pop' },
-    { title: 'Can\'t Help Falling in Love', artist: 'Elvis Presley', fileUrl: '', category: 'classic' },
-    { title: 'Marry Me', artist: 'Train', fileUrl: '', category: 'pop' },
+    { title: 'A Thousand Years', artist: 'Christina Perri (Instrumental)', fileUrl: '/music/a-thousand-years.mp3', category: 'pop' },
+    { title: 'Perfect', artist: 'Ed Sheeran (Acoustic Guitar)', fileUrl: '/music/perfect.mp3', category: 'pop' },
+    { title: 'Canon in D', artist: 'Johann Pachelbel (Piano & Strings)', fileUrl: '/music/canon-in-d.mp3', category: 'classic' },
+    { title: 'Romantic Wedding Bliss', artist: 'Wedding Melody Ensemble', fileUrl: '/music/wedding-song.mp3', category: 'acoustic' },
   ]
 
   for (const music of musicList) {
     const existing = await prisma.music.findFirst({ where: { title: music.title } })
     if (!existing) {
-      await prisma.music.create({ data: music })
-      console.log(`  ✓ Music: ${music.title}`)
+      await prisma.music.create({ data: { ...music, isActive: true } })
+      console.log(`  ✓ Music created: ${music.title}`)
+    } else {
+      await prisma.music.update({
+        where: { id: existing.id },
+        data: { fileUrl: music.fileUrl, artist: music.artist, category: music.category, isActive: true },
+      })
+      console.log(`  ✓ Music updated: ${music.title}`)
     }
   }
 

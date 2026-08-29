@@ -13,11 +13,11 @@ export function MusicPlayer({ musicUrl, isPlaying: initialPlayState }: MusicPlay
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    if (initialPlayState && audioRef.current && !isPlaying) {
+    if (initialPlayState && audioRef.current) {
       audioRef.current.play().then(() => {
         setIsPlaying(true)
       }).catch(err => {
-        console.warn('Autoplay prevented:', err)
+        console.warn('Autoplay prevented by browser:', err)
       })
     }
   }, [initialPlayState])
@@ -28,10 +28,14 @@ export function MusicPlayer({ musicUrl, isPlaying: initialPlayState }: MusicPlay
     if (!audioRef.current) return
     if (isPlaying) {
       audioRef.current.pause()
+      setIsPlaying(false)
     } else {
-      audioRef.current.play()
+      audioRef.current.play().then(() => {
+        setIsPlaying(true)
+      }).catch((err) => {
+        console.warn('Playback failed:', err)
+      })
     }
-    setIsPlaying(!isPlaying)
   }
 
   const toggleMute = () => {
