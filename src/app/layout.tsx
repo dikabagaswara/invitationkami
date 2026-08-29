@@ -69,6 +69,15 @@ export const metadata: Metadata = {
       'Undangan pernikahan digital berbasis web interaktif & estetik. Bagikan momen terindah Anda dengan mudah dan elegan.',
     images: ['/images/logo.png'],
   },
+  icons: {
+    icon: [
+      { url: '/favicon.png', sizes: '64x64', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
