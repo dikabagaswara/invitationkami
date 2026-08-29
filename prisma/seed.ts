@@ -71,6 +71,55 @@ async function main() {
         { id: 'default', name: 'DM Serif + DM Sans', heading: 'DM Serif Display', body: 'DM Sans' },
       ],
     },
+    {
+      slug: 'oceanic',
+      name: 'Oceanic',
+      description: 'Modern glassmorphism wedding with sky blue, translucent panels, and layered ocean aesthetics.',
+      category: 'modern',
+      colorPresets: [
+        { id: 'default', name: 'Ocean Glass', primary: '#0284c7', background: '#f0f9ff' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Plus Jakarta Sans + Outfit', heading: 'Plus Jakarta Sans', body: 'Outfit' },
+      ],
+    },
+    {
+      slug: 'rustic',
+      name: 'Rustic',
+      description: 'Warm organic stacked-card wedding with earthy tones, natural wood aesthetics, and asymmetric dividers.',
+      category: 'nature',
+      colorPresets: [
+        { id: 'default', name: 'Warm Earth & Terracotta', primary: '#785338', background: '#FAF6F0' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Lora + Nunito', heading: 'Lora', body: 'Nunito' },
+      ],
+    },
+    {
+      slug: 'vintage',
+      name: 'Vintage',
+      description: 'European vintage newspaper wedding announcement with double borders, editorial typography, and sepia filters.',
+      category: 'classic',
+      colorPresets: [
+        { id: 'default', name: 'Antique Parchment', primary: '#4a2e1b', background: '#F7F3EB' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Playfair Display + Newsreader', heading: 'Playfair Display', body: 'Newsreader' },
+      ],
+    },
+    {
+      slug: 'botanical',
+      name: 'Botanical',
+      description: 'Luxury deep emerald fashion-editorial wedding with full-width layout and alternating photo compositions.',
+      category: 'luxury',
+      isPremium: true,
+      colorPresets: [
+        { id: 'default', name: 'Emerald & Gold', primary: '#1b3b22', background: '#0d1f12' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Cinzel + Cormorant', heading: 'Cinzel', body: 'Cormorant Garamond' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -193,6 +242,42 @@ async function main() {
       bride: 'Alya Sabrina',
       brideNick: 'Alya',
       opening: 'WALKING TOGETHER',
+    },
+    {
+      slug: 'demo-oceanic',
+      themeSlug: 'oceanic',
+      groom: 'Bagas Pratama, S.T.',
+      groomNick: 'Bagas',
+      bride: 'Dika Anggraini, S.Kom.',
+      brideNick: 'Dika',
+      opening: 'OCEAN OF LOVE',
+    },
+    {
+      slug: 'demo-rustic',
+      themeSlug: 'rustic',
+      groom: 'Arka Bumi, S.Hut.',
+      groomNick: 'Arka',
+      bride: 'Rinjani Laras, S.P.',
+      brideNick: 'Rinjani',
+      opening: 'OUR RUSTIC JOURNEY',
+    },
+    {
+      slug: 'demo-vintage',
+      themeSlug: 'vintage',
+      groom: 'Raden Mas Haryo, M.Hum.',
+      groomNick: 'Haryo',
+      bride: 'Sekar Arum Ningrum, S.Sn.',
+      brideNick: 'Sekar',
+      opening: 'SPECIAL WEDDING GAZETTE',
+    },
+    {
+      slug: 'demo-botanical',
+      themeSlug: 'botanical',
+      groom: 'Adrian Hakim, B.Arch.',
+      groomNick: 'Adrian',
+      bride: 'Bella Safira, M.A.',
+      brideNick: 'Bella',
+      opening: 'BOTANICAL ELEGANCE',
     },
   ]
 

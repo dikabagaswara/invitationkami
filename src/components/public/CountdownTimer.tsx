@@ -4,16 +4,20 @@ import { useState, useEffect } from 'react'
 
 interface CountdownTimerProps {
   targetDate: string | Date
+  isDark?: boolean
+  className?: string
 }
 
-const TimeUnit = ({ label, value }: { label: string, value: number }) => (
-  <div className="flex flex-col items-center justify-center p-3 bg-white/50 backdrop-blur rounded-lg shadow-sm w-20">
-    <span className="text-2xl font-semibold text-gray-800">{value}</span>
-    <span className="text-xs text-gray-500 uppercase mt-1">{label}</span>
+const TimeUnit = ({ label, value, isDark }: { label: string, value: number, isDark?: boolean }) => (
+  <div className={`flex flex-col items-center justify-center p-3 rounded-xl shadow-sm w-16 sm:w-20 ${
+    isDark ? 'bg-black/30 backdrop-blur-md border border-white/20 text-white' : 'bg-white/70 backdrop-blur-md border border-black/5 text-gray-800'
+  }`}>
+    <span className={`text-xl sm:text-2xl font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{value}</span>
+    <span className={`text-[10px] sm:text-xs uppercase mt-1 ${isDark ? 'text-white/70' : 'text-gray-500'}`}>{label}</span>
   </div>
 )
 
-export function CountdownTimer({ targetDate }: CountdownTimerProps) {
+export function CountdownTimer({ targetDate, isDark = false, className = '' }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: 0, hours: 0, minutes: 0, seconds: 0
   })
@@ -42,11 +46,11 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate])
 
   return (
-    <div className="flex justify-center gap-2 sm:gap-4">
-      <TimeUnit label="Hari" value={timeLeft.days} />
-      <TimeUnit label="Jam" value={timeLeft.hours} />
-      <TimeUnit label="Menit" value={timeLeft.minutes} />
-      <TimeUnit label="Detik" value={timeLeft.seconds} />
+    <div className={`flex justify-center gap-2 sm:gap-4 ${className}`}>
+      <TimeUnit label="Hari" value={timeLeft.days} isDark={isDark} />
+      <TimeUnit label="Jam" value={timeLeft.hours} isDark={isDark} />
+      <TimeUnit label="Menit" value={timeLeft.minutes} isDark={isDark} />
+      <TimeUnit label="Detik" value={timeLeft.seconds} isDark={isDark} />
     </div>
   )
 }
