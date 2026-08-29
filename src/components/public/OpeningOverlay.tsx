@@ -74,30 +74,6 @@ export function OpeningOverlay({
     textSecondary = 'text-amber-700'
     accentColor = 'bg-stone-800 hover:bg-stone-900 text-amber-50 font-medium border border-amber-900/20 shadow-amber-900/10'
     borderClass = 'border-amber-200'
-  } else if (themeSlug === 'rustic') {
-    bgClass = 'bg-[#f6f4f0] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white to-[#ece8e1]'
-    textPrimary = 'text-[#4e5340]' // dark sage/olive
-    textSecondary = 'text-[#8b9176]'
-    accentColor = 'bg-[#6b705c] hover:bg-[#5a5f4d] text-[#f6f4f0] shadow-[#6b705c]/20'
-    borderClass = 'border-[#d3cec4]'
-  } else if (themeSlug === 'vintage') {
-    bgClass = 'bg-[#fdfbf7] bg-[linear-gradient(to_bottom_right,rgba(253,251,247,1),rgba(243,238,228,1))]'
-    textPrimary = 'text-[#5c3a21]'
-    textSecondary = 'text-[#a67c52]'
-    accentColor = 'bg-[#8b5a2b] hover:bg-[#6b4521] text-[#fdfbf7] shadow-[#8b5a2b]/20'
-    borderClass = 'border-[#e6d5c3]'
-  } else if (themeSlug === 'botanical') {
-    bgClass = 'bg-[#f8faf8] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-[#e8eee8]'
-    textPrimary = 'text-[#1a2f14]' // deep green
-    textSecondary = 'text-[#4b6b43]'
-    accentColor = 'bg-[#2d4a22] hover:bg-[#1a2f14] text-white shadow-[#2d4a22]/20'
-    borderClass = 'border-[#c1d1bd]'
-  } else if (themeSlug === 'oceanic') {
-    bgClass = 'bg-[#f0f9ff] bg-[linear-gradient(to_bottom,#f0f9ff_0%,#e0f2fe_100%)]'
-    textPrimary = 'text-[#0369a1]' // sky-700
-    textSecondary = 'text-[#0284c7]' // sky-600
-    accentColor = 'bg-[#0ea5e9] hover:bg-[#0284c7] text-white shadow-[#0ea5e9]/30'
-    borderClass = 'border-[#bae6fd]'
   }
 
   return (
