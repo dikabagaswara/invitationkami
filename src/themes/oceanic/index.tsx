@@ -41,11 +41,11 @@ export default function OceanicTheme({ data }: { data: ThemeData }) {
             </div>
 
             {/* Couple Feature Focus Photo / Avatar with Sea Gradient Ring */}
-            {(invitation.groomPhoto || invitation.bridePhoto || gallery[0]?.imageUrl) && (
+            {(gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto) && (
               <div className="relative mx-auto mb-8 w-32 h-32 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#0077B6] via-[#48CAE4] to-[#023E8A] shadow-xl shadow-[#0077B6]/25">
                 <div className="w-full h-full rounded-full overflow-hidden backdrop-blur-sm bg-white">
                   <img
-                    src={invitation.groomPhoto || gallery[0]?.imageUrl || invitation.bridePhoto || '/placeholder.jpg'}
+                    src={gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || '/placeholder.jpg'}
                     alt="Couple"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />

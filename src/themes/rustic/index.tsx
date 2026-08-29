@@ -41,10 +41,10 @@ export default function RusticTheme({ data }: { data: ThemeData }) {
               </div>
 
               {/* Couple Photo */}
-              {(invitation.groomPhoto || invitation.bridePhoto || gallery[0]?.imageUrl) && (
+              {(gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto) && (
                 <div className="relative mx-auto mb-8 w-36 h-36 sm:w-48 sm:h-48 rounded-full p-2 border-2 border-dashed border-[#8C6D53]/60 bg-[#FAF6F0]">
                   <img
-                    src={invitation.groomPhoto || gallery[0]?.imageUrl || invitation.bridePhoto || '/placeholder.jpg'}
+                    src={gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || '/placeholder.jpg'}
                     alt="Couple"
                     className="w-full h-full object-cover rounded-full filter sepia-[15%] contrast-[105%]"
                   />

@@ -66,7 +66,7 @@ export default function VintageTheme({ data }: { data: ThemeData }) {
               <div className="border-2 border-[#4A2E1B] p-2 bg-white shadow-sm mb-6">
                 <div className="aspect-[16/10] sm:aspect-[21/9] w-full overflow-hidden bg-[#E8E0D2] relative">
                   <img
-                    src={invitation.groomPhoto || gallery[0]?.imageUrl || invitation.bridePhoto || '/placeholder.jpg'}
+                    src={gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || '/placeholder.jpg'}
                     alt="Couple Announcement"
                     className="w-full h-full object-cover filter grayscale contrast-[115%] sepia-[45%]"
                   />

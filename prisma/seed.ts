@@ -281,6 +281,7 @@ async function main() {
       bride: 'Dika Anggraini, S.Kom.',
       brideNick: 'Dika',
       opening: 'THE WEDDING CELEBRATION',
+      coupleCover: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&auto=format&fit=crop&q=80',
     },
     {
       slug: 'demo-rustic',
@@ -290,6 +291,7 @@ async function main() {
       bride: 'Rinjani Laras, S.P.',
       brideNick: 'Rinjani',
       opening: 'OUR RUSTIC JOURNEY',
+      coupleCover: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop&q=80',
     },
     {
       slug: 'demo-vintage',
@@ -299,6 +301,7 @@ async function main() {
       bride: 'Sekar Arum Ningrum, S.Sn.',
       brideNick: 'Sekar',
       opening: 'SPECIAL WEDDING GAZETTE',
+      coupleCover: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1000&auto=format&fit=crop&q=80',
     },
     {
       slug: 'demo-botanical',
@@ -308,6 +311,7 @@ async function main() {
       bride: 'Bella Safira, M.A.',
       brideNick: 'Bella',
       opening: 'THE WEDDING CELEBRATION',
+      coupleCover: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1000&auto=format&fit=crop&q=80',
     },
     {
       slug: 'demo-terracotta',
@@ -317,6 +321,7 @@ async function main() {
       bride: 'Kinanti Senja, S.Ds.',
       brideNick: 'Kinanti',
       opening: 'TERRACOTTA SUNSET ROMANCE',
+      coupleCover: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1000&auto=format&fit=crop&q=80',
     },
     {
       slug: 'demo-celestial',
@@ -326,6 +331,7 @@ async function main() {
       bride: 'Lyra Vega, S.T.',
       brideNick: 'Lyra',
       opening: 'THE WEDDING CELEBRATION',
+      coupleCover: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1000&auto=format&fit=crop&q=80',
     },
   ]
 
@@ -333,140 +339,159 @@ async function main() {
     const matchedTheme = allThemes.find((t) => t.slug === demo.themeSlug)
     if (!matchedTheme) continue
 
-    await prisma.invitation.upsert({
+    const defaultCoupleCover = 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop&q=80'
+    const couplePhoto = demo.coupleCover || defaultCoupleCover
+
+    const existingInv = await prisma.invitation.findUnique({
       where: { slug: demo.slug },
-      update: {
-        themeId: matchedTheme.id,
-        musicId: firstMusic?.id,
-        openingTitle: demo.opening,
-        isPublished: true,
-      },
-      create: {
-        userId: customer.id,
-        slug: demo.slug,
-        isPublished: true,
-        groomName: demo.groomNick,
-        groomFullName: demo.groom,
-        groomFather: 'Bapak ' + demo.groomNick + ' Snr.',
-        groomMother: 'Ibu ' + demo.groomNick + ' Snr.',
-        groomPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
-        brideName: demo.brideNick,
-        brideFullName: demo.bride,
-        brideFather: 'Bapak ' + demo.brideNick + ' Snr.',
-        brideMother: 'Ibu ' + demo.brideNick + ' Snr.',
-        bridePhoto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80',
-        themeId: matchedTheme.id,
-        musicId: firstMusic?.id,
-        colorPreset: 'default',
-        fontPreset: 'default',
-        openingTitle: demo.opening,
-        openingText: 'Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.',
-        quote: 'Dan di antara tanda-tanda kebesaran-Nya diciptakan-Nya pasangan-pasangan untukmu agar kamu merasa tenteram bersamanya.',
-        quoteSource: 'QS. Ar-Rum: 21',
-        sectionConfig: {
-          hero: true,
-          quote: true,
-          couple: true,
-          countdown: true,
-          events: true,
-          story: true,
-          gallery: true,
-          rsvp: true,
-          guestbook: true,
-          gift: true,
-          location: true,
-        },
-        events: {
-          create: [
-            {
-              title: 'Akad Nikah',
-              date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-              startTime: '08:00 WIB',
-              endTime: '10:00 WIB',
-              venue: 'Masjid Agung Al-Azhar',
-              address: 'Jl. Sisingamangaraja No.1, Kebayoran Baru, Jakarta Selatan',
-              mapUrl: 'https://maps.google.com/?q=Masjid+Agung+Al-Azhar+Jakarta',
-              order: 1,
-            },
-            {
-              title: 'Resepsi Pernikahan',
-              date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-              startTime: '11:00 WIB',
-              endTime: '14:00 WIB',
-              venue: 'Grand Ballroom Hotel Mulia',
-              address: 'Jl. Asia Afrika, Senayan, Jakarta Pusat',
-              mapUrl: 'https://maps.google.com/?q=Hotel+Mulia+Senayan',
-              order: 2,
-            },
-          ],
-        },
-        loveStory: {
-          create: [
-            {
-              title: 'Pertama Kali Bertemu',
-              date: '2021',
-              description: 'Kami pertama kali bertemu di sebuah perpustakaan kota saat menyelesaikan tugas akhir kuliah.',
-              order: 1,
-            },
-            {
-              title: 'Komitmen Bersama',
-              date: '2023',
-              description: 'Setelah saling mengenal lebih dekat, kami memutuskan untuk melangkah ke jenjang yang lebih serius.',
-              order: 2,
-            },
-            {
-              title: 'Lamaran',
-              date: '2025',
-              description: 'Di hadapan kedua keluarga besar, kami mengikat janji suci untuk melangsungkan pernikahan.',
-              order: 3,
-            },
-          ],
-        },
-        gallery: {
-          create: [
-            {
-              imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=80',
-              caption: 'Momen Prewedding di Alam Terbuka',
-              order: 1,
-            },
-            {
-              imageUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80',
-              caption: 'Senyum Bahagia Bersama',
-              order: 2,
-            },
-            {
-              imageUrl: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&auto=format&fit=crop&q=80',
-              caption: 'Menatap Masa Depan',
-              order: 3,
-            },
-          ],
-        },
-        weddingGifts: {
-          create: [
-            {
-              type: 'BANK_TRANSFER',
-              bankName: 'BCA',
-              accountNumber: '1234567890',
-              accountHolder: demo.groomNick + ' & ' + demo.brideNick,
-              order: 1,
-            },
-            {
-              type: 'BANK_TRANSFER',
-              bankName: 'Bank Mandiri',
-              accountNumber: '9876543210',
-              accountHolder: demo.groomNick + ' & ' + demo.brideNick,
-              order: 2,
-            },
-            {
-              type: 'SHIPPING_ADDRESS',
-              address: 'Jl. Mawar No. 12, Kebayoran Baru, Jakarta Selatan (Kode Pos: 12180)',
-              notes: 'Penerima: ' + demo.groomNick + ' & ' + demo.brideNick,
-              order: 3,
-            },
-          ],
-        },
-      },
+      include: { gallery: true },
     })
+
+    if (existingInv) {
+      await prisma.invitation.update({
+        where: { id: existingInv.id },
+        data: {
+          themeId: matchedTheme.id,
+          musicId: firstMusic?.id,
+          openingTitle: demo.opening,
+          isPublished: true,
+        },
+      })
+      if (existingInv.gallery.length > 0) {
+        await prisma.galleryItem.update({
+          where: { id: existingInv.gallery[0].id },
+          data: { imageUrl: couplePhoto },
+        })
+      }
+    } else {
+      await prisma.invitation.create({
+        data: {
+          userId: customer.id,
+          slug: demo.slug,
+          isPublished: true,
+          groomName: demo.groomNick,
+          groomFullName: demo.groom,
+          groomFather: 'Bapak ' + demo.groomNick + ' Snr.',
+          groomMother: 'Ibu ' + demo.groomNick + ' Snr.',
+          groomPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
+          brideName: demo.brideNick,
+          brideFullName: demo.bride,
+          brideFather: 'Bapak ' + demo.brideNick + ' Snr.',
+          brideMother: 'Ibu ' + demo.brideNick + ' Snr.',
+          bridePhoto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80',
+          themeId: matchedTheme.id,
+          musicId: firstMusic?.id,
+          colorPreset: 'default',
+          fontPreset: 'default',
+          openingTitle: demo.opening,
+          openingText: 'Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.',
+          quote: 'Dan di antara tanda-tanda kebesaran-Nya diciptakan-Nya pasangan-pasangan untukmu agar kamu merasa tenteram bersamanya.',
+          quoteSource: 'QS. Ar-Rum: 21',
+          sectionConfig: {
+            hero: true,
+            quote: true,
+            couple: true,
+            countdown: true,
+            events: true,
+            story: true,
+            gallery: true,
+            rsvp: true,
+            guestbook: true,
+            gift: true,
+            location: true,
+          },
+          events: {
+            create: [
+              {
+                title: 'Akad Nikah',
+                date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                startTime: '08:00 WIB',
+                endTime: '10:00 WIB',
+                venue: 'Masjid Agung Al-Azhar',
+                address: 'Jl. Sisingamangaraja No.1, Kebayoran Baru, Jakarta Selatan',
+                mapUrl: 'https://maps.google.com/?q=Masjid+Agung+Al-Azhar+Jakarta',
+                order: 1,
+              },
+              {
+                title: 'Resepsi Pernikahan',
+                date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                startTime: '11:00 WIB',
+                endTime: '14:00 WIB',
+                venue: 'Grand Ballroom Hotel Mulia',
+                address: 'Jl. Asia Afrika, Senayan, Jakarta Pusat',
+                mapUrl: 'https://maps.google.com/?q=Hotel+Mulia+Senayan',
+                order: 2,
+              },
+            ],
+          },
+          loveStory: {
+            create: [
+              {
+                title: 'Pertama Kali Bertemu',
+                date: '2021',
+                description: 'Kami pertama kali bertemu di sebuah perpustakaan kota saat menyelesaikan tugas akhir kuliah.',
+                order: 1,
+              },
+              {
+                title: 'Komitmen Bersama',
+                date: '2023',
+                description: 'Setelah saling mengenal lebih dekat, kami memutuskan untuk melangkah ke jenjang yang lebih serius.',
+                order: 2,
+              },
+              {
+                title: 'Lamaran',
+                date: '2025',
+                description: 'Di hadapan kedua keluarga besar, kami mengikat janji suci untuk melangsungkan pernikahan.',
+                order: 3,
+              },
+            ],
+          },
+          gallery: {
+            create: [
+              {
+                imageUrl: couplePhoto,
+                caption: 'Momen Bahagia Bersama Berdua',
+                order: 1,
+              },
+              {
+                imageUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80',
+                caption: 'Senyum Bahagia Bersama',
+                order: 2,
+              },
+              {
+                imageUrl: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&auto=format&fit=crop&q=80',
+                caption: 'Menatap Masa Depan',
+                order: 3,
+              },
+            ],
+          },
+          weddingGifts: {
+            create: [
+              {
+                type: 'BANK_TRANSFER',
+                bankName: 'BCA',
+                accountNumber: '1234567890',
+                accountHolder: demo.groomNick + ' & ' + demo.brideNick,
+                order: 1,
+              },
+              {
+                type: 'BANK_TRANSFER',
+                bankName: 'Bank Mandiri',
+                accountNumber: '9876543210',
+                accountHolder: demo.groomNick + ' & ' + demo.brideNick,
+                order: 2,
+              },
+              {
+                type: 'SHIPPING_ADDRESS',
+                address: 'Jl. Mawar No. 12, Kebayoran Baru, Jakarta Selatan (Kode Pos: 12180)',
+                notes: 'Penerima: ' + demo.groomNick + ' & ' + demo.brideNick,
+                order: 3,
+              },
+            ],
+          },
+        },
+      })
+    }
     console.log(`  ✓ Demo [${matchedTheme.name}]: /i/${demo.slug}`)
   }
 

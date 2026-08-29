@@ -47,11 +47,11 @@ export default function CelestialTheme({ data }: { data: ThemeData }) {
               </div>
 
               {/* Couple Avatar with Cosmic Golden Halo */}
-              {(invitation.groomPhoto || invitation.bridePhoto || gallery[0]?.imageUrl) && (
+              {(gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto) && (
                 <div className="relative mx-auto mb-8 w-36 h-36 sm:w-48 sm:h-48 rounded-full p-1.5 bg-gradient-to-tr from-[#8B5CF6] via-[#FBBF24] to-[#EC4899] shadow-2xl shadow-purple-900/50">
                   <div className="w-full h-full rounded-full overflow-hidden backdrop-blur-sm bg-[#0A071B]">
                     <img
-                      src={invitation.groomPhoto || gallery[0]?.imageUrl || invitation.bridePhoto || '/placeholder.jpg'}
+                      src={gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || '/placeholder.jpg'}
                       alt="Couple"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                     />

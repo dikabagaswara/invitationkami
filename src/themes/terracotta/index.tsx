@@ -41,11 +41,11 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
               </div>
 
               {/* Arch Shaped Photo Frame */}
-              {(invitation.groomPhoto || invitation.bridePhoto || gallery[0]?.imageUrl) && (
+              {(gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto) && (
                 <div className="relative mx-auto mb-8 w-44 h-60 sm:w-56 sm:h-72 rounded-t-[5rem] sm:rounded-t-[7rem] rounded-b-2xl overflow-hidden p-2 border-2 border-[#D48B6C]/50 bg-[#FBF6F0] shadow-md">
                   <div className="w-full h-full rounded-t-[4.5rem] sm:rounded-t-[6.5rem] rounded-b-xl overflow-hidden">
                     <img
-                      src={invitation.groomPhoto || gallery[0]?.imageUrl || invitation.bridePhoto || '/placeholder.jpg'}
+                      src={gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || '/placeholder.jpg'}
                       alt="Couple"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 filter contrast-[105%]"
                     />
