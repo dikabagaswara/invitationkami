@@ -325,7 +325,7 @@ async function main() {
       groomNick: 'Orion',
       bride: 'Lyra Vega, S.T.',
       brideNick: 'Lyra',
-      opening: 'WRITTEN IN THE STARS',
+      opening: 'THE WEDDING CELEBRATION',
     },
   ]
 

@@ -42,7 +42,7 @@ export default function CelestialTheme({ data }: { data: ThemeData }) {
               {/* Starlight Pill Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#261A4E]/80 border border-[#A78BFA]/30 text-[#C4B5FD] text-xs font-semibold uppercase tracking-[0.3em] mb-8 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#FBBF24] animate-spin" />
-                <span>{invitation.openingTitle || 'WRITTEN IN THE STARS'}</span>
+                <span>{invitation.openingTitle || 'THE WEDDING CELEBRATION'}</span>
                 <Moon className="w-3.5 h-3.5 text-[#C4B5FD]" />
               </div>
 
