@@ -241,7 +241,7 @@ export default async function HomePage() {
               <p className="text-xs text-stone-500 font-light mt-0.5">Kelola tamu</p>
             </div>
             <p className="text-xs text-stone-600 leading-relaxed font-light pt-1 border-t border-stone-100">
-              Konfirmasi kehadiran instan langsung terhubung ke WhatsApp dan rekap daftar tamu yang rapi.
+              Konfirmasi kehadiran instan langsung secara online dan rekap daftar tamu yang rapi.
             </p>
           </div>
 
