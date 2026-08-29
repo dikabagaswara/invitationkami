@@ -280,7 +280,7 @@ async function main() {
       groomNick: 'Bagas',
       bride: 'Dika Anggraini, S.Kom.',
       brideNick: 'Dika',
-      opening: 'OCEAN OF LOVE',
+      opening: 'THE WEDDING CELEBRATION',
     },
     {
       slug: 'demo-rustic',
@@ -307,7 +307,7 @@ async function main() {
       groomNick: 'Adrian',
       bride: 'Bella Safira, M.A.',
       brideNick: 'Bella',
-      opening: 'BOTANICAL ELEGANCE',
+      opening: 'THE WEDDING CELEBRATION',
     },
     {
       slug: 'demo-terracotta',
@@ -338,6 +338,7 @@ async function main() {
       update: {
         themeId: matchedTheme.id,
         musicId: firstMusic?.id,
+        openingTitle: demo.opening,
         isPublished: true,
       },
       create: {

@@ -33,7 +33,7 @@ export default function BotanicalTheme({ data }: { data: ThemeData }) {
         <section className="relative z-10 min-h-screen flex flex-col justify-between p-6 sm:p-12 md:p-20 bg-gradient-to-b from-[#0b1f11] via-[#07130a] to-[#07130a]">
           <div className="flex items-center justify-between border-b border-emerald-800/40 pb-6">
             <span className="text-xs uppercase tracking-[0.4em] text-emerald-400 font-medium">
-              Botanical Luxury Edition
+              THE WEDDING CELEBRATION
             </span>
             <span className="text-xs font-serif italic text-emerald-300">
               {eventDateFormatted || 'The Wedding Day'}
