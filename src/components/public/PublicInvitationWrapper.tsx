@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { OpeningOverlay } from './OpeningOverlay'
 import { MusicPlayer } from './MusicPlayer'
+import { InvitationFloatingNav } from './InvitationFloatingNav'
 
 interface PublicInvitationWrapperProps {
   children: React.ReactNode
@@ -43,8 +44,11 @@ export function PublicInvitationWrapper({
       />
       <MusicPlayer musicUrl={musicUrl} isPlaying={isOpened} />
       
+      {/* Floating navigation bar rendered once the invitation is opened */}
+      {isOpened && <InvitationFloatingNav themeSlug={themeSlug} />}
+      
       {/* The main content is hidden from screen readers/interaction until opened, though visually handled by the overlay */}
-      <div className={!isOpened ? 'pointer-events-none' : ''}>
+      <div className={!isOpened ? 'pointer-events-none' : 'pb-16 sm:pb-20'}>
         {children}
       </div>
     </>

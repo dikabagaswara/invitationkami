@@ -1,10 +1,12 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
+import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 
 export default function FloralTheme({ data }: { data: ThemeData }) {
   const { invitation, events, gallery, loveStory, weddingGifts } = data
   const { sectionConfig } = invitation
+  const couplePhoto = gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
 
   return (
     <div className="bg-rose-50/50 text-rose-900 min-h-screen font-sans">
@@ -16,20 +18,29 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
 
       {/* Hero */}
       {sectionConfig.hero && (
-        <section className="min-h-screen relative flex flex-col items-center justify-center p-8 overflow-hidden font-lora text-center">
+        <section id="hero" className="min-h-screen relative flex flex-col items-center justify-center p-6 sm:p-8 overflow-hidden font-lora text-center">
           <div className="absolute top-0 left-0 w-64 h-64 bg-rose-200 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-200 rounded-full blur-3xl opacity-50 translate-x-1/3 translate-y-1/3"></div>
           
-          <div className="z-10 bg-white/70 p-12 rounded-3xl backdrop-blur-sm border border-white shadow-xl max-w-2xl w-full">
-            <h2 className="tracking-[0.2em] uppercase text-sm mb-6 text-rose-600 font-semibold">
+          <div className="z-10 bg-white/75 p-8 sm:p-12 rounded-3xl backdrop-blur-sm border border-white shadow-xl max-w-2xl w-full space-y-4">
+            <h2 className="tracking-[0.2em] uppercase text-xs sm:text-sm text-rose-600 font-semibold">
               {invitation.openingTitle || 'The Wedding Of'}
             </h2>
-            <div className="text-4xl mb-4">🌸</div>
-            <h1 className="font-cursive text-6xl md:text-8xl text-rose-600 mb-6 drop-shadow-sm leading-tight">
-              {invitation.groomName} <br/><span className="text-5xl text-rose-400">&</span><br/> {invitation.brideName}
+
+            {/* Couple Feature Focus Photo with Frame */}
+            <HeroCouplePhoto
+              photoUrl={couplePhoto}
+              groomName={invitation.groomName}
+              brideName={invitation.brideName}
+              themeSlug="floral"
+              frameVariant="double-ring"
+            />
+
+            <h1 className="font-cursive text-5xl sm:text-7xl md:text-8xl text-rose-600 drop-shadow-sm leading-tight">
+              {invitation.groomName} <br/><span className="text-4xl sm:text-5xl text-rose-400">&</span><br/> {invitation.brideName}
             </h1>
             {events.length > 0 && (
-              <p className="mt-8 font-semibold text-rose-700 tracking-wider">
+              <p className="pt-4 font-semibold text-rose-700 tracking-wider text-sm sm:text-base">
                 {new Date(events[0].date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
             )}
@@ -52,7 +63,7 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
 
       {/* Couple */}
       {sectionConfig.couple && (
-        <section className="py-24 px-8 text-center font-lora">
+        <section id="couple" className="py-24 px-8 text-center font-lora">
           <h2 className="font-cursive text-5xl text-rose-600 mb-16">The Happy Couple</h2>
           <div className="flex flex-col md:flex-row justify-center items-center gap-16 max-w-5xl mx-auto">
             <div className="text-center w-full">
@@ -103,7 +114,7 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
 
       {/* Events */}
       {sectionConfig.events && events.length > 0 && (
-        <section className="py-24 px-8 bg-white/60 font-lora relative">
+        <section id="events" className="py-24 px-8 bg-white/60 font-lora relative">
           <h2 className="font-cursive text-5xl text-rose-600 mb-16 text-center">Wedding Events</h2>
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
             {events.map(event => (
@@ -132,7 +143,7 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
 
       {/* Story */}
       {sectionConfig.story && loveStory.length > 0 && (
-        <section className="py-24 px-8 font-lora">
+        <section id="story" className="py-24 px-8 font-lora">
           <h2 className="font-cursive text-5xl text-rose-600 mb-16 text-center">Our Journey</h2>
           <div className="max-w-3xl mx-auto space-y-12">
             {loveStory.map((story, i) => (
@@ -153,7 +164,7 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
 
       {/* Gallery */}
       {sectionConfig.gallery && gallery.length > 0 && (
-        <section className="py-24 px-8 bg-rose-100/30">
+        <section id="gallery" className="py-24 px-8 bg-rose-100/30">
           <h2 className="font-cursive text-5xl text-rose-600 mb-16 text-center">Beautiful Moments</h2>
           <div className="max-w-6xl mx-auto columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
             {gallery.map(item => (

@@ -14,7 +14,7 @@ export function PublicSharedSections({ data, isDark = false }: { data: ThemeData
     <div className="w-full">
       {/* RSVP Section */}
       {sectionConfig.rsvp && (
-        <section className="py-16 px-4 max-w-2xl mx-auto">
+        <section id="rsvp" className="py-16 px-4 max-w-2xl mx-auto">
           <h2 className={`text-3xl text-center mb-8 font-light ${isDark ? 'text-[#d4af37]' : ''}`}>RSVP</h2>
           <RsvpForm 
             slug={invitation.slug} 
@@ -30,7 +30,7 @@ export function PublicSharedSections({ data, isDark = false }: { data: ThemeData
 
       {/* Guest Messages Section */}
       {sectionConfig.guestbook && (
-        <section className="py-16 px-4 max-w-2xl mx-auto">
+        <section id="wishes" className="py-16 px-4 max-w-2xl mx-auto">
           <h2 className={`text-3xl text-center mb-8 font-light ${isDark ? 'text-[#d4af37]' : ''}`}>Ucapan & Doa</h2>
           <GuestbookSection 
             slug={invitation.slug} 
@@ -42,7 +42,7 @@ export function PublicSharedSections({ data, isDark = false }: { data: ThemeData
 
       {/* Gift Section */}
       {sectionConfig.gift && weddingGifts && weddingGifts.length > 0 && (
-        <section className="py-16 px-4 max-w-2xl mx-auto">
+        <section id="gift" className="py-16 px-4 max-w-2xl mx-auto">
           <h2 className={`text-3xl text-center mb-8 font-light ${isDark ? 'text-[#d4af37]' : ''}`}>Wedding Gift</h2>
           <p className={`text-center mb-8 max-w-md mx-auto text-sm ${isDark ? 'text-stone-400' : 'text-gray-600'}`}>
             Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika Anda memberi perhatian lebih, dapat mengirimkan kado melalui:

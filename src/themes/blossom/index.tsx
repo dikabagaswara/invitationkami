@@ -1,5 +1,6 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
+import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 import { Calendar, MapPin, Heart, Sparkles } from 'lucide-react'
 
@@ -9,6 +10,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
 
   const primaryEvent = events[0]
   const receptionEvent = events[1] || events[0]
+  const couplePhoto = gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
 
   return (
     <div className="relative min-h-screen bg-[#FFF9F9] text-stone-800 font-sans selection:bg-rose-100 overflow-x-hidden">
@@ -104,7 +106,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
           HERO COVER SECTION (WITH SWAYING FLOWER CORNERS)
          ───────────────────────────────────────────── */}
       {sectionConfig.hero && (
-        <section className="min-h-screen relative flex flex-col items-center justify-center p-6 text-center overflow-hidden bg-gradient-to-b from-[#FFF0F0] via-[#FFF8F8] to-[#FFF9F9]">
+        <section id="hero" className="min-h-screen relative flex flex-col items-center justify-center p-6 text-center overflow-hidden bg-gradient-to-b from-[#FFF0F0] via-[#FFF8F8] to-[#FFF9F9]">
           {/* Top-Left Floral Ornament */}
           <div className="absolute -top-6 -left-6 w-48 sm:w-72 pointer-events-none z-10 animate-sway-left">
             <img 
@@ -149,6 +151,15 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
               </span>
               <div className="w-12 h-0.5 bg-rose-300 mx-auto mt-2"></div>
             </div>
+
+            {/* Couple Feature Focus Photo with Frame */}
+            <HeroCouplePhoto
+              photoUrl={couplePhoto}
+              groomName={invitation.groomName}
+              brideName={invitation.brideName}
+              themeSlug="blossom"
+              frameVariant="double-ring"
+            />
 
             {/* Couple Names in Elegant Script */}
             <div className="py-2">
@@ -208,7 +219,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
           COUPLE SECTION (BRIDE & GROOM PROFILES)
          ───────────────────────────────────────────── */}
       {sectionConfig.couple && (
-        <section className="py-20 sm:py-28 px-6 text-center max-w-5xl mx-auto relative">
+        <section id="couple" className="py-20 sm:py-28 px-6 text-center max-w-5xl mx-auto relative">
           <div className="text-center mb-14 space-y-2">
             <span className="text-xs uppercase tracking-[0.3em] font-semibold text-rose-500">
               Pasangan Mempelai
@@ -295,7 +306,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
           EVENTS / RANGKAIAN ACARA SECTION
          ───────────────────────────────────────────── */}
       {sectionConfig.events && events.length > 0 && (
-        <section className="py-20 sm:py-28 px-6 max-w-5xl mx-auto relative">
+        <section id="events" className="py-20 sm:py-28 px-6 max-w-5xl mx-auto relative">
           <div className="text-center mb-14 space-y-2">
             <span className="text-xs uppercase tracking-[0.3em] font-semibold text-rose-500">
               Waktu &amp; Tempat
@@ -361,7 +372,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
           LOVE STORY TIMELINE SECTION
          ───────────────────────────────────────────── */}
       {sectionConfig.story && loveStory.length > 0 && (
-        <section className="py-20 sm:py-28 px-6 max-w-4xl mx-auto text-center">
+        <section id="story" className="py-20 sm:py-28 px-6 max-w-4xl mx-auto text-center">
           <div className="mb-14 space-y-2">
             <span className="text-xs uppercase tracking-[0.3em] font-semibold text-rose-500">
               Perjalanan Kami
@@ -401,7 +412,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
           GALLERY PREWEDDING SECTION
          ───────────────────────────────────────────── */}
       {sectionConfig.gallery && gallery.length > 0 && (
-        <section className="py-20 px-6 max-w-5xl mx-auto text-center">
+        <section id="gallery" className="py-20 px-6 max-w-5xl mx-auto text-center">
           <div className="mb-12 space-y-2">
             <span className="text-xs uppercase tracking-[0.3em] font-semibold text-rose-500">
               Galeri Kenangan

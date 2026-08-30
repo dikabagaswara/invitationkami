@@ -223,7 +223,7 @@ export function ShareGeneratorClient({
                       id="invitation-url"
                       value={invitationUrlInput}
                       onChange={(e) => setInvitationUrlInput(e.target.value)}
-                      placeholder="contoh: dika-dan-nurdi atau demo-oceanic"
+                      placeholder="contoh: bagas-anggra atau demo-blossom"
                       className="font-mono text-xs pl-8 h-9"
                     />
                     <Link2 className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400" />

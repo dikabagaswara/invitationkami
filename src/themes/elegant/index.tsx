@@ -1,24 +1,36 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
+import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 
 export default function ElegantTheme({ data }: { data: ThemeData }) {
   const { invitation, events, gallery, loveStory, weddingGifts } = data
   const { sectionConfig } = invitation
+  const couplePhoto = gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
 
   return (
     <div className="font-serif bg-amber-50 text-stone-800 min-h-screen">
       {/* Hero Section */}
       {sectionConfig.hero && (
-        <section className="min-h-screen flex flex-col items-center justify-center text-center p-8 border-8 border-double border-amber-200 m-4 relative">
-          <h2 className="text-xl tracking-[0.3em] uppercase mb-8 text-amber-700 font-light">
+        <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center p-6 sm:p-8 border-8 border-double border-amber-200 m-3 sm:m-4 relative space-y-6">
+          <h2 className="text-sm sm:text-xl tracking-[0.3em] uppercase text-amber-700 font-light">
             {invitation.openingTitle || 'The Wedding Of'}
           </h2>
-          <h1 className="text-6xl md:text-8xl mb-8 font-light tracking-wider drop-shadow-sm">
+
+          {/* Couple Feature Focus Photo with Frame */}
+          <HeroCouplePhoto
+            photoUrl={couplePhoto}
+            groomName={invitation.groomName}
+            brideName={invitation.brideName}
+            themeSlug="elegant"
+            frameVariant="double-ring"
+          />
+
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-light tracking-wider drop-shadow-sm">
             {invitation.groomName} <span className="text-amber-500 italic">&</span> {invitation.brideName}
           </h1>
           {events.length > 0 && (
-            <p className="text-xl tracking-widest uppercase border-t border-b border-amber-300 py-4 px-12 mt-8 text-amber-800">
+            <p className="text-sm sm:text-xl tracking-widest uppercase border-t border-b border-amber-300 py-3 sm:py-4 px-6 sm:px-12 text-amber-800">
               {new Date(events[0].date).toLocaleDateString('id-ID', {
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
               })}
@@ -44,7 +56,7 @@ export default function ElegantTheme({ data }: { data: ThemeData }) {
 
       {/* Couple Section */}
       {sectionConfig.couple && (
-        <section className="py-24 px-8 max-w-4xl mx-auto text-center relative">
+        <section id="couple" className="py-24 px-8 max-w-4xl mx-auto text-center relative">
           <h2 className="text-4xl italic text-amber-700 mb-20 font-light">Meet the Couple</h2>
           <div className="grid md:grid-cols-2 gap-16">
             <div className="space-y-6">
@@ -99,7 +111,7 @@ export default function ElegantTheme({ data }: { data: ThemeData }) {
 
       {/* Events Section */}
       {sectionConfig.events && events.length > 0 && (
-        <section className="py-24 px-8 bg-white text-center">
+        <section id="events" className="py-24 px-8 bg-white text-center">
           <h2 className="text-4xl italic text-amber-700 mb-20 font-light">Wedding Events</h2>
           <div className="max-w-3xl mx-auto space-y-12">
             {events.map(event => (
@@ -129,7 +141,7 @@ export default function ElegantTheme({ data }: { data: ThemeData }) {
 
       {/* Story Section */}
       {sectionConfig.story && loveStory.length > 0 && (
-        <section className="py-24 px-8 max-w-4xl mx-auto text-center">
+        <section id="story" className="py-24 px-8 max-w-4xl mx-auto text-center">
           <h2 className="text-4xl italic text-amber-700 mb-20 font-light">Our Love Story</h2>
           <div className="space-y-12 relative before:absolute before:inset-0 before:ml-1/2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-amber-200">
             {loveStory.map((story, i) => (
@@ -146,7 +158,7 @@ export default function ElegantTheme({ data }: { data: ThemeData }) {
 
       {/* Gallery Section */}
       {sectionConfig.gallery && gallery.length > 0 && (
-        <section className="py-24 px-8 bg-amber-100/50">
+        <section id="gallery" className="py-24 px-8 bg-amber-100/50">
           <h2 className="text-4xl italic text-amber-700 mb-16 font-light text-center">Gallery</h2>
           <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {gallery.map(item => (
