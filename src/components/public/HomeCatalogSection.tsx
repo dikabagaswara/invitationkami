@@ -263,6 +263,25 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 13. Arcade 8-Bit Pixel Game Wedding
+  arcade: {
+    bgGradient: 'from-[#1e1b4b] via-[#312e81] to-[#0f172a]',
+    isDarkTheme: true,
+    titleColor: 'text-[#38bdf8] font-mono font-bold tracking-widest',
+    subColor: 'text-[#f43f5e] font-mono',
+    bottomColor: 'text-[#a5b4fc] border-[#38bdf8]/30',
+    badgeBg: 'bg-[#0f172a]/90 border border-[#38bdf8]/40 shadow-xs backdrop-blur-md',
+    badgeText: 'text-[#38bdf8] font-mono font-bold',
+    icon: Sparkles,
+    animationElement: (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-4 left-4 text-xs font-mono text-[#f43f5e] animate-pulse">❤️ x3</div>
+        <div className="absolute bottom-4 right-4 text-xs font-mono text-amber-300 animate-bounce">🪙 999</div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#38bdf8_1px,transparent_1px),linear-gradient(to_bottom,#38bdf8_1px,transparent_1px)] bg-[size:16px_16px] opacity-15"></div>
+      </div>
+    ),
+  },
 }
 
 export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {

@@ -46,6 +46,9 @@ export const themeRegistry: Record<string, ThemeRegistryEntry> = {
   blossom: {
     meta: { name: 'Blossom Animated', category: 'romantic', description: 'Swaying floral animations & falling petals' },
   },
+  arcade: {
+    meta: { name: '8-Bit Arcade Pixel', category: 'creative', description: 'Retro 8-bit game wedding adventure with pixel art UI, HP hearts, quest log, & coin counters' },
+  },
 }
 
 export function isValidTheme(slug: string): boolean {

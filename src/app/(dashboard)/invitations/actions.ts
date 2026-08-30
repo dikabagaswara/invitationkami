@@ -82,33 +82,45 @@ export async function createInvitationAction(formData: FormData) {
   const brideName = formData.get('brideName') as string
   const slug = (formData.get('slug') as string).toLowerCase().trim().replace(/[^a-z0-9-]/g, '-')
   const themeSlug = (formData.get('themeSlug') as string) || 'elegant'
+  const templateDemoSlug = (formData.get('templateDemoSlug') as string) || ''
   const targetUserId = (formData.get('userId') as string) || user.id
 
   const finalUserId = user.role === 'SUPER_ADMIN' ? targetUserId : user.id
 
-  const theme = await prisma.theme.findUnique({ where: { slug: themeSlug } })
-  if (!theme) throw new Error('Theme not found')
+  let invitation: { id: string; slug: string }
 
-  const invitation = await invitationService.createInvitation(finalUserId, {
-    slug,
-    groomName,
-    brideName,
-    themeId: theme.id,
-    isPublished: false,
-    sectionConfig: {
-      hero: true,
-      quote: true,
-      couple: true,
-      countdown: true,
-      events: true,
-      story: true,
-      gallery: true,
-      rsvp: true,
-      guestbook: true,
-      gift: true,
-      location: true,
-    },
-  })
+  // If user chose to clone from a demo template
+  if (templateDemoSlug && templateDemoSlug.startsWith('demo-')) {
+    invitation = await invitationService.cloneInvitationFromTemplate(finalUserId, templateDemoSlug, {
+      slug,
+      groomName,
+      brideName,
+    })
+  } else {
+    const theme = await prisma.theme.findUnique({ where: { slug: themeSlug } })
+    if (!theme) throw new Error('Theme not found')
+
+    invitation = await invitationService.createInvitation(finalUserId, {
+      slug,
+      groomName,
+      brideName,
+      themeId: theme.id,
+      isPublished: false,
+      sectionConfig: {
+        hero: true,
+        quote: true,
+        couple: true,
+        countdown: true,
+        events: true,
+        story: true,
+        gallery: true,
+        rsvp: true,
+        guestbook: true,
+        gift: true,
+        location: true,
+      },
+    })
+  }
 
   revalidatePath('/invitations')
   revalidatePath('/admin/invitations')

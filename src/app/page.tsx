@@ -35,10 +35,16 @@ export default async function HomePage() {
     'floral',
     'minimalist',
     'blossom',
+    'arcade',
   ]
 
   // Simple, concise & customer-focused descriptions
   const THEME_DATA_MAP: Record<string, { displayName: string; tagline: string; category: string }> = {
+    arcade: {
+      displayName: '8-Bit Arcade Pixel',
+      category: 'Creative',
+      tagline: 'Petualangan cinta retro 8-bit bertema game dengan HP bar, quest cinta, pixel badges, dan kotak dialog RPG.',
+    },
     blossom: {
       displayName: 'Blossom Animated',
       category: 'Romantic',

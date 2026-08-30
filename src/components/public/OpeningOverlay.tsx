@@ -116,6 +116,14 @@ export function OpeningOverlay({
     cardClass = 'bg-[#FFFDF9]/95 border-[#D9CBB9] shadow-2xl backdrop-blur-md'
     frameClass = 'rounded-full p-2 bg-gradient-to-tr from-[#C2AB91] via-[#FFFDF9] to-[#8C6D53] shadow-xl ring-4 ring-[#E8DDD0]'
     badgeClass = 'bg-amber-50/80 text-amber-950 border-amber-200'
+  } else if (themeSlug === 'arcade') {
+    bgClass = 'bg-[#0f172a] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1b4b] to-[#020617]'
+    textPrimary = 'text-[#38bdf8]'
+    textSecondary = 'text-[#f43f5e]'
+    accentBtn = 'bg-gradient-to-r from-[#06b6d4] via-[#ec4899] to-[#8b5cf6] hover:brightness-110 text-white font-mono font-bold shadow-cyan-500/40 border border-cyan-300'
+    cardClass = 'bg-[#0f172a]/90 border-2 border-[#38bdf8] shadow-[0_0_25px_rgba(56,189,248,0.3)] backdrop-blur-md'
+    frameClass = 'rounded-full p-2 bg-gradient-to-tr from-[#06b6d4] via-[#ec4899] to-[#8b5cf6] shadow-[0_0_20px_rgba(6,182,212,0.6)] ring-4 ring-[#06b6d4]'
+    badgeClass = 'bg-[#1e1b4b] text-[#38bdf8] border-[#38bdf8]/50 font-mono'
   }
 
   return (

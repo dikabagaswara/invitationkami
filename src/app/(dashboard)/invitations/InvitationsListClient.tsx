@@ -249,6 +249,13 @@ export function InvitationsListClient({
 
                 {/* ─── Action Buttons ─── */}
                 <div className="mt-6 pt-4 border-t border-gray-100 flex flex-col gap-2">
+                  {inv.slug.startsWith('demo-') && (
+                    <Link href={`/invitations/new?template=${inv.slug}`} className="w-full">
+                      <Button size="sm" className="w-full text-xs bg-amber-600 hover:bg-amber-700 text-white font-semibold shadow-xs">
+                        <Sparkles className="w-3.5 h-3.5 mr-1" /> Gunakan Template Ini
+                      </Button>
+                    </Link>
+                  )}
                   <div className="flex gap-2">
                     <Link href={`/invitations/${inv.id}/couple`} className="flex-1">
                       <Button variant="outline" size="sm" className="w-full text-xs">
@@ -256,7 +263,7 @@ export function InvitationsListClient({
                       </Button>
                     </Link>
                     <Link href={`/i/${inv.slug}`} target="_blank" className="flex-1">
-                      <Button size="sm" className="w-full text-xs">
+                      <Button size="sm" variant={inv.slug.startsWith('demo-') ? "outline" : "default"} className="w-full text-xs">
                         <ExternalLink className="w-3.5 h-3.5 mr-1" /> Preview
                       </Button>
                     </Link>

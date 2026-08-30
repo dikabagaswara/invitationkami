@@ -165,3 +165,122 @@ export async function deleteInvitation(invitationId: string, userId: string) {
     where: { id: invitationId },
   })
 }
+
+/**
+ * Duplicate / Clone full data from any template demo into a newly created invitation
+ */
+export async function cloneInvitationFromTemplate(
+  userId: string,
+  templateSlug: string,
+  overrides: {
+    slug: string
+    groomName: string
+    brideName: string
+  }
+) {
+  const template = await prisma.invitation.findUnique({
+    where: { slug: templateSlug },
+    include: {
+      events: true,
+      gallery: true,
+      loveStory: true,
+      weddingGifts: true,
+    },
+  })
+
+  if (!template) {
+    throw new NotFoundError('Template Demo')
+  }
+
+  // Create new invitation copying structure & presets from template
+  const newInvitation = await prisma.invitation.create({
+    data: {
+      userId,
+      slug: overrides.slug,
+      groomName: overrides.groomName,
+      groomFullName: overrides.groomName,
+      groomFather: template.groomFather,
+      groomMother: template.groomMother,
+      groomPhoto: template.groomPhoto,
+      brideName: overrides.brideName,
+      brideFullName: overrides.brideName,
+      brideFather: template.brideFather,
+      brideMother: template.brideMother,
+      bridePhoto: template.bridePhoto,
+      coverPhoto: template.coverPhoto,
+      heroPhoto: template.heroPhoto,
+      themeId: template.themeId,
+      colorPreset: template.colorPreset,
+      fontPreset: template.fontPreset,
+      animationIntensity: template.animationIntensity,
+      musicId: template.musicId,
+      sectionConfig: template.sectionConfig as object,
+      openingTitle: template.openingTitle,
+      openingText: template.openingText,
+      quote: template.quote,
+      quoteSource: template.quoteSource,
+      isPublished: false,
+    },
+  })
+
+  // Clone Events
+  if (template.events.length > 0) {
+    await prisma.event.createMany({
+      data: template.events.map((evt) => ({
+        invitationId: newInvitation.id,
+        title: evt.title,
+        date: evt.date,
+        startTime: evt.startTime,
+        endTime: evt.endTime,
+        venue: evt.venue,
+        address: evt.address,
+        mapUrl: evt.mapUrl,
+        order: evt.order,
+      })),
+    })
+  }
+
+  // Clone Gallery
+  if (template.gallery.length > 0) {
+    await prisma.galleryItem.createMany({
+      data: template.gallery.map((g) => ({
+        invitationId: newInvitation.id,
+        imageUrl: g.imageUrl,
+        caption: g.caption,
+        order: g.order,
+      })),
+    })
+  }
+
+  // Clone Love Story
+  if (template.loveStory.length > 0) {
+    await prisma.loveStory.createMany({
+      data: template.loveStory.map((s) => ({
+        invitationId: newInvitation.id,
+        title: s.title,
+        description: s.description,
+        date: s.date,
+        imageUrl: s.imageUrl,
+        order: s.order,
+      })),
+    })
+  }
+
+  // Clone Wedding Gifts
+  if (template.weddingGifts.length > 0) {
+    await prisma.weddingGift.createMany({
+      data: template.weddingGifts.map((w) => ({
+        invitationId: newInvitation.id,
+        type: w.type,
+        bankName: w.bankName,
+        accountNumber: w.accountNumber,
+        accountHolder: w.accountHolder,
+        address: w.address,
+        notes: w.notes,
+        order: w.order,
+      })),
+    })
+  }
+
+  return newInvitation
+}

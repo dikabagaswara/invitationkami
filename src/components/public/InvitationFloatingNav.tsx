@@ -55,6 +55,10 @@ export function InvitationFloatingNav({ themeSlug = 'elegant' }: InvitationFloat
     barClass = 'bg-white/95 border-[#EBD7CE] text-[#C85A32] shadow-lg shadow-amber-950/10'
     activeItemClass = 'bg-[#C85A32] text-white shadow-xs'
     inactiveItemClass = 'hover:bg-orange-50 hover:text-[#822B0C]'
+  } else if (themeSlug === 'arcade') {
+    barClass = 'bg-[#0f172a]/95 border-2 border-[#38bdf8] text-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.4)]'
+    activeItemClass = 'bg-gradient-to-r from-[#06b6d4] to-[#ec4899] text-white font-mono font-bold shadow-xs'
+    inactiveItemClass = 'hover:bg-[#1e1b4b] hover:text-white font-mono'
   }
 
   return (

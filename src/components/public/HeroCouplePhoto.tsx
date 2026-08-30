@@ -47,6 +47,9 @@ export function HeroCouplePhoto({
   } else if (themeSlug === 'rustic' || themeSlug === 'vintage') {
     frameGradients = 'from-[#C2AB91] via-[#FFFDF9] to-[#8C6D53] ring-[#D9CBB9]/60 shadow-[#5C3E28]/20'
     heartBadgeColor = 'bg-[#785338] text-[#FAF6F0]'
+  } else if (themeSlug === 'arcade') {
+    frameGradients = 'from-[#06b6d4] via-[#ec4899] to-[#8b5cf6] ring-4 ring-[#06b6d4] shadow-cyan-500/50'
+    heartBadgeColor = 'bg-[#f43f5e] text-white font-mono'
   }
 
   // 1. Arch Variant (Great for Terracotta, Vintage)

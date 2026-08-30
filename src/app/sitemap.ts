@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'floral',
     'minimalist',
     'blossom',
+    'arcade',
   ]
 
   const demoRoutes = demoThemes.map((slug) => ({

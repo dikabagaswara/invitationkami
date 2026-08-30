@@ -11,15 +11,15 @@ async function setupCleanCustomerData() {
   // 1. Ensure customer@invitationkami.com exists
   const customerKami = await prisma.user.upsert({
     where: { email: 'customer@invitationkami.com' },
-    update: { passwordHash, name: 'Budi & Anisa' },
+    update: { passwordHash, name: 'cust' },
     create: {
       email: 'customer@invitationkami.com',
-      name: 'Budi & Anisa',
+      name: 'cust',
       passwordHash,
       role: 'CUSTOMER',
     },
   })
-  console.log(`  ✓ User customer@invitationkami.com (ID: ${customerKami.id})`)
+  console.log(`  ✓ User customer@invitationkami.com (Name: cust, ID: ${customerKami.id})`)
 
   // 2. Ensure admin@invitationkami.com exists
   const admin = await prisma.user.upsert({
