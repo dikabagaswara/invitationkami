@@ -243,6 +243,26 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 12. Blossom Animated: Swaying Floral Petals & Romantic Script (Inspired by nikahin.id)
+  blossom: {
+    bgGradient: 'from-[#FFF0F3] via-[#FFE3E8] to-[#FFCCD5]',
+    isDarkTheme: false,
+    titleColor: 'text-rose-950 font-bold',
+    subColor: 'text-rose-700 font-medium',
+    bottomColor: 'text-rose-900 border-rose-300',
+    badgeBg: 'bg-rose-600 text-white shadow-xs',
+    badgeText: 'text-white font-semibold',
+    icon: Heart,
+    animationElement: (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-6 -left-6 text-4xl animate-bounce duration-[4000ms]">🌸</div>
+        <div className="absolute -bottom-6 -right-6 text-4xl animate-pulse duration-[3000ms]">🌺</div>
+        <div className="absolute top-1/3 right-4 text-2xl opacity-60">✨</div>
+        <div className="absolute inset-0 bg-[radial-gradient(#e11d48_1px,transparent_1px)] opacity-[0.18] [background-size:22px_22px]"></div>
+      </div>
+    ),
+  },
 }
 
 export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {

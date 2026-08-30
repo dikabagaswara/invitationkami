@@ -145,6 +145,19 @@ async function main() {
         { id: 'default', name: 'Cinzel + Plus Jakarta Sans', heading: 'Cinzel', body: 'Plus Jakarta Sans' },
       ],
     },
+    {
+      slug: 'blossom',
+      name: 'Blossom Animated',
+      description: 'Romantic floral blooming wedding with swaying flower animations, falling petal particles, and luxury cursive script.',
+      category: 'romantic',
+      isPremium: true,
+      colorPresets: [
+        { id: 'default', name: 'Blossom Rose & Gold', primary: '#E11D48', background: '#FFF9F9' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Alex Brush + Cormorant', heading: 'Alex Brush', body: 'Cormorant Garamond' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -346,6 +359,16 @@ async function main() {
       brideNick: 'Lyra',
       opening: 'THE WEDDING CELEBRATION',
       coupleCover: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1000&auto=format&fit=crop&q=80',
+    },
+    {
+      slug: 'demo-blossom',
+      themeSlug: 'blossom',
+      groom: 'Widianto Hasbi, S.T.',
+      groomNick: 'Widi',
+      bride: 'Revi Zushan, S.Kom.',
+      brideNick: 'Revi',
+      opening: 'THE WEDDING OF',
+      coupleCover: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop&q=80',
     },
   ]
 

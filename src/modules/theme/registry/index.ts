@@ -9,7 +9,6 @@ export interface ThemeRegistryEntry {
 }
 
 // Registry maps theme slugs to metadata
-// Components will be loaded dynamically via next/dynamic
 export const themeRegistry: Record<string, ThemeRegistryEntry> = {
   elegant: {
     meta: { name: 'Elegant', category: 'classic', description: 'Timeless elegance' },
@@ -25,6 +24,27 @@ export const themeRegistry: Record<string, ThemeRegistryEntry> = {
   },
   minimalist: {
     meta: { name: 'Minimalist', category: 'minimal', description: 'Pure typography-driven' },
+  },
+  oceanic: {
+    meta: { name: 'Oceanic', category: 'nature', description: 'Mediterranean blue glassmorphism' },
+  },
+  terracotta: {
+    meta: { name: 'Terracotta', category: 'nature', description: 'Warm earth tones & arch frames' },
+  },
+  botanical: {
+    meta: { name: 'Botanical', category: 'luxury', description: 'Emerald luxury editorial layout' },
+  },
+  celestial: {
+    meta: { name: 'Celestial', category: 'luxury', description: 'Starry night & cosmic glow' },
+  },
+  rustic: {
+    meta: { name: 'Rustic', category: 'nature', description: 'Warm paper & polaroid photos' },
+  },
+  vintage: {
+    meta: { name: 'Vintage', category: 'classic', description: 'European vintage newspaper' },
+  },
+  blossom: {
+    meta: { name: 'Blossom Animated', category: 'romantic', description: 'Swaying floral animations & falling petals' },
   },
 }
 

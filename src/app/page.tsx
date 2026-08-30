@@ -34,10 +34,16 @@ export default async function HomePage() {
     'modern',
     'floral',
     'minimalist',
+    'blossom',
   ]
 
   // Simple, concise & customer-focused descriptions
   const THEME_DATA_MAP: Record<string, { displayName: string; tagline: string; category: string }> = {
+    blossom: {
+      displayName: 'Blossom Animated',
+      category: 'Romantic',
+      tagline: 'Animasi sudut bunga bergoyang lembut dan kelopak bunga melayang dengan nuansa cinta romantis.',
+    },
     oceanic: {
       displayName: 'Oceanic',
       category: 'Nature',
