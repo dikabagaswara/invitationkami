@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,6 +12,7 @@ export function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -35,9 +36,11 @@ export function LoginForm() {
         return
       }
 
-      // Client-side direct push keeps the current window.location.origin (e.g. Cloudflare tunnel domain)
-      router.push('/dashboard')
-      router.refresh()
+      // Read callbackUrl from query params if available, else default to /dashboard
+      const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
+      
+      // Hard navigation ensures session cookies are fully recognized and refreshed immediately
+      window.location.href = callbackUrl
     } catch (err: unknown) {
       setError('Terjadi kesalahan saat masuk')
       setLoading(false)

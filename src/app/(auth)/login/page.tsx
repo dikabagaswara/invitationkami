@@ -1,9 +1,10 @@
+import { Suspense } from 'react'
 import { LoginForm } from '@/components/auth/login-form'
 import { appConfig } from '@/lib/config'
 import Link from 'next/link'
 
 export const metadata = {
-  title: `Login  ${process.env.APP_NAME ?? 'InvitationKami'}`,
+  title: `Login — ${process.env.APP_NAME ?? 'InvitationKami'}`,
 }
 
 export default function LoginPage() {
@@ -18,7 +19,9 @@ export default function LoginPage() {
           <p className="text-gray-600 mt-1 text-sm">{appConfig.tagline}</p>
           <p className="text-[11px] text-muted-foreground font-sans mt-1">Copyright © 2026 InvitationKami</p>
         </div>
-        <LoginForm />
+        <Suspense fallback={<div className="p-6 text-center text-sm text-stone-400">Memuat formulir masuk...</div>}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   )
