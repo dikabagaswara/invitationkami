@@ -37,10 +37,16 @@ export default async function HomePage() {
     'minimalist',
     'blossom',
     'arcade',
+    'heritage',
   ]
 
   // Simple, concise & customer-focused descriptions
   const THEME_DATA_MAP: Record<string, { displayName: string; tagline: string; category: string }> = {
+    heritage: {
+      displayName: 'Nusantara Heritage Royal',
+      category: 'Tradisional',
+      tagline: 'Kemegahan adat Nusantara bertabur ornamen Gunungan emas, aksen batik keraton, dan tipografi ningrat klasik.',
+    },
     arcade: {
       displayName: '8-Bit Arcade Pixel',
       category: 'Creative',

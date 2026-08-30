@@ -282,6 +282,25 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 14. Nusantara Heritage Royal (Adat Jawa / Tradisional Modern)
+  heritage: {
+    bgGradient: 'from-[#2a1d17] via-[#1c1612] to-[#120e0b]',
+    isDarkTheme: true,
+    titleColor: 'text-[#f9f295] font-serif font-bold tracking-wider',
+    subColor: 'text-[#d4af37] font-serif',
+    bottomColor: 'text-[#e4d5c7] border-[#d4af37]/30',
+    badgeBg: 'bg-[#322720]/90 border border-[#d4af37]/40 shadow-xs backdrop-blur-md',
+    badgeText: 'text-[#f9f295] font-serif font-semibold',
+    icon: Sparkles,
+    animationElement: (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-3 right-3 text-lg opacity-75">⚜️</div>
+        <div className="absolute bottom-3 left-3 text-lg opacity-75">🌾</div>
+        <div className="absolute inset-0 bg-[radial-gradient(#d4af37_1px,transparent_1px)] opacity-[0.2] [background-size:20px_20px]"></div>
+      </div>
+    ),
+  },
 }
 
 export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {

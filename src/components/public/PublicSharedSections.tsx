@@ -99,11 +99,18 @@ export function PublicSharedSections({ data, isDark = false }: { data: ThemeData
       {sectionConfig.rsvp && (
         <section id="rsvp" className="py-16 sm:py-20 px-4 max-w-2xl mx-auto">
           <div className="text-center mb-8 space-y-1">
+            {guestName && (
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 mb-2">
+                Kepada Yth. {guestName}
+              </span>
+            )}
             <h2 className={`text-2xl sm:text-3xl font-serif font-medium tracking-wide ${headingColor}`}>
               Konfirmasi Kehadiran (RSVP)
             </h2>
             <p className={`text-xs sm:text-sm ${subtextColor}`}>
-              Mohon konfirmasikan kehadiran Anda untuk membantu persiapan kami.
+              {guestName
+                ? `Terima kasih Bapak/Ibu/Saudara/i ${guestName}, mohon konfirmasikan kehadiran Anda.`
+                : 'Mohon konfirmasikan kehadiran Anda untuk membantu persiapan kami.'}
             </p>
           </div>
           <RsvpForm 

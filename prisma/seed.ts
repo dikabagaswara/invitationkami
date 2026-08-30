@@ -171,6 +171,19 @@ async function main() {
         { id: 'default', name: 'Press Start 2P + VT323', heading: 'Press Start 2P', body: 'VT323' },
       ],
     },
+    {
+      slug: 'heritage',
+      name: 'Nusantara Heritage Royal',
+      description: 'Kemewahan adat Nusantara dengan ornamen Gunungan emas, aksen batik keraton, dan font klasik ningrat.',
+      category: 'classic',
+      isPremium: true,
+      colorPresets: [
+        { id: 'default', name: 'Royal Gold & Keraton Dark', primary: '#D4AF37', background: '#1C1612' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Cinzel + Cormorant Garamond', heading: 'Cinzel Decorative', body: 'Cormorant Garamond' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -386,6 +399,16 @@ async function main() {
       brideNick: 'Azalia',
       opening: 'STAGE: WEDDING QUEST',
       coupleCover: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1000&auto=format&fit=crop&q=80',
+    },
+    {
+      slug: 'demo-heritage',
+      themeSlug: 'heritage',
+      groom: 'Raden Bagus Dananjaya, S.T.',
+      groomNick: 'Dananjaya',
+      bride: 'Raden Ajeng Sekar Arum, S.S.',
+      brideNick: 'Sekar',
+      opening: 'PAWIWAHAN ADAT NUSANTARA',
+      coupleCover: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop&q=80',
     },
   ]
 

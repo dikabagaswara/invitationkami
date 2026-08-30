@@ -49,6 +49,9 @@ export const themeRegistry: Record<string, ThemeRegistryEntry> = {
   arcade: {
     meta: { name: '8-Bit Arcade Pixel', category: 'creative', description: 'Retro 8-bit game wedding adventure with pixel art UI, HP hearts, quest log, & coin counters' },
   },
+  heritage: {
+    meta: { name: 'Nusantara Heritage Royal', category: 'classic', description: 'Kemewahan adat Nusantara dengan ornamen Gunungan emas, aksen batik keraton, dan font klasik' },
+  },
 }
 
 export function isValidTheme(slug: string): boolean {

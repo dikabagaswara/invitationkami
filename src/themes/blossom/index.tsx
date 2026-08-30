@@ -2,6 +2,8 @@ import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
 import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
+import { GalleryLightbox } from '@/components/public/GalleryLightbox'
+import { FloatingParticles } from '@/components/public/FloatingParticles'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 import { Calendar, MapPin, Heart, Sparkles } from 'lucide-react'
 
@@ -421,7 +423,12 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
       )}
 
       {/* ─────────────────────────────────────────────
-          GALLERY PREWEDDING SECTION
+          FLOATING SAKURA PETALS PARTICLES
+         ───────────────────────────────────────────── */}
+      <FloatingParticles themeSlug="blossom" />
+
+      {/* ─────────────────────────────────────────────
+          GALLERY PREWEDDING SECTION (LIGHTBOX POPUP)
          ───────────────────────────────────────────── */}
       {sectionConfig.gallery && gallery.length > 0 && (
         <section id="gallery" className="py-20 px-6 max-w-5xl mx-auto text-center">
@@ -432,27 +439,15 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
             <h2 className="font-serif-cormorant text-3xl sm:text-5xl text-stone-900 font-normal">
               Momen Bahagia Bersama
             </h2>
+            <p className="text-xs text-stone-500 font-light">Klik foto untuk melihat dalam layar penuh</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {gallery.map((item, idx) => (
-              <div
-                key={item.id || idx}
-                className="rounded-3xl overflow-hidden shadow-md border-4 border-white group aspect-[4/5] bg-rose-50 relative"
-              >
-                <img
-                  src={item.imageUrl}
-                  alt={item.caption || 'Gallery Photo'}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {item.caption && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4 text-white text-xs font-light">
-                    {item.caption}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <GalleryLightbox
+            photos={gallery.map((g) => ({
+              imageUrl: g.imageUrl,
+              caption: g.caption,
+            }))}
+          />
         </section>
       )}
 
