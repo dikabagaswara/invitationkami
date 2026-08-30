@@ -46,10 +46,10 @@ export function MusicPlayer({ musicUrl, isPlaying: initialPlayState }: MusicPlay
   }
 
   return (
-    <div className="fixed bottom-20 left-4 sm:bottom-6 sm:left-6 z-40 flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
+    <div className="fixed bottom-20 left-4 sm:bottom-6 sm:left-6 z-40 flex items-center pointer-events-auto">
       <audio ref={audioRef} src={musicUrl} loop preload="auto" />
       
-      {/* Vinyl Disc Rotating Music Player Button */}
+      {/* Vinyl Disc Rotating Music Player Button (Single Clean Toggle) */}
       <button
         type="button"
         onClick={togglePlay}
@@ -67,20 +67,6 @@ export function MusicPlayer({ musicUrl, isPlaying: initialPlayState }: MusicPlay
         
         {/* Subtle center music dot */}
         <span className={`absolute w-2 h-2 rounded-full ${isPlaying ? 'bg-amber-400 animate-ping' : 'bg-stone-400'}`} />
-      </button>
-
-      {/* Quick Mute Toggle */}
-      <button
-        type="button"
-        onClick={toggleMute}
-        title={isMuted ? 'Nyalakan Suara' : 'Bisukan Suara'}
-        className="w-8 h-8 rounded-full bg-white/80 backdrop-blur-md shadow-md border border-stone-200/80 flex items-center justify-center text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
-      >
-        {isMuted ? (
-          <VolumeX className="w-3.5 h-3.5 text-rose-500" />
-        ) : (
-          <Volume2 className="w-3.5 h-3.5 text-stone-700" />
-        )}
       </button>
     </div>
   )
