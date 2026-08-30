@@ -19,8 +19,12 @@ import {
   CheckCircle2,
   FileEdit,
   Timer,
-  Share2
+  Share2,
+  Copy,
+  Loader2
 } from 'lucide-react'
+import { duplicateInvitationAction } from './actions'
+import { useRouter } from 'next/navigation'
 
 export interface InvitationItemData {
   id: string
@@ -43,8 +47,22 @@ export function InvitationsListClient({
   invitations: InvitationItemData[]
   isAdmin: boolean
 }) {
+  const router = useRouter()
   const [filterStatus, setFilterStatus] = useState<'ALL' | 'LIVE' | 'DRAFT'>('ALL')
   const [searchQuery, setSearchQuery] = useState('')
+  const [duplicatingId, setDuplicatingId] = useState<string | null>(null)
+
+  const handleDuplicate = async (id: string) => {
+    if (duplicatingId) return
+    setDuplicatingId(id)
+    try {
+      const res = await duplicateInvitationAction(id)
+      router.push(`/invitations/${res.id}/couple`)
+    } catch (err: unknown) {
+      console.error(err)
+      setDuplicatingId(null)
+    }
+  }
 
   const filteredInvitations = useMemo(() => {
     return invitations.filter((inv) => {
@@ -274,7 +292,27 @@ export function InvitationsListClient({
                         <Share2 className="w-3.5 h-3.5 mr-1" /> Bagi Undangan
                       </Button>
                     </Link>
-                    <Link href={`/invitations/${inv.id}/settings`} className="flex-1">
+                    {!inv.slug.startsWith('demo-') && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDuplicate(inv.id)}
+                        disabled={duplicatingId === inv.id}
+                        className="flex-1 text-xs text-amber-800 border-amber-200 hover:bg-amber-50"
+                      >
+                        {duplicatingId === inv.id ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 mr-1 animate-spin" /> Duplikasi...
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5 mr-1" /> Duplikat
+                          </>
+                        )}
+                      </Button>
+                    )}
+                    <Link href={`/invitations/${inv.id}/settings`} className={inv.slug.startsWith('demo-') ? "flex-1" : "flex-initial"}>
                       <Button variant="ghost" size="sm" className="w-full text-xs text-muted-foreground hover:text-foreground">
                         <Settings className="w-3.5 h-3.5 mr-1" /> Pengaturan
                       </Button>

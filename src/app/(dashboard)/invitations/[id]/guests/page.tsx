@@ -8,6 +8,8 @@ import { Label } from '@/components/ui/label'
 import { revalidatePath } from 'next/cache'
 import { Trash2, UserPlus, Phone } from 'lucide-react'
 
+import { ExportGuestsButton } from './ExportGuestsButton'
+
 export default async function GuestsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const user = await requireAuth()
@@ -101,8 +103,20 @@ export default async function GuestsPage({ params }: { params: Promise<{ id: str
       </Card>
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Daftar Tamu</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-base">Daftar Tamu ({guests.length})</CardTitle>
+          <ExportGuestsButton
+            guests={guests.map(g => ({
+              id: g.id,
+              name: g.name,
+              phone: g.phone,
+              rsvpStatus: g.rsvpStatus,
+              attendance: g.attendance,
+              rsvpAt: g.rsvpAt ? g.rsvpAt.toISOString() : null,
+              createdAt: g.createdAt.toISOString(),
+            }))}
+            weddingTitle={`${invitation.groomName} & ${invitation.brideName}`}
+          />
         </CardHeader>
         <CardContent>
           {guests.length === 0 ? (

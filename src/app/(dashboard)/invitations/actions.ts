@@ -156,3 +156,30 @@ export async function deleteGiftAction(invitationId: string, giftId: string) {
   return result
 }
 
+export async function duplicateInvitationAction(invitationId: string) {
+  const user = await requireAuth()
+  const source = await prisma.invitation.findUnique({
+    where: { id: invitationId },
+  })
+
+  if (!source) throw new Error('Invitation not found')
+  if (user.role !== 'SUPER_ADMIN' && source.userId !== user.id) {
+    throw new Error('Unauthorized to clone this invitation')
+  }
+
+  // Create unique clone slug
+  const timestamp = Date.now().toString().slice(-4)
+  const cloneSlug = `${source.slug}-copy-${timestamp}`
+
+  const cloned = await invitationService.cloneInvitationFromTemplate(user.id, source.slug, {
+    slug: cloneSlug,
+    groomName: source.groomName,
+    brideName: source.brideName,
+  })
+
+  revalidatePath('/invitations')
+  revalidatePath('/dashboard')
+  return { id: cloned.id, slug: cloned.slug }
+}
+
+
