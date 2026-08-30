@@ -7,9 +7,17 @@ interface RsvpFormProps {
   slug: string
   className?: string
   isDark?: boolean
+  customInputClass?: string
+  customBtnClass?: string
 }
 
-export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps) {
+export function RsvpForm({ 
+  slug, 
+  className = '', 
+  isDark = false,
+  customInputClass = '',
+  customBtnClass = ''
+}: RsvpFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
@@ -50,19 +58,23 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
     }
   }
 
-  const inputClasses = isDark
+  const defaultInputClass = isDark
     ? "w-full px-4 py-2.5 bg-[#171719] border border-[#c5a880]/30 rounded-lg text-stone-100 placeholder:text-stone-500 focus:ring-1 focus:ring-[#c5a880] focus:border-[#c5a880] text-sm"
-    : "w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent text-sm"
+    : "w-full px-4 py-2.5 border border-stone-300 rounded-lg focus:ring-2 focus:ring-stone-800 text-stone-900 text-sm bg-white"
+
+  const inputClasses = customInputClass 
+    ? `w-full px-4 py-2.5 rounded-lg text-sm transition-colors ${customInputClass}`
+    : defaultInputClass
 
   const labelClasses = isDark
-    ? "block text-xs tracking-wider font-medium text-[#c5a880] mb-1.5"
-    : "block text-sm font-medium text-gray-700 mb-1"
+    ? "block text-xs tracking-wider font-medium text-stone-300 mb-1.5"
+    : "block text-xs tracking-wider font-semibold text-stone-700 mb-1.5 uppercase"
 
   if (success) {
     return (
-      <div className={`p-6 text-center rounded-lg ${isDark ? 'bg-[#142316] border border-emerald-500/30 text-emerald-300' : 'bg-green-50 text-green-800'} ${className}`}>
-        <h3 className="text-lg font-medium mb-1">Terima Kasih!</h3>
-        <p className="text-xs opacity-90">Konfirmasi kehadiran Anda telah berhasil dikirim.</p>
+      <div className={`p-6 text-center rounded-xl ${isDark ? 'bg-emerald-950/70 border border-emerald-500/30 text-emerald-300' : 'bg-emerald-50 border border-emerald-200 text-emerald-800'} ${className}`}>
+        <h3 className="text-base font-semibold mb-1">Terima Kasih! 🎉</h3>
+        <p className="text-xs opacity-90">Konfirmasi kehadiran Anda telah berhasil tersimpan dalam daftar tamu.</p>
       </div>
     )
   }
@@ -70,7 +82,7 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
   return (
     <form onSubmit={handleSubmit} className={`space-y-4 ${className}`}>
       {error && (
-        <div className={`p-3 rounded-md text-sm ${isDark ? 'bg-red-950/60 border border-red-800 text-red-300' : 'bg-red-50 text-red-700'}`}>
+        <div className={`p-3 rounded-lg text-xs ${isDark ? 'bg-red-950/60 border border-red-800 text-red-300' : 'bg-red-50 border border-red-200 text-red-700'}`}>
           {error}
         </div>
       )}
@@ -83,17 +95,20 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
       <div>
         <label htmlFor="attendance" className={labelClasses}>Jumlah Kehadiran</label>
         <select id="attendance" name="attendance" className={inputClasses}>
-          <option value="1" className={isDark ? "bg-[#171719] text-white" : ""}>1 Orang</option>
-          <option value="2" className={isDark ? "bg-[#171719] text-white" : ""}>2 Orang</option>
+          <option value="1">1 Orang</option>
+          <option value="2">2 Orang</option>
+          <option value="3">3 Orang</option>
+          <option value="4">4 Orang</option>
+          <option value="5">5+ Orang (Rombongan)</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="rsvpStatus" className={labelClasses}>Konfirmasi Kehadiran</label>
         <select id="rsvpStatus" name="rsvpStatus" required className={inputClasses}>
-          <option value="ATTENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Hadir</option>
-          <option value="NOT_ATTENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Tidak Hadir</option>
-          <option value="PENDING" className={isDark ? "bg-[#171719] text-white" : ""}>Masih Ragu</option>
+          <option value="ATTENDING">🟢 Hadir</option>
+          <option value="NOT_ATTENDING">🔴 Tidak Hadir</option>
+          <option value="PENDING">🟡 Masih Ragu</option>
         </select>
       </div>
 
@@ -101,12 +116,14 @@ export function RsvpForm({ slug, className = '', isDark = false }: RsvpFormProps
         type="submit"
         disabled={isSubmitting}
         className={
-          isDark
-            ? "w-full py-3 bg-[#c5a880] text-black font-medium tracking-wider text-xs rounded-lg hover:bg-[#d6ba94] transition-colors disabled:opacity-50 shadow-sm cursor-pointer"
-            : "w-full py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors disabled:opacity-50 text-sm cursor-pointer"
+          customBtnClass
+            ? `w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 disabled:opacity-50 cursor-pointer ${customBtnClass}`
+            : isDark
+            ? "w-full py-3 bg-[#c5a880] text-black font-medium tracking-wider text-xs rounded-xl hover:bg-[#d6ba94] transition-colors disabled:opacity-50 shadow-sm cursor-pointer"
+            : "w-full py-3 bg-stone-900 text-white rounded-xl hover:bg-stone-800 transition-colors disabled:opacity-50 text-sm font-medium cursor-pointer shadow-xs"
         }
       >
-        {isSubmitting ? 'Mengirim...' : 'Kirim Konfirmasi'}
+        {isSubmitting ? 'Mengirim...' : 'Kirim Konfirmasi Kehadiran'}
       </button>
     </form>
   )

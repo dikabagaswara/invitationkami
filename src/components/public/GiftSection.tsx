@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Copy, Check, CreditCard, MapPin } from 'lucide-react'
 
 interface WeddingGift {
   id: string
@@ -16,15 +17,23 @@ interface GiftSectionProps {
   gifts: WeddingGift[]
   className?: string
   isDark?: boolean
+  cardBgClass?: string
+  btnClass?: string
 }
 
-export function GiftSection({ gifts, className = '', isDark = false }: GiftSectionProps) {
+export function GiftSection({ 
+  gifts, 
+  className = '', 
+  isDark = false,
+  cardBgClass = '',
+  btnClass = ''
+}: GiftSectionProps) {
   const [copiedId, setCopiedId] = useState<string | null>(null)
 
   const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text)
     setCopiedId(id)
-    setTimeout(() => setCopiedId(null), 2000)
+    setTimeout(() => setCopiedId(null), 2500)
   }
 
   if (!gifts || gifts.length === 0) return null
@@ -35,53 +44,100 @@ export function GiftSection({ gifts, className = '', isDark = false }: GiftSecti
         <div 
           key={gift.id} 
           className={
-            isDark
-              ? "bg-[#141414] p-6 rounded-2xl border border-[#d4af37]/30 shadow-xl text-center text-stone-200"
-              : "bg-white/80 backdrop-blur p-6 rounded-xl border border-gray-100 shadow-sm text-center"
+            cardBgClass
+              ? `p-6 rounded-2xl border backdrop-blur-md text-center transition-all ${cardBgClass}`
+              : isDark
+              ? "bg-[#141414] p-6 rounded-2xl border border-[#c5a880]/30 shadow-xl text-center text-stone-200"
+              : "bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-stone-200 shadow-sm text-center"
           }
         >
           {gift.type === 'BANK_TRANSFER' || gift.type === 'EWALLET' ? (
-            <>
-              <p className={`font-semibold mb-1 ${isDark ? 'text-[#c5a880] tracking-wider text-xs' : 'text-gray-900'}`}>
-                {gift.bankName}
-              </p>
-              <p className={`text-xl tracking-wider mb-2 font-mono ${isDark ? 'text-white font-bold' : 'text-gray-700'}`}>
-                {gift.accountNumber}
-              </p>
-              <p className={`text-sm mb-4 ${isDark ? 'text-stone-400' : 'text-gray-500'}`}>
-                a.n {gift.accountHolder}
-              </p>
-              <button
-                onClick={() => handleCopy(gift.accountNumber || '', gift.id)}
-                className={
-                  isDark
-                    ? "px-5 py-2 bg-[#1f1f22] border border-[#c5a880]/40 hover:bg-[#c5a880] hover:text-black text-[#c5a880] text-xs font-medium tracking-wider rounded-lg transition-colors cursor-pointer"
-                    : "px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-md transition-colors cursor-pointer"
-                }
-              >
-                {copiedId === gift.id ? 'Tersalin!' : 'Salin No. Rekening'}
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="mb-4">
-                <svg className={`w-6 h-6 mx-auto mb-2 ${isDark ? 'text-[#c5a880]' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <p className={`font-medium mb-2 ${isDark ? 'text-[#c5a880]' : 'text-gray-900'}`}>Alamat Pengiriman</p>
-                <p className={`text-sm leading-relaxed ${isDark ? 'text-stone-300' : 'text-gray-600'}`}>{gift.address}</p>
+            <div className="space-y-3">
+              <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-xs font-semibold uppercase tracking-wider">
+                <CreditCard className="w-3.5 h-3.5" />
+                <span>{gift.bankName || 'Transfer Bank'}</span>
               </div>
-              <button
-                onClick={() => handleCopy(gift.address || '', gift.id)}
-                className={
-                  isDark
-                    ? "px-5 py-2 bg-[#1f1f22] border border-[#c5a880]/40 hover:bg-[#c5a880] hover:text-black text-[#c5a880] text-xs font-medium tracking-wider rounded-lg transition-colors cursor-pointer"
-                    : "px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-md transition-colors cursor-pointer"
-                }
-              >
-                {copiedId === gift.id ? 'Tersalin!' : 'Salin Alamat'}
-              </button>
-            </>
+              
+              <div>
+                <p className="text-xl sm:text-2xl tracking-widest font-mono font-bold my-1">
+                  {gift.accountNumber}
+                </p>
+                <p className="text-xs sm:text-sm opacity-75">
+                  a.n <span className="font-semibold">{gift.accountHolder}</span>
+                </p>
+              </div>
+
+              {gift.notes && (
+                <p className="text-xs opacity-60 italic">{gift.notes}</p>
+              )}
+
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => handleCopy(gift.accountNumber || '', gift.id)}
+                  className={
+                    btnClass
+                      ? `inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-300 cursor-pointer shadow-xs ${btnClass}`
+                      : isDark
+                      ? "inline-flex items-center justify-center gap-2 px-5 py-2 bg-[#c5a880] text-black text-xs font-semibold tracking-wider rounded-xl hover:bg-[#d6ba94] transition-colors shadow-sm cursor-pointer"
+                      : "inline-flex items-center justify-center gap-2 px-5 py-2 bg-stone-900 text-white text-xs font-semibold rounded-xl hover:bg-stone-800 transition-colors shadow-xs cursor-pointer"
+                  }
+                >
+                  {copiedId === gift.id ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Nomor Rekening Tersalin!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Salin Nomor Rekening</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5" />
+                <span>Alamat Pengiriman Kado</span>
+              </div>
+              
+              <p className="text-xs sm:text-sm leading-relaxed max-w-md mx-auto opacity-90 px-4">
+                {gift.address}
+              </p>
+
+              {gift.notes && (
+                <p className="text-xs opacity-60 italic">{gift.notes}</p>
+              )}
+
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => handleCopy(gift.address || '', gift.id)}
+                  className={
+                    btnClass
+                      ? `inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold transition-all duration-300 cursor-pointer shadow-xs ${btnClass}`
+                      : isDark
+                      ? "inline-flex items-center justify-center gap-2 px-5 py-2 bg-[#c5a880] text-black text-xs font-semibold tracking-wider rounded-xl hover:bg-[#d6ba94] transition-colors shadow-sm cursor-pointer"
+                      : "inline-flex items-center justify-center gap-2 px-5 py-2 bg-stone-900 text-white text-xs font-semibold rounded-xl hover:bg-stone-800 transition-colors shadow-xs cursor-pointer"
+                  }
+                >
+                  {copiedId === gift.id ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Alamat Tersalin!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Salin Alamat Lengkap</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
           )}
         </div>
       ))}
