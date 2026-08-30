@@ -10,6 +10,7 @@ const loginSchema = z.object({
 })
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   providers: [
     Credentials({
       credentials: {
@@ -77,6 +78,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.role = token.role as string
       }
       return session
+    },
+    redirect({ url, baseUrl }) {
+      // Allows relative callback URLs and dynamic host/tunnel URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      if (new URL(url).origin === baseUrl) return url
+      return baseUrl
     },
   },
   pages: {
