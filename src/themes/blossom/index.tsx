@@ -437,13 +437,6 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
           SHARED SECTIONS (AMPLOP DIGITAL, RSVP, BUKU TAMU)
          ───────────────────────────────────────────── */}
       <PublicSharedSections data={data} isDark={false} />
-
-      {/* ─────────────────────────────────────────────
-          THEME FOOTER
-         ───────────────────────────────────────────── */}
-      <footer className="py-12 text-center text-xs text-rose-400 font-light border-t border-rose-100 bg-[#FFF3F3]">
-        <p>Made with love • InvitationKami</p>
-      </footer>
     </div>
   )
 }
