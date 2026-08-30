@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { updateBasicInfoAction, deleteInvitationAction } from '../../actions'
+import { updateBasicInfoAction, deleteInvitationAction, duplicateInvitationAction } from '../../actions'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -133,6 +133,40 @@ export default function SettingsManager({
               Simpan Pengaturan
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Duplicate Invitation Section */}
+      <Card className="border-amber-200/80 bg-amber-50/30">
+        <CardHeader>
+          <CardTitle className="text-base flex items-center gap-2 text-amber-900">
+            <Copy className="h-4 w-4 text-amber-700" /> Duplikasi Undangan Ini
+          </CardTitle>
+          <CardDescription className="text-amber-800/80">
+            Salin seluruh susunan acara, galeri, cerita cinta, amplop kado, dan desain tema ini ke undangan baru. Sangat berguna untuk membedakan sesi Akad dan Resepsi.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              startTransition(async () => {
+                try {
+                  const res = await duplicateInvitationAction(invitationId)
+                  toast.success("Undangan berhasil diduplikasi!")
+                  router.push(`/invitations/${res.id}/couple`)
+                } catch {
+                  toast.error("Gagal menduplikasi undangan.")
+                }
+              })
+            }}
+            disabled={isPending}
+            className="text-xs sm:text-sm text-amber-900 border-amber-300 hover:bg-amber-100/70"
+          >
+            {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Copy className="mr-2 h-4 w-4" />}
+            Duplikat ke Undangan Baru
+          </Button>
         </CardContent>
       </Card>
 

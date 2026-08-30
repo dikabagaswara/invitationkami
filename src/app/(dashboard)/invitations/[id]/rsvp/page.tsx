@@ -10,6 +10,7 @@ import { Trash2, UserPlus, Phone, Users, CheckCircle, XCircle, HelpCircle } from
 import { GuestLinkGenerator } from './GuestLinkGenerator'
 import { DeleteGuestButton } from './DeleteGuestButton'
 import { appConfig } from '@/lib/config'
+import { ExportGuestsButton } from '../guests/ExportGuestsButton'
 
 export default async function RsvpPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -164,8 +165,20 @@ export default async function RsvpPage({ params }: { params: Promise<{ id: strin
 
       {/* Guest Table */}
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Daftar Tamu & Link Khusus</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-base">Daftar Tamu &amp; Link Khusus ({guests.length})</CardTitle>
+          <ExportGuestsButton
+            guests={guests.map(g => ({
+              id: g.id,
+              name: g.name,
+              phone: g.phone,
+              rsvpStatus: g.rsvpStatus,
+              attendance: g.attendance,
+              rsvpAt: g.rsvpAt ? g.rsvpAt.toISOString() : null,
+              createdAt: g.createdAt.toISOString(),
+            }))}
+            weddingTitle={`${invitation.groomName} & ${invitation.brideName}`}
+          />
         </CardHeader>
         <CardContent>
           {guests.length === 0 ? (

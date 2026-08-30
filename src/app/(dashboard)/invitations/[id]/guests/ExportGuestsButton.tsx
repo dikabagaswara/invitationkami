@@ -63,16 +63,14 @@ export function ExportGuestsButton({
     }
   }
 
-  if (guests.length === 0) return null
-
   return (
     <Button
       type="button"
       variant="outline"
       size="sm"
       onClick={exportToCSV}
-      disabled={isExporting}
-      className="text-xs text-emerald-700 border-emerald-300 hover:bg-emerald-50 shadow-xs"
+      disabled={isExporting || guests.length === 0}
+      className="text-xs text-emerald-700 border-emerald-300 hover:bg-emerald-50 shadow-xs disabled:opacity-50"
     >
       <FileSpreadsheet className="w-3.5 h-3.5 mr-1.5 text-emerald-600" />
       <span>{isExporting ? 'Mengekspor...' : 'Export Excel / CSV'}</span>
