@@ -205,28 +205,28 @@ async function main() {
   const bcrypt = await import('bcryptjs')
   const passwordHash = await bcrypt.default.hash('Password123!', 12)
 
-  // Demo Customer (customer@gmail.com requested by user)
+  // Demo Customer (customer@invitationkami.com)
   const customer = await prisma.user.upsert({
-    where: { email: 'customer@gmail.com' },
+    where: { email: 'customer@invitationkami.com' },
     update: {
       passwordHash,
     },
     create: {
-      email: 'customer@gmail.com',
-      name: 'Dika Bagaswara & Nurdi',
+      email: 'customer@invitationkami.com',
+      name: 'Budi Santoso',
       passwordHash,
       role: 'CUSTOMER',
     },
   })
   console.log(`  ✓ Customer user: ${customer.email}`)
 
-  // Fallback demo customer
+  // Customer Gmail (customer@gmail.com)
   await prisma.user.upsert({
-    where: { email: 'customer@invitationkami.com' },
+    where: { email: 'customer@gmail.com' },
     update: { passwordHash },
     create: {
-      email: 'customer@invitationkami.com',
-      name: 'Budi Santoso',
+      email: 'customer@gmail.com',
+      name: 'Dika Bagaswara & Nurdi',
       passwordHash,
       role: 'CUSTOMER',
     },
@@ -388,6 +388,7 @@ async function main() {
       await prisma.invitation.update({
         where: { id: existingInv.id },
         data: {
+          userId: customer.id,
           themeId: matchedTheme.id,
           musicId: firstMusic?.id,
           openingTitle: demo.opening,
