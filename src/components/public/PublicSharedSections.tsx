@@ -143,10 +143,10 @@ export function PublicSharedSections({ data, isDark = false }: { data: ThemeData
         <section id="gift" className="py-16 sm:py-20 px-4 max-w-2xl mx-auto">
           <div className="text-center mb-8 space-y-1">
             <h2 className={`text-2xl sm:text-3xl font-serif font-medium tracking-wide ${headingColor}`}>
-              Tanda Kasih (Wedding Gift)
+              Wedding Gift
             </h2>
             <p className={`text-xs sm:text-sm max-w-md mx-auto leading-relaxed ${subtextColor}`}>
-              Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Apabila Anda bermaksud memberikan tanda kasih, dapat melalui:
+              Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika Anda ingin mengirimkan hadiah, dapat melalui:
             </p>
           </div>
           <GiftSection 
