@@ -79,6 +79,10 @@ model Invitation {
   brideMother   String?
   bridePhoto    String?
 
+  // Couple Photos (Cover / Opening Overlay & Hero Section)
+  coverPhoto String? // Foto berdua sebelum buka undangan (Opening Overlay)
+  heroPhoto  String? // Foto berdua setelah buka undangan (Hero Section)
+
   // Appearance
   themeId            String
   theme              Theme              @relation(fields: [themeId], references: [id])

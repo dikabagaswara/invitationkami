@@ -34,6 +34,8 @@ export default function CoupleForm({
       brideFather: formData.get('brideFather') as string,
       brideMother: formData.get('brideMother') as string,
       bridePhoto: formData.get('bridePhoto') as string,
+      coverPhoto: formData.get('coverPhoto') as string,
+      heroPhoto: formData.get('heroPhoto') as string,
       openingTitle: formData.get('openingTitle') as string,
       openingText: formData.get('openingText') as string,
       quote: formData.get('quote') as string,
@@ -110,6 +112,51 @@ export default function CoupleForm({
           </CardContent>
         </Card>
       </div>
+
+      {/* ─── FOTO BERDUA / COUPLE FEATURE PHOTOS (CRUD) ─── */}
+      <Card className="border-rose-200/80 bg-rose-50/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-rose-900 text-lg">
+            <span>📸 Foto Berdua Kedua Mempelai (Cover &amp; Hero)</span>
+          </CardTitle>
+          <p className="text-xs text-muted-foreground">
+            Atur foto berdua yang ditampilkan pada halaman awal sebelum membuka undangan dan section utama setelah undangan dibuka.
+          </p>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="coverPhoto" className="font-semibold text-stone-800">
+                1. Foto Cover (Sebelum Buka Undangan / Opening Overlay)
+              </Label>
+              <Input 
+                id="coverPhoto"
+                name="coverPhoto" 
+                defaultValue={defaultValues.coverPhoto || ''} 
+                placeholder="https://images.unsplash.com/... atau /uploads/..." 
+              />
+              <p className="text-[11px] text-muted-foreground">
+                Tampil di tengah bingkai lingkaran bercahaya saat tamu pertama kali menerima link.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="heroPhoto" className="font-semibold text-stone-800">
+                2. Foto Hero (Setelah Buka Undangan / Section Utama)
+              </Label>
+              <Input 
+                id="heroPhoto"
+                name="heroPhoto" 
+                defaultValue={defaultValues.heroPhoto || ''} 
+                placeholder="https://images.unsplash.com/... atau /uploads/..." 
+              />
+              <p className="text-[11px] text-muted-foreground">
+                Tampil di section awal begitu undangan dibuka dengan bingkai estetik.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>

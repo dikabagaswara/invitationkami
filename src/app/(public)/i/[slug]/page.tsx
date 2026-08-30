@@ -90,6 +90,8 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
       brideFather: invitation.brideFather,
       brideMother: invitation.brideMother,
       bridePhoto: invitation.bridePhoto,
+      coverPhoto: invitation.coverPhoto,
+      heroPhoto: invitation.heroPhoto,
       openingTitle: invitation.openingTitle,
       openingText: invitation.openingText,
       quote: invitation.quote,
@@ -159,6 +161,9 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   }) : undefined
 
+  // Priority: explicit coverPhoto -> heroPhoto -> first gallery image -> groomPhoto -> bridePhoto
+  const preOpeningPhoto = invitation.coverPhoto || invitation.heroPhoto || invitation.gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || undefined
+
   return (
     <PublicInvitationWrapper
       groomName={invitation.groomName}
@@ -168,7 +173,7 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
       eventDate={eventDate}
       musicUrl={invitation.music?.fileUrl}
       themeSlug={themeSlug}
-      coverPhoto={invitation.gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto || undefined}
+      coverPhoto={preOpeningPhoto}
     >
       <ThemeComponent data={themeData} />
     </PublicInvitationWrapper>

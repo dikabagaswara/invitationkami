@@ -96,6 +96,8 @@ export interface ThemeData {
     brideFather?: string | null
     brideMother?: string | null
     bridePhoto?: string | null
+    coverPhoto?: string | null
+    heroPhoto?: string | null
     openingTitle?: string | null
     openingText?: string | null
     quote?: string | null

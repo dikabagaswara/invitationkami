@@ -6,7 +6,7 @@ import { ThemeData } from '@/modules/theme/types/theme-data'
 export default function ElegantTheme({ data }: { data: ThemeData }) {
   const { invitation, events, gallery, loveStory, weddingGifts } = data
   const { sectionConfig } = invitation
-  const couplePhoto = gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
+  const couplePhoto = invitation.heroPhoto || invitation.coverPhoto || gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
 
   return (
     <div className="font-serif bg-amber-50 text-stone-800 min-h-screen">

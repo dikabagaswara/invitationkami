@@ -1,4 +1,4 @@
-﻿import { z } from 'zod'
+import { z } from 'zod'
 
 export const updateBasicInfoSchema = z.object({
   slug: z.string().min(3).max(50),
@@ -16,6 +16,8 @@ export const updateCoupleSchema = z.object({
   brideFather: z.string().optional(),
   brideMother: z.string().optional(),
   bridePhoto: z.string().optional(),
+  coverPhoto: z.string().optional(),
+  heroPhoto: z.string().optional(),
   openingTitle: z.string().optional(),
   openingText: z.string().optional(),
   quote: z.string().optional(),

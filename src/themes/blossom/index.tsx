@@ -10,7 +10,7 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
 
   const primaryEvent = events[0]
   const receptionEvent = events[1] || events[0]
-  const couplePhoto = gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
+  const couplePhoto = invitation.heroPhoto || invitation.coverPhoto || gallery[0]?.imageUrl || invitation.groomPhoto || invitation.bridePhoto
 
   return (
     <div className="relative min-h-screen bg-[#FFF9F9] text-stone-800 font-sans selection:bg-rose-100 overflow-x-hidden">

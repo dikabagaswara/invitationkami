@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function setupCleanCustomerData() {
-  console.log('🔄 Cleaning & assigning correct demo ownership, deleting dika-dan-nurdi and establishing bagas-anggra...')
+  console.log('🔄 Cleaning non-demo invitations and ensuring ONLY demo-* invitations exist...')
 
   const bcrypt = await import('bcryptjs')
   const passwordHash = await bcrypt.default.hash('Password123!', 12)
@@ -34,19 +34,19 @@ async function setupCleanCustomerData() {
   })
   console.log(`  ✓ User admin@invitationkami.com`)
 
-  // 3. Permanently remove 'dika-dan-nurdi' invitation
-  const deletedDika = await prisma.invitation.deleteMany({
-    where: { slug: 'dika-dan-nurdi' },
+  // 3. Delete ANY invitation whose slug does NOT start with 'demo-'
+  const deletedNonDemo = await prisma.invitation.deleteMany({
+    where: {
+      slug: {
+        not: {
+          startsWith: 'demo-',
+        },
+      },
+    },
   })
-  console.log(`  ✓ Permanently deleted ${deletedDika.count} 'dika-dan-nurdi' invitation(s)`)
+  console.log(`  ✓ Successfully deleted ${deletedNonDemo.count} non-demo invitation(s) (including test/sample slugs)`)
 
-  // 4. Permanently delete legacy customer@gmail.com
-  const deleted = await prisma.user.deleteMany({
-    where: { email: 'customer@gmail.com' },
-  })
-  console.log(`  ✓ Removed ${deleted.count} legacy customer@gmail.com user(s)`)
-
-  // 5. Update demo-oceanic to Bagas & Anggra
+  // 4. Update demo-oceanic to Bagas & Anggra
   const oceanicTheme = await prisma.theme.findFirst({ where: { slug: 'oceanic' } })
   const firstMusic = await prisma.music.findFirst({ where: { isActive: true } })
 
@@ -59,6 +59,8 @@ async function setupCleanCustomerData() {
         groomFullName: 'Bagas Pratama, S.T.',
         brideName: 'Anggra',
         brideFullName: 'Anggraini Putri, S.Kom.',
+        coverPhoto: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&auto=format&fit=crop&q=80',
+        heroPhoto: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&auto=format&fit=crop&q=80',
       },
       create: {
         userId: customerKami.id,
@@ -71,61 +73,14 @@ async function setupCleanCustomerData() {
         brideName: 'Anggra',
         brideFullName: 'Anggraini Putri, S.Kom.',
         openingTitle: 'THE WEDDING CELEBRATION',
+        coverPhoto: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&auto=format&fit=crop&q=80',
+        heroPhoto: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&auto=format&fit=crop&q=80',
       },
     })
-    console.log(`  ✓ Updated demo-oceanic to Bagas & Anggra`)
+    console.log(`  ✓ Updated demo-oceanic to Bagas & Anggra with coverPhoto and heroPhoto`)
   }
 
-  // 6. Create or update permanent invitation 'bagas-anggra'
-  if (oceanicTheme) {
-    await prisma.invitation.upsert({
-      where: { slug: 'bagas-anggra' },
-      update: {
-        userId: customerKami.id,
-        themeId: oceanicTheme.id,
-        musicId: firstMusic?.id,
-        isPublished: true,
-        groomName: 'Bagas',
-        groomFullName: 'Bagas Pratama, S.T.',
-        groomFather: 'Bapak Hendra Pratama',
-        groomMother: 'Ibu Ratna Dewi',
-        groomPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
-        brideName: 'Anggra',
-        brideFullName: 'Anggraini Putri, S.Kom.',
-        brideFather: 'Bapak Joko Santoso',
-        brideMother: 'Ibu Sri Wahyuni',
-        bridePhoto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80',
-        openingTitle: 'THE WEDDING CELEBRATION',
-        openingText: 'Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam pernikahan kami.',
-        quote: 'Dan di antara tanda-tanda kebesaran-Nya diciptakan-Nya pasangan-pasangan untukmu agar kamu merasa tenteram bersamanya.',
-        quoteSource: 'QS. Ar-Rum: 21',
-      },
-      create: {
-        userId: customerKami.id,
-        slug: 'bagas-anggra',
-        themeId: oceanicTheme.id,
-        musicId: firstMusic?.id,
-        isPublished: true,
-        groomName: 'Bagas',
-        groomFullName: 'Bagas Pratama, S.T.',
-        groomFather: 'Bapak Hendra Pratama',
-        groomMother: 'Ibu Ratna Dewi',
-        groomPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
-        brideName: 'Anggra',
-        brideFullName: 'Anggraini Putri, S.Kom.',
-        brideFather: 'Bapak Joko Santoso',
-        brideMother: 'Ibu Sri Wahyuni',
-        bridePhoto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80',
-        openingTitle: 'THE WEDDING CELEBRATION',
-        openingText: 'Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam pernikahan kami.',
-        quote: 'Dan di antara tanda-tanda kebesaran-Nya diciptakan-Nya pasangan-pasangan untukmu agar kamu merasa tenteram bersamanya.',
-        quoteSource: 'QS. Ar-Rum: 21',
-      },
-    })
-    console.log(`  ✓ Permanent invitation /i/bagas-anggra created & active!`)
-  }
-
-  // 7. Update all demo-* invitations to belong to customer@invitationkami.com
+  // 5. Update all demo-* invitations to belong to customer@invitationkami.com and ensure default couple cover
   const updateResult = await prisma.invitation.updateMany({
     where: {
       slug: { startsWith: 'demo-' },
@@ -134,9 +89,20 @@ async function setupCleanCustomerData() {
       userId: customerKami.id,
     },
   })
-  console.log(`  ✓ Assigned ${updateResult.count} demo invitations to customer@invitationkami.com`)
+  console.log(`  ✓ Assigned all ${updateResult.count} demo invitations exclusively to customer@invitationkami.com`)
 
-  console.log('\n🎉 Selesai! dika-dan-nurdi terhapus permanen dan bagas-anggra telah aktif sempurna.')
+  // 6. List all remaining invitations in the database for verification
+  const remainingInvitations = await prisma.invitation.findMany({
+    select: { slug: true, groomName: true, brideName: true, userId: true },
+    orderBy: { slug: 'asc' },
+  })
+
+  console.log(`\n📋 Status Database Saat Ini (${remainingInvitations.length} total demo):`)
+  remainingInvitations.forEach((inv, i) => {
+    console.log(`  ${i + 1}. /i/${inv.slug} (${inv.groomName} & ${inv.brideName})`)
+  })
+
+  console.log('\n🎉 Selesai! Semua undangan selain demo-* berhasil dihapus secara bersih.')
 }
 
 setupCleanCustomerData()
