@@ -220,16 +220,9 @@ async function main() {
   })
   console.log(`  ✓ Customer user: ${customer.email}`)
 
-  // Customer Gmail (customer@gmail.com)
-  await prisma.user.upsert({
+  // Delete legacy customer@gmail.com if exists
+  await prisma.user.deleteMany({
     where: { email: 'customer@gmail.com' },
-    update: { passwordHash },
-    create: {
-      email: 'customer@gmail.com',
-      name: 'Dika Bagaswara & Nurdi',
-      passwordHash,
-      role: 'CUSTOMER',
-    },
   })
 
   // Demo Admin
