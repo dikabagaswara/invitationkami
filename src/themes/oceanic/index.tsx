@@ -3,6 +3,7 @@
 import { ThemeData } from '@/modules/theme/types/theme-data'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { MapPin, Calendar, Clock, Waves, Sparkles, Heart, Compass } from 'lucide-react'
 
 export default function OceanicTheme({ data }: { data: ThemeData }) {
@@ -228,17 +229,30 @@ export default function OceanicTheme({ data }: { data: ThemeData }) {
                     </div>
                   </div>
 
-                  {evt.mapUrl && (
-                    <a
-                      href={evt.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative z-10 mt-4 inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0077B6] to-[#023E8A] hover:from-[#023E8A] hover:to-[#03045E] text-white text-xs font-semibold uppercase tracking-wider shadow-md shadow-[#0077B6]/25 transition-all active:scale-[0.99]"
-                    >
-                      <Compass className="w-4 h-4" />
-                      <span>Petunjuk Lokasi (Google Maps)</span>
-                    </a>
-                  )}
+                  <div className="relative z-10 mt-4 flex flex-col gap-2">
+                    <AddToCalendarButton
+                      title={`${evt.title} - ${invitation.groomName} & ${invitation.brideName}`}
+                      description={`Pernikahan ${invitation.groomName} & ${invitation.brideName}. Waktu: ${evt.startTime || '09:00'} WIB. Lokasi: ${evt.venue}`}
+                      location={`${evt.venue}, ${evt.address || ''}`}
+                      startDate={evt.date}
+                      startTime={evt.startTime}
+                      endTime={evt.endTime}
+                      themeSlug="oceanic"
+                      className="w-full justify-center"
+                    />
+
+                    {evt.mapUrl && (
+                      <a
+                        href={evt.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white border border-[#BAE6FD] hover:bg-[#E0F2FE] text-[#023E8A] text-xs font-semibold uppercase tracking-wider shadow-2xs transition-all active:scale-[0.99]"
+                      >
+                        <Compass className="w-3.5 h-3.5" />
+                        <span>Petunjuk Lokasi (Google Maps)</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

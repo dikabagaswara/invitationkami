@@ -3,6 +3,7 @@
 import { ThemeData } from '@/modules/theme/types/theme-data'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { MapPin, Calendar, Clock, Compass, Heart, Sun } from 'lucide-react'
 
 export default function TerracottaTheme({ data }: { data: ThemeData }) {
@@ -217,17 +218,29 @@ export default function TerracottaTheme({ data }: { data: ThemeData }) {
                     </div>
                   </div>
 
-                  {evt.mapUrl && (
-                    <a
-                      href={evt.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#C85A32] hover:bg-[#A84521] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs"
-                    >
-                      <Compass className="w-3.5 h-3.5" />
-                      <span>Buka Google Maps</span>
-                    </a>
-                  )}
+                  <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+                    <AddToCalendarButton
+                      title={`${evt.title} - ${invitation.groomName} & ${invitation.brideName}`}
+                      description={`Pernikahan ${invitation.groomName} & ${invitation.brideName}. Waktu: ${evt.startTime || '09:00'} WIB. Lokasi: ${evt.venue}`}
+                      location={`${evt.venue}, ${evt.address || ''}`}
+                      startDate={evt.date}
+                      startTime={evt.startTime}
+                      endTime={evt.endTime}
+                      themeSlug="terracotta"
+                    />
+
+                    {evt.mapUrl && (
+                      <a
+                        href={evt.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-xl bg-white border border-[#EBD7CE] hover:bg-[#F5E6DF] text-[#C85A32] text-xs font-semibold uppercase tracking-wider transition-colors shadow-2xs"
+                      >
+                        <Compass className="w-3.5 h-3.5" />
+                        <span>Buka Google Maps</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

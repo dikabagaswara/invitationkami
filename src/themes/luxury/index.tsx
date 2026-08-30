@@ -1,5 +1,7 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
+import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 
 export default function LuxuryTheme({ data }: { data: ThemeData }) {
@@ -124,11 +126,22 @@ export default function LuxuryTheme({ data }: { data: ThemeData }) {
                   <p className="text-stone-200 font-normal text-base mb-1">{event.venue}</p>
                   {event.address && <p className="text-stone-400 font-light text-xs mb-6 leading-relaxed">{event.address}</p>}
                   
-                  {event.mapUrl && (
-                    <a href={event.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-6 py-2 border border-[#c5a880]/60 text-[#c5a880] hover:bg-[#c5a880] hover:text-black transition-colors text-xs tracking-wider rounded-md">
-                      Lihat Petunjuk Lokasi
-                    </a>
-                  )}
+                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
+                    <AddToCalendarButton
+                      title={`${event.title} - ${invitation.groomName} & ${invitation.brideName}`}
+                      description={`Pernikahan ${invitation.groomName} & ${invitation.brideName}. Waktu: ${event.startTime || '09:00'} WIB. Lokasi: ${event.venue}`}
+                      location={`${event.venue}, ${event.address || ''}`}
+                      startDate={event.date}
+                      startTime={event.startTime}
+                      endTime={event.endTime}
+                      themeSlug="luxury"
+                    />
+                    {event.mapUrl && (
+                      <a href={event.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 border border-[#c5a880]/60 text-[#c5a880] hover:bg-[#c5a880] hover:text-black transition-colors text-xs tracking-wider rounded-xl">
+                        Lihat Lokasi
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

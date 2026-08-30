@@ -3,6 +3,7 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 import { 
   Gamepad2, 
@@ -327,16 +328,27 @@ export default function ArcadeTheme({ data }: { data: ThemeData }) {
                   {evt.address && <p className="text-stone-400 text-[11px] pt-1">{evt.address}</p>}
                 </div>
 
-                {evt.mapUrl && (
-                  <a
-                    href={evt.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-pixel-sub shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-colors"
-                  >
-                    <MapPin className="w-3.5 h-3.5" /> OPEN GPS MAP
-                  </a>
-                )}
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
+                  <AddToCalendarButton
+                    title={`${evt.title} - ${invitation.groomName} & ${invitation.brideName}`}
+                    description={`Wedding Quest ${invitation.groomName} & ${invitation.brideName}. Waktu: ${evt.startTime || '08:00'} WIB. Arena: ${evt.venue}`}
+                    location={`${evt.venue}, ${evt.address || ''}`}
+                    startDate={evt.date}
+                    startTime={evt.startTime}
+                    endTime={evt.endTime}
+                    themeSlug="arcade"
+                  />
+                  {evt.mapUrl && (
+                    <a
+                      href={evt.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded border border-cyan-400 bg-[#0c1222] hover:bg-cyan-950 text-cyan-300 text-xs font-pixel-sub shadow-xs transition-colors"
+                    >
+                      <MapPin className="w-3.5 h-3.5" /> OPEN GPS MAP
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>

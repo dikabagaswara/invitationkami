@@ -1,6 +1,7 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 import { Calendar, MapPin, Heart, Sparkles } from 'lucide-react'
 
@@ -352,16 +353,27 @@ export default function BlossomTheme({ data }: { data: ThemeData }) {
                   )}
                 </div>
 
-                {evt.mapUrl && (
-                  <a
-                    href={evt.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium shadow-xs transition-colors"
-                  >
-                    <MapPin className="w-3.5 h-3.5" /> Buka Google Maps
-                  </a>
-                )}
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                  <AddToCalendarButton
+                    title={`${evt.title} - ${invitation.groomName} & ${invitation.brideName}`}
+                    description={`Pernikahan ${invitation.groomName} & ${invitation.brideName}. Waktu: ${evt.startTime || '08:00'} WIB. Lokasi: ${evt.venue}`}
+                    location={`${evt.venue}, ${evt.address || ''}`}
+                    startDate={evt.date}
+                    startTime={evt.startTime}
+                    endTime={evt.endTime}
+                    themeSlug="blossom"
+                  />
+                  {evt.mapUrl && (
+                    <a
+                      href={evt.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-white border border-rose-200 hover:bg-rose-50 text-rose-700 text-xs font-medium shadow-xs transition-colors"
+                    >
+                      <MapPin className="w-3.5 h-3.5" /> Buka Google Maps
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
