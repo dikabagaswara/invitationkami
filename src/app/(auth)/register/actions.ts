@@ -2,8 +2,6 @@
 
 import { registerUser } from '@/modules/auth/services/auth.service'
 import { registerSchema } from '@/modules/auth/schemas/auth.schema'
-import { redirect } from 'next/navigation'
-import { signIn } from '@/lib/auth'
 
 export async function registerAction(formData: FormData) {
   const raw = {
@@ -19,15 +17,9 @@ export async function registerAction(formData: FormData) {
 
   try {
     await registerUser(parsed.data)
+    return { success: true }
   } catch (err: unknown) {
     const error = err as { code?: string; message?: string }
-    return { error: error.message ?? 'Registration failed' }
+    return { error: error.message ?? 'Pendaftaran gagal' }
   }
-
-  // Auto-login after registration
-  await signIn('credentials', {
-    email: parsed.data.email,
-    password: parsed.data.password,
-    redirectTo: '/dashboard',
-  })
 }
