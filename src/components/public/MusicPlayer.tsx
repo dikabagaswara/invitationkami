@@ -46,7 +46,7 @@ export function MusicPlayer({ musicUrl, isPlaying: initialPlayState }: MusicPlay
   }
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 flex items-center gap-2 pointer-events-auto">
+    <div className="fixed bottom-20 left-4 sm:bottom-6 sm:left-6 z-40 flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
       <audio ref={audioRef} src={musicUrl} loop preload="auto" />
       
       {/* Vinyl Disc Rotating Music Player Button */}
@@ -54,14 +54,14 @@ export function MusicPlayer({ musicUrl, isPlaying: initialPlayState }: MusicPlay
         type="button"
         onClick={togglePlay}
         title={isPlaying ? 'Jeda Musik' : 'Putar Musik'}
-        className={`relative w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110 cursor-pointer border ${
+        className={`relative w-11 h-11 sm:w-12 sm:h-12 rounded-full shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110 cursor-pointer border ${
           isPlaying 
-            ? 'bg-stone-900 text-amber-300 border-amber-300/40' 
+            ? 'bg-stone-900 text-amber-300 border-amber-300/40 shadow-[0_0_15px_rgba(217,119,6,0.35)]' 
             : 'bg-white/90 text-stone-700 border-stone-200'
         }`}
       >
         <Disc3 
-          className={`w-6 h-6 ${isPlaying ? 'animate-spin' : 'opacity-70'}`} 
+          className={`w-5 h-5 sm:w-6 sm:h-6 ${isPlaying ? 'animate-spin' : 'opacity-70'}`} 
           style={{ animationDuration: '4s' }} 
         />
         
