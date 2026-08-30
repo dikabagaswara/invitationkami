@@ -30,6 +30,13 @@ export function DashboardNav({ user }: { user: NavUser }) {
     { href: '/admin/music', label: 'Master Musik' },
   ]
 
+  async function handleLogout() {
+    // redirect: false prevents NextAuth server from issuing a 302 to AUTH_URL (localhost:3000)
+    await signOut({ redirect: false })
+    // Hard navigate with active browser origin (e.g. Cloudflare tunnel URL)
+    window.location.href = '/login'
+  }
+
   return (
     <aside className="w-64 min-h-screen bg-white border-r border-gray-200 flex flex-col">
       <div className="p-5 border-b flex items-center gap-3">
@@ -85,8 +92,8 @@ export function DashboardNav({ user }: { user: NavUser }) {
       <div className="p-4 border-t">
         <p className="text-sm text-gray-700 truncate mb-2">{user.email}</p>
         <button
-          onClick={() => signOut({ callbackUrl: '/login' })}
-          className="text-sm text-red-600 hover:underline w-full text-left"
+          onClick={handleLogout}
+          className="text-sm text-red-600 hover:underline w-full text-left font-medium"
         >
           Logout
         </button>
