@@ -286,7 +286,7 @@ const THEME_ANIMATION_STYLES: Record<string, {
 
 export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
       {items.map((item) => {
         const style = THEME_ANIMATION_STYLES[item.themeSlug] || THEME_ANIMATION_STYLES.elegant
         const IconComponent = style.icon
@@ -296,7 +296,7 @@ export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
             key={item.id}
             href={`/i/${item.demoSlug}`}
             target="_blank"
-            className="group relative aspect-[4/5] rounded-[2rem] border border-stone-200/90 shadow-sm hover:shadow-2xl hover:border-amber-400/80 transition-all duration-500 overflow-hidden flex flex-col justify-between p-6 cursor-pointer transform hover:-translate-y-1.5"
+            className="group relative aspect-[3/4] sm:aspect-[4/5] rounded-2xl sm:rounded-[2rem] border border-stone-200/90 shadow-2xs hover:shadow-2xl hover:border-amber-400/80 transition-all duration-500 overflow-hidden flex flex-col justify-between p-3.5 sm:p-6 cursor-pointer transform hover:-translate-y-1"
           >
             {/* Background Animated Atmosphere */}
             <div
@@ -308,50 +308,50 @@ export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {
             {/* Top Bar: Icon Badge with subtle branding */}
             <div className="relative z-10 flex items-center justify-between">
               <div
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider ${style.badgeBg} ${style.badgeText} shadow-xs`}
+                className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 sm:px-3.5 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider ${style.badgeBg} ${style.badgeText} shadow-xs`}
               >
-                <IconComponent className="w-3.5 h-3.5 animate-pulse" />
-                <span>{item.name}</span>
+                <IconComponent className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 animate-pulse" />
+                <span className="truncate max-w-[75px] sm:max-w-none">{item.name}</span>
               </div>
 
               {/* Discreet Logo Mark */}
-              <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center p-1 border border-stone-300/40 opacity-70 group-hover:opacity-100 transition-opacity">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center p-0.5 sm:p-1 border border-stone-300/40 opacity-70 group-hover:opacity-100 transition-opacity">
                 <img src="/images/logo.png" alt="IK" className="w-full h-full object-contain" />
               </div>
             </div>
 
             {/* Center: Clean High-Contrast Thematic Title */}
-            <div className="relative z-10 text-center my-auto py-4">
-              <span className={`text-[10px] tracking-[0.3em] uppercase block mb-1 font-sans font-medium ${style.subColor}`}>
-                Tema Eksklusif
+            <div className="relative z-10 text-center my-auto py-2 sm:py-4">
+              <span className={`text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] uppercase block mb-0.5 sm:mb-1 font-sans font-medium ${style.subColor}`}>
+                Tema
               </span>
-              <h3 className={`text-2xl sm:text-3xl font-serif tracking-wide drop-shadow-xs group-hover:scale-108 transition-transform duration-500 ${style.titleColor}`}>
+              <h3 className={`text-base sm:text-2xl md:text-3xl font-serif tracking-wide drop-shadow-xs group-hover:scale-105 transition-transform duration-500 line-clamp-2 ${style.titleColor}`}>
                 {item.name}
               </h3>
             </div>
 
             {/* Bottom Bar: Quick Indicator (Static State) */}
-            <div className={`relative z-10 flex items-center justify-between text-xs border-t pt-3 group-hover:opacity-0 transition-opacity duration-300 ${style.bottomColor}`}>
-              <span className="text-[10px] tracking-widest uppercase font-medium">100% Responsif</span>
-              <span className="text-[11px] font-medium inline-flex items-center gap-1">
+            <div className={`relative z-10 flex items-center justify-between text-[10px] sm:text-xs border-t pt-2 sm:pt-3 group-hover:opacity-0 transition-opacity duration-300 ${style.bottomColor}`}>
+              <span className="text-[8px] sm:text-[10px] tracking-widest uppercase font-medium hidden sm:inline">100% Responsif</span>
+              <span className="text-[10px] sm:text-[11px] font-medium inline-flex items-center gap-1 mx-auto sm:mx-0">
                 Buka Tema →
               </span>
             </div>
 
             {/* Full-Cover Interactive Hover Overlay */}
-            <div className="absolute inset-0 z-20 bg-stone-950/85 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col items-center justify-center gap-3.5 p-6 text-center text-white">
-              <div className="w-14 h-14 rounded-full bg-white/15 border border-white/30 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-300 shadow-xl">
-                <Eye className="w-6 h-6 text-white animate-pulse" />
+            <div className="absolute inset-0 z-20 bg-stone-950/85 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col items-center justify-center gap-2 sm:gap-3.5 p-3 sm:p-6 text-center text-white">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white/15 border border-white/30 flex items-center justify-center scale-75 group-hover:scale-100 transition-transform duration-300 shadow-xl">
+                <Eye className="w-4 h-4 sm:w-6 sm:h-6 text-white animate-pulse" />
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-amber-300 font-sans block mb-1">
-                  InvitationKami Premium
+                <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] text-amber-300 font-sans block mb-0.5 sm:mb-1">
+                  InvitationKami
                 </span>
-                <h4 className="font-serif text-2xl font-light tracking-wide">{item.name}</h4>
-                <p className="text-[11px] text-stone-300 font-light mt-0.5">Klik untuk melihat tampilan undangan</p>
+                <h4 className="font-serif text-sm sm:text-2xl font-light tracking-wide">{item.name}</h4>
+                <p className="text-[9px] sm:text-[11px] text-stone-300 font-light mt-0.5 hidden sm:block">Klik untuk melihat tampilan undangan</p>
               </div>
-              <span className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-white text-stone-950 text-xs font-semibold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                Buka Preview <ExternalLink className="w-3.5 h-3.5" />
+              <span className="inline-flex items-center gap-1 px-3 py-1 sm:px-5 sm:py-2 rounded-full bg-white text-stone-950 text-[10px] sm:text-xs font-semibold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                Lihat <ExternalLink className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
               </span>
             </div>
           </Link>

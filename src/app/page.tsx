@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db'
 import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
 import { HomeNavbar } from '@/components/public/HomeNavbar'
+import { FloatingWhatsAppWidget } from '@/components/shared/FloatingWhatsAppWidget'
 import { ArrowRight, MessageCircle, Sparkles, Music, Smartphone } from 'lucide-react'
 
 // Force dynamic rendering so build does not fail when DB is unseeded/offline during docker build
@@ -337,6 +338,9 @@ export default async function HomePage() {
         </div>
         <p className="text-xs text-stone-400 font-light">© 2026 {appConfig.name}</p>
       </footer>
+
+      {/* Floating WhatsApp Help Widget */}
+      <FloatingWhatsAppWidget />
     </div>
   )
 }
