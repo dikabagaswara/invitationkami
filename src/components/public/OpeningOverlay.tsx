@@ -124,6 +124,14 @@ export function OpeningOverlay({
     cardClass = 'bg-[#0f172a]/90 border-2 border-[#38bdf8] shadow-[0_0_25px_rgba(56,189,248,0.3)] backdrop-blur-md'
     frameClass = 'rounded-full p-2 bg-gradient-to-tr from-[#06b6d4] via-[#ec4899] to-[#8b5cf6] shadow-[0_0_20px_rgba(6,182,212,0.6)] ring-4 ring-[#06b6d4]'
     badgeClass = 'bg-[#1e1b4b] text-[#38bdf8] border-[#38bdf8]/50 font-mono'
+  } else if (themeSlug === 'heritage') {
+    bgClass = 'bg-[#1C1612] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#2D231C] to-[#120E0B]'
+    textPrimary = 'text-[#F9F295]'
+    textSecondary = 'text-[#D4AF37]'
+    accentBtn = 'bg-gradient-to-r from-[#D4AF37] via-[#F9F295] to-[#AA7C11] hover:brightness-110 text-stone-950 font-serif font-bold shadow-[#D4AF37]/30 border border-[#F9F295]/40'
+    cardClass = 'bg-[#251E19]/95 border border-[#D4AF37]/40 shadow-[0_0_25px_rgba(212,175,55,0.2)] backdrop-blur-md'
+    frameClass = 'rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-[#F9F295] to-[#8C6D45] shadow-2xl ring-4 ring-[#D4AF37]/40'
+    badgeClass = 'bg-[#322720] text-[#F9F295] border-[#D4AF37]/40 font-serif'
   }
 
   return (
