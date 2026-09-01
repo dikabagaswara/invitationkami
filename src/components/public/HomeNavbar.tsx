@@ -45,9 +45,6 @@ export function HomeNavbar({ appName }: { appName: string }) {
           <a href="#koleksi" className="hover:text-stone-900 transition-colors">
             Koleksi Tema
           </a>
-          <a href="#harga" className="hover:text-stone-900 transition-colors">
-            Paket Harga
-          </a>
           <Link href="/share-generator" className="hover:text-stone-900 transition-colors">
             Bagi Undangan
           </Link>
@@ -87,13 +84,6 @@ export function HomeNavbar({ appName }: { appName: string }) {
               className="px-3 py-2.5 rounded-xl text-sm font-light text-stone-700 hover:bg-stone-100 hover:text-stone-900 transition-colors"
             >
               Koleksi Tema
-            </a>
-            <a
-              href="#harga"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-xl text-sm font-light text-stone-700 hover:bg-stone-100 hover:text-stone-900 transition-colors"
-            >
-              Paket Harga
             </a>
             <Link
               href="/share-generator"
