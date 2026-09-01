@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ImageUpload } from '@/components/shared/ImageUpload'
 import { toast } from 'sonner'
 import { Loader2, Sparkles, BookOpen, Image as ImageIcon } from 'lucide-react'
 
@@ -123,8 +124,13 @@ export default function CoupleForm({
               <Input name="groomMother" defaultValue={defaultValues.groomMother || ''} />
             </div>
             <div className="space-y-2">
-              <Label>URL Foto</Label>
-              <Input name="groomPhoto" defaultValue={defaultValues.groomPhoto || ''} placeholder="https://..." />
+              <ImageUpload
+                name="groomPhoto"
+                defaultValue={defaultValues.groomPhoto || ''}
+                label="Foto Mempelai Pria"
+                aspectRatioHint="Rasio 1:1 (Kotak / Bulat)"
+                description="Tampil pada profil perkenalan mempelai pria."
+              />
             </div>
           </CardContent>
         </Card>
@@ -151,8 +157,13 @@ export default function CoupleForm({
               <Input name="brideMother" defaultValue={defaultValues.brideMother || ''} />
             </div>
             <div className="space-y-2">
-              <Label>URL Foto</Label>
-              <Input name="bridePhoto" defaultValue={defaultValues.bridePhoto || ''} placeholder="https://..." />
+              <ImageUpload
+                name="bridePhoto"
+                defaultValue={defaultValues.bridePhoto || ''}
+                label="Foto Mempelai Wanita"
+                aspectRatioHint="Rasio 1:1 (Kotak / Bulat)"
+                description="Tampil pada profil perkenalan mempelai wanita."
+              />
             </div>
           </CardContent>
         </Card>
@@ -166,42 +177,28 @@ export default function CoupleForm({
             <span>Foto Berdua Kedua Mempelai (Cover &amp; Hero)</span>
           </CardTitle>
           <p className="text-xs text-muted-foreground">
-            Atur foto berdua yang ditampilkan pada halaman awal sebelum membuka undangan dan section utama setelah undangan dibuka.
+            Upload foto berdua yang ditampilkan pada halaman awal sebelum membuka undangan dan section utama setelah undangan dibuka.
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="coverPhoto" className="font-semibold text-stone-800 flex items-center justify-between">
-                <span>1. Foto Cover (Sebelum Buka Undangan)</span>
-                <span className="text-[10px] text-amber-700 bg-amber-100 px-2 py-0.5 rounded font-normal">Rasio 1:1 atau 3:4</span>
-              </Label>
-              <Input 
-                id="coverPhoto"
-                name="coverPhoto" 
-                defaultValue={defaultValues.coverPhoto || ''} 
-                placeholder="https://images.unsplash.com/... atau link foto..." 
-              />
-              <p className="text-[11px] text-muted-foreground">
-                Tampil di tengah bingkai lingkaran bercahaya saat tamu pertama kali menerima link.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ImageUpload
+              id="coverPhoto"
+              name="coverPhoto"
+              defaultValue={defaultValues.coverPhoto || ''}
+              label="1. Foto Cover (Sebelum Buka Undangan)"
+              aspectRatioHint="Rasio 1:1 atau 3:4"
+              description="Tampil di tengah bingkai lingkaran bercahaya saat tamu pertama kali menerima link."
+            />
 
-            <div className="space-y-2">
-              <Label htmlFor="heroPhoto" className="font-semibold text-stone-800 flex items-center justify-between">
-                <span>2. Foto Hero (Setelah Buka Undangan)</span>
-                <span className="text-[10px] text-rose-700 bg-rose-100 px-2 py-0.5 rounded font-normal">Rasio 3:4 atau Potrait</span>
-              </Label>
-              <Input 
-                id="heroPhoto"
-                name="heroPhoto" 
-                defaultValue={defaultValues.heroPhoto || ''} 
-                placeholder="https://images.unsplash.com/... atau link foto..." 
-              />
-              <p className="text-[11px] text-muted-foreground">
-                Tampil di section awal begitu undangan dibuka dengan bingkai estetik bergradasi.
-              </p>
-            </div>
+            <ImageUpload
+              id="heroPhoto"
+              name="heroPhoto"
+              defaultValue={defaultValues.heroPhoto || ''}
+              label="2. Foto Hero (Setelah Buka Undangan)"
+              aspectRatioHint="Rasio 3:4 atau Potrait"
+              description="Tampil di section awal begitu undangan dibuka dengan bingkai estetik bergradasi."
+            />
           </div>
         </CardContent>
       </Card>

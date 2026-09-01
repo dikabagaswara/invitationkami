@@ -4,7 +4,7 @@ import { appConfig } from '@/lib/config'
 import { HomeCatalogSection, type CatalogItem } from '@/components/public/HomeCatalogSection'
 import { HomeNavbar } from '@/components/public/HomeNavbar'
 import { FloatingWhatsAppWidget } from '@/components/shared/FloatingWhatsAppWidget'
-import { ArrowRight, MessageCircle, Sparkles, Music, Smartphone } from 'lucide-react'
+import { ArrowRight, MessageCircle, Sparkles, Music, Smartphone, Check, Crown, Zap } from 'lucide-react'
 
 // Force dynamic rendering so build does not fail when DB is unseeded/offline during docker build
 export const dynamic = 'force-dynamic'
@@ -303,7 +303,178 @@ export default async function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          5. BANTUAN & WHATSAPP (RESPONSIVE)
+          5. PAKET HARGA / PRICING SECTION (RESPONSIVE)
+         ───────────────────────────────────────────── */}
+      <section id="harga" className="relative z-10 py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-20 space-y-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-medium tracking-wider uppercase shadow-2xs">
+            <Crown className="w-3.5 h-3.5 text-amber-600" />
+            <span>Pilihan Paket Terbaik</span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-stone-900 font-normal">
+            Investasi Terjangkau untuk Hari Bahagia Anda
+          </h2>
+          <p className="text-xs sm:text-sm text-stone-500 font-light max-w-md mx-auto leading-relaxed">
+            Pilih paket yang paling sesuai dengan kebutuhan pernikahan Anda tanpa biaya tersembunyi.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          {/* Paket 1: Silver / Basic */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-white/90 border border-stone-200 shadow-xs flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-semibold text-stone-500 uppercase tracking-widest block">Paket Basic</span>
+                <h3 className="text-2xl font-serif text-stone-900 mt-1">Silver Elegance</h3>
+                <p className="text-xs text-stone-500 font-light mt-1">Cocok untuk acara intim &amp; sederhana</p>
+              </div>
+
+              <div className="pt-2 border-t border-stone-100">
+                <span className="text-xs text-stone-400 line-through">Rp 149.000</span>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="text-3xl font-serif font-bold text-stone-900">Rp 49.000</span>
+                  <span className="text-xs text-stone-500">/ undangan</span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 text-xs text-stone-600 font-light pt-2">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Pilihan 5 Tema Klasik
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Profil Lengkap Mempelai
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Rangkaian Acara &amp; Google Maps
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Countdown Timer
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Masa Aktif 6 Bulan
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-8">
+              <Link
+                href="/register"
+                className="block w-full py-3 rounded-2xl text-center text-xs font-semibold text-stone-800 bg-stone-100 hover:bg-stone-200 transition-colors"
+              >
+                Pilih Paket Silver
+              </Link>
+            </div>
+          </div>
+
+          {/* Paket 2: Gold / Premium (Most Popular Featured) */}
+          <div className="relative p-7 sm:p-8 rounded-3xl bg-stone-900 text-white border-2 border-amber-400/80 shadow-2xl flex flex-col justify-between transform md:-translate-y-2 hover:-translate-y-3 transition-all duration-300">
+            {/* Best Seller Badge */}
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-stone-950 text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1">
+              <Sparkles className="w-3 h-3" /> Paling Favorit
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-semibold text-amber-300 uppercase tracking-widest block">Paket Lengkap</span>
+                <h3 className="text-2xl sm:text-3xl font-serif text-white mt-1">Gold Signature</h3>
+                <p className="text-xs text-stone-400 font-light mt-1">Fitur terlengkap untuk pernikahan impian</p>
+              </div>
+
+              <div className="pt-2 border-t border-stone-800">
+                <span className="text-xs text-stone-500 line-through">Rp 249.000</span>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="text-3xl sm:text-4xl font-serif font-bold text-amber-300">Rp 99.000</span>
+                  <span className="text-xs text-stone-400">/ undangan</span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 text-xs text-stone-300 font-light pt-2">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> <strong>Semua 14 Tema Bebas Pilih</strong>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> Musik Latar Otomatis (Vinyl Player)
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> RSVP Online &amp; Export Excel/CSV
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> Amplop Kado Digital (BCA, Mandiri, E-Wallet)
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> Galeri Foto Lightbox (Hingga 15 Foto)
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> Generator Nama Tamu WhatsApp Unlimited
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" /> Masa Aktif Selamanya (Lifetime)
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-8">
+              <Link
+                href="/register"
+                className="block w-full py-3.5 rounded-2xl text-center text-xs font-bold text-stone-950 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 hover:brightness-110 shadow-lg shadow-amber-400/20 transition-all"
+              >
+                Buat Undangan Sekarang →
+              </Link>
+            </div>
+          </div>
+
+          {/* Paket 3: Custom VIP */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-white/90 border border-stone-200 shadow-xs flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-semibold text-stone-500 uppercase tracking-widest block">Layanan Khusus</span>
+                <h3 className="text-2xl font-serif text-stone-900 mt-1">Custom VIP</h3>
+                <p className="text-xs text-stone-500 font-light mt-1">Dibuatkan langsung oleh tim desainer kami</p>
+              </div>
+
+              <div className="pt-2 border-t border-stone-100">
+                <span className="text-xs text-stone-400 line-through">Rp 399.000</span>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <span className="text-3xl font-serif font-bold text-stone-900">Rp 199.000</span>
+                  <span className="text-xs text-stone-500">/ all-in</span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 text-xs text-stone-600 font-light pt-2">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Semua Fitur Paket Gold
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Terima Beres (Admin yang Isi &amp; Desain)
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Custom Musik Bebas Request
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Garansi Revisi Sepuasnya
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" /> Prioritas Customer Support WhatsApp
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-8">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full py-3 rounded-2xl text-center text-xs font-semibold text-stone-800 bg-stone-100 hover:bg-stone-200 transition-colors"
+              >
+                Konsultasi Tim VIP
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────
+          6. BANTUAN & WHATSAPP (RESPONSIVE)
          ───────────────────────────────────────────── */}
       <section id="tentang" className="relative z-10 py-16 sm:py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center border-t border-stone-200/70">
         <div className="p-8 sm:p-14 rounded-3xl border border-stone-200/80 bg-white/90 backdrop-blur-md shadow-sm space-y-4 sm:space-y-5">

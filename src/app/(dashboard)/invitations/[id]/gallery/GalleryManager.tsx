@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { ImageUpload } from '@/components/shared/ImageUpload'
 import { toast } from 'sonner'
 import { Loader2, Plus, Trash2, Image as ImageIcon } from 'lucide-react'
 import {
@@ -79,16 +80,20 @@ export default function GalleryManager({
             </DialogHeader>
             <form action={onSubmit} className="space-y-4 pt-4">
               <div className="space-y-2">
-                <Label>URL Foto</Label>
-                <Input name="imageUrl" placeholder="https://..." required />
+                <ImageUpload
+                  name="imageUrl"
+                  label="Pilih Foto Galeri"
+                  aspectRatioHint="Potrait / Landscape"
+                  description="Upload foto prewedding momen bahagia Anda."
+                />
               </div>
               <div className="space-y-2">
-                <Label>Caption (Opsional)</Label>
-                <Input name="caption" placeholder="Momen manis..." />
+                <Label>Caption / Keterangan (Opsional)</Label>
+                <Input name="caption" placeholder="Momen manis di pantai..." />
               </div>
               <Button type="submit" className="w-full" disabled={isPending}>
                 {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                Simpan Foto
+                Simpan ke Galeri
               </Button>
             </form>
           </DialogContent>
