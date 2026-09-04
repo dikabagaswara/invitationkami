@@ -9,10 +9,10 @@
     "lint": "eslint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "tsx prisma/seed.ts",
-    "db:seed": "npx prisma db seed",
+    "prisma:seed": "node prisma/seed.js",
+    "db:seed": "node prisma/seed.js",
     "prisma:studio": "prisma studio",
-    "db:setup": "prisma migrate dev && tsx prisma/seed.ts",
+    "db:setup": "prisma migrate dev && node prisma/seed.js",
     "test": "vitest run"
   },
   "dependencies": {
@@ -57,6 +57,6 @@
     "vitest": "^4.1.11"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "node prisma/seed.js"
   }
 }

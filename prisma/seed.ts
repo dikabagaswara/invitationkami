@@ -241,8 +241,9 @@ async function main() {
   }
 
   console.log('Seeding demo users...')
-  const bcrypt = await import('bcryptjs')
-  const passwordHash = await bcrypt.default.hash('Password123!', 12)
+  const bcryptModule = await import('bcryptjs')
+  const bcrypt = bcryptModule.default || bcryptModule
+  const passwordHash = await bcrypt.hash('Password123!', 12)
 
   // Demo Customer (customer@invitationkami.com)
   const customer = await prisma.user.upsert({
