@@ -132,6 +132,14 @@ export function OpeningOverlay({
     cardClass = 'bg-[#251E19]/95 border border-[#D4AF37]/40 shadow-[0_0_25px_rgba(212,175,55,0.2)] backdrop-blur-md'
     frameClass = 'rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-[#F9F295] to-[#8C6D45] shadow-2xl ring-4 ring-[#D4AF37]/40'
     badgeClass = 'bg-[#322720] text-[#F9F295] border-[#D4AF37]/40 font-serif'
+  } else if (themeSlug === 'gatsby') {
+    bgClass = 'bg-[#0a0e1a] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#151a28] to-[#0A0E1A]'
+    textPrimary = 'text-[#D4AF37]'
+    textSecondary = 'text-white'
+    accentBtn = 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] hover:brightness-110 text-black font-semibold shadow-amber-500/30'
+    cardClass = 'bg-[#0d121c]/90 border border-[#D4AF37]/50 shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur-md'
+    frameClass = 'rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-[#FFD700] to-[#D4AF37] shadow-xl ring-2 ring-[#D4AF37]/40'
+    badgeClass = 'bg-[#151a28] text-[#D4AF37] border-[#D4AF37]/50 uppercase tracking-[0.2em]'
   }
 
   return (

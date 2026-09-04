@@ -1,4 +1,5 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
 import { ThemeData } from '@/modules/theme/types/theme-data'
@@ -16,6 +17,11 @@ export default function ElegantTheme({ data }: { data: ThemeData }) {
           <h2 className="text-sm sm:text-xl tracking-[0.3em] uppercase text-amber-700 font-light">
             {invitation.openingTitle || 'The Wedding Of'}
           </h2>
+          {invitation.openingText && (
+            <p className="text-sm text-stone-500 max-w-md mx-auto font-light leading-relaxed mt-2">
+              {invitation.openingText}
+            </p>
+          )}
 
           {/* Couple Feature Focus Photo with Frame */}
           <HeroCouplePhoto
@@ -133,6 +139,17 @@ export default function ElegantTheme({ data }: { data: ThemeData }) {
                     Buka Google Maps
                   </a>
                 )}
+                
+                <AddToCalendarButton
+                  title={`${invitation.groomName} & ${invitation.brideName} - ${event.title}`}
+                  description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                  location={event.address || event.venue}
+                  startDate={event.date}
+                  startTime={event.startTime}
+                  endTime={event.endTime}
+                  themeSlug="elegant"
+                  className="mt-3"
+                />
               </div>
             ))}
           </div>

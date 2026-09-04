@@ -59,6 +59,10 @@ export function InvitationFloatingNav({ themeSlug = 'elegant' }: InvitationFloat
     barClass = 'bg-[#0f172a]/95 border-2 border-[#38bdf8] text-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.4)]'
     activeItemClass = 'bg-gradient-to-r from-[#06b6d4] to-[#ec4899] text-white font-mono font-bold shadow-xs'
     inactiveItemClass = 'hover:bg-[#1e1b4b] hover:text-white font-mono'
+  } else if (themeSlug === 'gatsby') {
+    barClass = 'bg-[#151a28]/95 border border-[#D4AF37]/50 text-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+    activeItemClass = 'bg-[#D4AF37] text-black font-bold shadow-xs'
+    inactiveItemClass = 'hover:bg-[#0A0E1A] hover:text-white uppercase'
   }
 
   return (

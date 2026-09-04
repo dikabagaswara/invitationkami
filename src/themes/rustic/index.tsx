@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeData } from '@/modules/theme/types/theme-data'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { MapPin, Calendar, Clock, Compass, Heart } from 'lucide-react'
@@ -247,6 +248,17 @@ export default function RusticTheme({ data }: { data: ThemeData }) {
                           <span>Lihat di Google Maps</span>
                         </a>
                       )}
+                      
+                      <AddToCalendarButton
+                        title={`${invitation.groomName} & ${invitation.brideName} - ${evt.title}`}
+                        description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                        location={evt.address || evt.venue}
+                        startDate={evt.date}
+                        startTime={evt.startTime}
+                        endTime={evt.endTime}
+                        themeSlug="rustic"
+                        className="mt-3 block"
+                      />
                     </div>
                   </div>
                 )

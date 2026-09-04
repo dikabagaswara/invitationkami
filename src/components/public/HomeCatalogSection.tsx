@@ -301,6 +301,26 @@ const THEME_ANIMATION_STYLES: Record<string, {
       </div>
     ),
   },
+
+  // 15. Gatsby Art Deco
+  gatsby: {
+    bgGradient: 'from-[#0A0E1A] via-[#151a28] to-[#0d121c]',
+    isDarkTheme: true,
+    titleColor: 'text-[#D4AF37] font-serif uppercase tracking-widest',
+    subColor: 'text-white',
+    bottomColor: 'text-gray-400 border-[#D4AF37]/30',
+    badgeBg: 'bg-[#151a28]/90 border border-[#D4AF37]/50 backdrop-blur-md',
+    badgeText: 'text-[#D4AF37]',
+    icon: Star,
+    animationElement: (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-4 left-4 w-12 h-12 border-t border-l border-[#D4AF37] opacity-50"></div>
+        <div className="absolute bottom-4 right-4 w-12 h-12 border-b border-r border-[#D4AF37] opacity-50"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#D4AF37] rotate-45 opacity-30"></div>
+        <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(45deg, transparent 49%, #D4AF37 49%, #D4AF37 51%, transparent 51%)', backgroundSize: '40px 40px', opacity: 0.1 }}></div>
+      </div>
+    ),
+  },
 }
 
 export function HomeCatalogSection({ items }: { items: CatalogItem[] }) {

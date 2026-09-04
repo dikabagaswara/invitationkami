@@ -1,4 +1,5 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 
@@ -12,9 +13,14 @@ export default function ModernTheme({ data }: { data: ThemeData }) {
       {sectionConfig.hero && (
         <section className="min-h-screen flex flex-col items-start justify-center p-8 md:p-24 relative overflow-hidden">
           <div className="w-24 h-2 bg-black mb-12"></div>
-          <h2 className="text-sm md:text-base tracking-[0.2em] uppercase text-zinc-500 font-bold mb-6">
+          <h2 className="text-sm md:text-base tracking-[0.2em] uppercase text-zinc-500 font-bold mb-2">
             {invitation.openingTitle || 'Wedding Invitation'}
           </h2>
+          {invitation.openingText && (
+            <p className="text-sm text-zinc-500 max-w-md font-medium leading-relaxed mb-6">
+              {invitation.openingText}
+            </p>
+          )}
           <h1 className="text-7xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-4">
             {invitation.groomName}
           </h1>
@@ -119,6 +125,17 @@ export default function ModernTheme({ data }: { data: ThemeData }) {
                       View on Map
                     </a>
                   )}
+                  
+                  <AddToCalendarButton
+                    title={`${invitation.groomName} & ${invitation.brideName} - ${event.title}`}
+                    description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                    location={event.address || event.venue}
+                    startDate={event.date}
+                    startTime={event.startTime}
+                    endTime={event.endTime}
+                    themeSlug="modern"
+                    className="mt-3"
+                  />
                 </div>
               </div>
             ))}

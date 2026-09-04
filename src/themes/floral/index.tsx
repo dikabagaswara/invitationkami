@@ -1,4 +1,5 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { HeroCouplePhoto } from '@/components/public/HeroCouplePhoto'
 import { ThemeData } from '@/modules/theme/types/theme-data'
@@ -26,6 +27,11 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
             <h2 className="tracking-[0.2em] uppercase text-xs sm:text-sm text-rose-600 font-semibold">
               {invitation.openingTitle || 'The Wedding Of'}
             </h2>
+            {invitation.openingText && (
+              <p className="text-sm text-rose-500/80 font-medium leading-relaxed">
+                {invitation.openingText}
+              </p>
+            )}
 
             {/* Couple Feature Focus Photo with Frame */}
             <HeroCouplePhoto
@@ -135,6 +141,17 @@ export default function FloralTheme({ data }: { data: ThemeData }) {
                     Buka Google Maps
                   </a>
                 )}
+                
+                <AddToCalendarButton
+                  title={`${invitation.groomName} & ${invitation.brideName} - ${event.title}`}
+                  description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                  location={event.address || event.venue}
+                  startDate={event.date}
+                  startTime={event.startTime}
+                  endTime={event.endTime}
+                  themeSlug="floral"
+                  className="mt-3"
+                />
               </div>
             ))}
           </div>

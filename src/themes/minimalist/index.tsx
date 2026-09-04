@@ -1,4 +1,5 @@
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { ThemeData } from '@/modules/theme/types/theme-data'
 
@@ -17,9 +18,14 @@ export default function MinimalistTheme({ data }: { data: ThemeData }) {
       {sectionConfig.hero && (
         <section className="min-h-screen flex flex-col items-center justify-center p-8 font-dm text-center">
           <div className="max-w-4xl w-full">
-            <p className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-16">
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-2">
               {invitation.openingTitle || 'Wedding Invitation'}
             </p>
+            {invitation.openingText && (
+              <p className="text-sm text-gray-400 font-light leading-relaxed mb-12">
+                {invitation.openingText}
+              </p>
+            )}
             <h1 className="text-6xl md:text-8xl font-light mb-4 tracking-tight">
               {invitation.groomName}
             </h1>
@@ -106,6 +112,19 @@ export default function MinimalistTheme({ data }: { data: ThemeData }) {
                         Map Location
                       </a>
                     )}
+                    
+                    <div className="mt-4">
+                      <AddToCalendarButton
+                        title={`${invitation.groomName} & ${invitation.brideName} - ${event.title}`}
+                        description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                        location={event.address || event.venue}
+                        startDate={event.date}
+                        startTime={event.startTime}
+                        endTime={event.endTime}
+                        themeSlug="minimalist"
+                        className=""
+                      />
+                    </div>
                   </div>
                 </div>
               ))}

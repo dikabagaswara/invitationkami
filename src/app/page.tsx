@@ -38,6 +38,7 @@ export default async function HomePage() {
     'blossom',
     'arcade',
     'heritage',
+    'gatsby',
   ]
 
   // Simple, concise & customer-focused descriptions
@@ -46,6 +47,11 @@ export default async function HomePage() {
       displayName: 'Nusantara Heritage Royal',
       category: 'Tradisional',
       tagline: 'Kemegahan adat Nusantara bertabur ornamen Gunungan emas, aksen batik keraton, dan tipografi ningrat klasik.',
+    },
+    gatsby: {
+      displayName: 'Gatsby Art Deco',
+      category: 'Luxury',
+      tagline: '1920s Art Deco glamour with geometric gold patterns & noir elegance.',
     },
     arcade: {
       displayName: '8-Bit Arcade Pixel',

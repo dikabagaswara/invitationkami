@@ -24,6 +24,8 @@ export function FloatingParticles({ themeSlug = 'elegant' }: FloatingParticlesPr
       symbols = ['❤️', '⭐', '🪙', '👾', '✨']
     } else if (themeSlug === 'heritage') {
       symbols = ['✨', '⚜️', '🌾', '🍂', '✨']
+    } else if (themeSlug === 'gatsby') {
+      symbols = ['✨', '💎', '⚜️', '✨', '⚜️']
     }
 
     const items = Array.from({ length: 14 }).map((_, idx) => ({

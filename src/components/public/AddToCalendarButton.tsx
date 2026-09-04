@@ -92,6 +92,8 @@ export function AddToCalendarButton({
     btnClasses = 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-950/40'
   } else if (themeSlug === 'arcade') {
     btnClasses = 'bg-[#06b6d4] hover:bg-[#0891b2] text-white font-mono shadow-cyan-500/30'
+  } else if (themeSlug === 'gatsby') {
+    btnClasses = 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-semibold shadow-amber-500/30'
   }
 
   return (

@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeData } from '@/modules/theme/types/theme-data'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { MapPin, Calendar, Clock, Compass } from 'lucide-react'
@@ -238,6 +239,17 @@ export default function VintageTheme({ data }: { data: ThemeData }) {
                         Buka Peta Lokasi (Google Maps)
                       </a>
                     )}
+                    
+                    <AddToCalendarButton
+                      title={`${invitation.groomName} & ${invitation.brideName} - ${evt.title}`}
+                      description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                      location={evt.address || evt.venue}
+                      startDate={evt.date}
+                      startTime={evt.startTime}
+                      endTime={evt.endTime}
+                      themeSlug="vintage"
+                      className="mt-3 block w-fit"
+                    />
                   </div>
                 ))}
               </div>

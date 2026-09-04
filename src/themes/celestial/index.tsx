@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeData } from '@/modules/theme/types/theme-data'
+import { AddToCalendarButton } from '@/components/public/AddToCalendarButton'
 import { CountdownTimer } from '@/components/public/CountdownTimer'
 import { PublicSharedSections } from '@/components/public/PublicSharedSections'
 import { MapPin, Calendar, Clock, Compass, Sparkles, Star, Moon, Heart } from 'lucide-react'
@@ -247,6 +248,17 @@ export default function CelestialTheme({ data }: { data: ThemeData }) {
                       <span>Petunjuk Lokasi (Google Maps)</span>
                     </a>
                   )}
+                  
+                  <AddToCalendarButton
+                    title={`${invitation.groomName} & ${invitation.brideName} - ${evt.title}`}
+                    description={`Undangan pernikahan ${invitation.groomName} & ${invitation.brideName}`}
+                    location={evt.address || evt.venue}
+                    startDate={evt.date}
+                    startTime={evt.startTime}
+                    endTime={evt.endTime}
+                    themeSlug="celestial"
+                    className="mt-3 w-full"
+                  />
                 </div>
               ))}
             </div>

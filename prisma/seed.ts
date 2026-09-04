@@ -184,6 +184,19 @@ async function main() {
         { id: 'default', name: 'Cinzel + Cormorant Garamond', heading: 'Cinzel Decorative', body: 'Cormorant Garamond' },
       ],
     },
+    {
+      slug: 'gatsby',
+      name: 'Gatsby Art Deco',
+      description: '1920s Art Deco glamour with geometric gold patterns & noir elegance.',
+      category: 'luxury',
+      isPremium: true,
+      colorPresets: [
+        { id: 'default', name: 'Noir Gold', primary: '#D4AF37', background: '#0A0E1A' },
+      ],
+      fontPresets: [
+        { id: 'default', name: 'Playfair + Raleway', heading: 'Playfair Display', body: 'Raleway' },
+      ],
+    },
   ]
 
   for (const theme of themes) {
@@ -409,6 +422,15 @@ async function main() {
       brideNick: 'Sekar',
       opening: 'PAWIWAHAN ADAT NUSANTARA',
       coupleCover: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop&q=80',
+    },
+    {
+      slug: 'demo-gatsby',
+      themeSlug: 'gatsby',
+      groom: 'Fitzgerald Hakim, S.E.',
+      groomNick: 'Fitzgerald',
+      bride: 'Daisy Amira, S.Sn.',
+      brideNick: 'Daisy',
+      opening: 'THE GRAND CELEBRATION',
     },
   ]
 

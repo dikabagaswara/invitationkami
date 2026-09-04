@@ -52,6 +52,9 @@ export const themeRegistry: Record<string, ThemeRegistryEntry> = {
   heritage: {
     meta: { name: 'Nusantara Heritage Royal', category: 'classic', description: 'Kemewahan adat Nusantara dengan ornamen Gunungan emas, aksen batik keraton, dan font klasik' },
   },
+  gatsby: {
+    meta: { name: 'Gatsby Art Deco', category: 'luxury', description: '1920s Art Deco glamour with geometric gold patterns & noir elegance' },
+  },
 }
 
 export function isValidTheme(slug: string): boolean {
